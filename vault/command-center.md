@@ -1,26 +1,27 @@
 # Command center
 
-Updated: 2026-08-24 — vault initialized, onboard not yet run.
+Updated: 2026-08-24 — game production roster locked; Game Dev already working.
 
 ## This week
 
-1. Complete `/onboard` so identity, goals, and constraints are real.
-2. Drain the inbox into commitments / projects / people.
-3. Pick one outcome that would make this week count, and put it here.
+1. Protect Game Dev: playable 5-minute loop, no second implementer.
+2. Spawn **Game Design** only if that loop is still undefined — see [studio/roster.md](studio/roster.md).
+3. Tell CoS the game title, engine, and repo so this vault can see the work.
 
 ## Today
 
-- [ ] Tell the Chief of Staff who you are and what this season is for (`/onboard` or just talk)
-- [ ] Dump anything rattling around your head (`/capture`)
+- [ ] Do not spin extra agents. Game Dev + CoS is the team until a trigger in the roster fires.
+- [ ] Drop working title / engine / game repo URL into this vault (`/capture` is fine).
 
 ## Waiting on
 
-_Nothing tracked yet._
+- Game Dev: playable loop
+- brandon: title, engine, repo (not visible from The Vault)
 
 ## Risks / stuck
 
-The vault has structure but no signal. Until onboard is done, briefings will be thin on purpose.
+Staffing too wide (art/audio/marketing) before the loop is fun. Game Dev agent is not in this environment — CoS cannot inspect its PRs until the repo is linked.
 
 ## Inbox
 
-1 unfiled item — see [inbox.md](inbox.md).
+0 unfiled items — see [inbox.md](inbox.md).

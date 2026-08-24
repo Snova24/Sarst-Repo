@@ -6,13 +6,14 @@ A goal is an outcome with a reason, not a task. Tasks live in [commitments.md](c
 
 ## North star
 
-[TODO] One sentence: what would make the next 90 days a win?
+[TODO] One sentence: what would make the next 90 days a win? Default until onboard: a 5-minute playable game slice, not a full game.
 
 ## Now (max 3)
 
 | Goal | Why it matters | How we'll know | Status |
 | --- | --- | --- | --- |
-| Stand up The Vault as a working Chief of Staff | Memory and priorities were starting from zero each session | Identity filled, at least one real project and one real commitment, weekly review used once | In progress |
+| Ship a 5-minute vertical slice | Game Dev is already running; production fails if we staff a studio before a loop exists | Stranger can play 5 minutes with win/lose; roster stays ≤3 concurrent agents | In progress |
+| Stand up The Vault as a working Chief of Staff | Memory and priorities were starting from zero each session | Identity filled, weekly review used once | In progress |
 
 ## Next
 

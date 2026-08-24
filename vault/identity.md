@@ -21,7 +21,9 @@ Last updated: 2026-08-24
 
 ## Current context
 
-[TODO] What is he building, who does he work with, what does a good week look like?
+Producing a game. A Game Dev Cloud Agent is already working (repo/engine not yet linked into this vault). This repo is the Chief of Staff layer around that work — see `vault/studio/roster.md` and `vault/projects/the-game.md`.
+
+[TODO] Working title, engine, platform, game repo URL.
 
 ## Constraints
 

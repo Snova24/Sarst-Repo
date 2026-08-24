@@ -81,3 +81,4 @@ This vault is a git repo. Persist changes so the next Cloud Agent session has th
 - Do not create parallel todo lists in chat. The lists live in the vault.
 - Do not start a new project file for a one-off task. Use commitments.
 - Do not store secrets, passwords, or tokens in this repo.
+- Do not staff a full game studio. Follow `vault/studio/roster.md`: max 3 concurrent Cloud Agents; Game Dev is the only implementer; CoS does not write game code.

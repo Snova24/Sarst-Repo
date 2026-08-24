@@ -19,6 +19,7 @@ Read this first. Then open only the files you need.
 | --- | --- |
 | [people/](people/) | One file per person. Copy [templates/person.md](templates/person.md) |
 | [projects/](projects/) | One file per active project. Copy [templates/project.md](templates/project.md) |
+| [studio/roster.md](studio/roster.md) | Cloud Agent staffing for the game. Cap 3 concurrent. |
 | [journal/](journal/) | Dated notes (`YYYY-MM-DD.md`) |
 | [weekly/](weekly/) | Week reviews (`YYYY-Www.md`) |
 | [log/sessions.md](log/sessions.md) | Short session trail so the next agent is not cold |
