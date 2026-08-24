@@ -1,0 +1,13 @@
+name: Vault health
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check vault spine
+        run: python3 scripts/status.py
