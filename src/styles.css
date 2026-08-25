@@ -157,7 +157,7 @@ h3 {
 /* —— View tabs —— */
 .view-toggle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0;
   margin: 0 0 1.1rem;
   border: 1px solid var(--ink);
@@ -1194,6 +1194,218 @@ h3 {
   transform: rotate(-1deg);
 }
 
+/* —— Club + register —— */
+.club-pin,
+.reminders {
+  margin: 0 0 1rem;
+  padding: 0.85rem 0.9rem 0.8rem;
+  border: 1px solid var(--ink);
+  background: var(--ticket);
+  box-shadow: 3px 3px 0 rgba(28, 24, 20, 0.12);
+}
+
+.club-pin p,
+.reminders-kicker,
+.reminder-place,
+.reminder-copy {
+  margin: 0;
+}
+
+.club-pin p,
+.reminder-copy {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.club-pin-actions,
+.reminder-actions,
+.club-actions,
+.scan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.reminders-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.45rem;
+}
+
+.reminder-card + .reminder-card {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--rule);
+}
+
+.reminder-place {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.club-scan {
+  margin-top: 0.7rem;
+}
+
+.club-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.club-card {
+  --accent: var(--sage);
+  padding: 0.9rem 0.9rem 0.85rem;
+  border: 1px solid var(--ink);
+  background: var(--ticket);
+  box-shadow: 3px 3px 0 rgba(28, 24, 20, 0.1);
+  border-top: 6px solid var(--accent);
+}
+
+.club-card.is-in {
+  background: color-mix(in srgb, var(--accent) 8%, var(--ticket));
+}
+
+.club-name {
+  margin: 0;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.25rem;
+}
+
+.club-merchant {
+  margin: 0.1rem 0 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.club-perk {
+  margin: 0 0 0.45rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.club-perks {
+  margin: 0 0 0.55rem;
+  padding-left: 1.1rem;
+}
+
+.club-link {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.barcode {
+  margin: 0.55rem 0 0.4rem;
+  padding: 0.45rem 0.5rem 0.35rem;
+  color: #111;
+  background: #fff;
+  border: 1px solid var(--ink);
+}
+
+.barcode svg {
+  display: block;
+  width: 100%;
+  height: 56px;
+}
+
+.barcode.is-tall svg {
+  height: 96px;
+}
+
+.barcode figcaption {
+  margin: 0.35rem 0 0;
+  text-align: center;
+  font-family: ui-monospace, "Cascadia Mono", monospace;
+  letter-spacing: 0.16em;
+  font-size: 0.82rem;
+}
+
+.pass-overlay,
+.scan-overlay {
+  z-index: 46;
+  place-items: center;
+  padding: 1rem;
+}
+
+.register-pass,
+.scan-desk {
+  width: min(28rem, 100%);
+  padding: 1.35rem 1.15rem 1.25rem;
+  border: 1px solid var(--ink);
+  background: #fff;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.register-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.register-merchant {
+  margin: 0.35rem 0 0;
+  font-weight: 700;
+}
+
+.register-pass h2,
+.scan-desk h2 {
+  margin: 0.15rem 0 0.7rem;
+}
+
+.register-hint,
+.scan-desk p {
+  margin: 0.65rem 0 0.85rem;
+  color: var(--ink-soft);
+}
+
+.scan-desk {
+  text-align: left;
+}
+
+.scan-video {
+  display: block;
+  width: 100%;
+  max-height: 180px;
+  margin: 0.4rem 0 0.75rem;
+  background: #1c1814;
+  object-fit: cover;
+}
+
+.scan-desk label {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.scan-desk input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  margin-bottom: 0.55rem;
+}
+
+@media (min-width: 640px) {
+  .club-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .worth {
   margin: 0.9rem 0 0.5rem;
   padding: 0.85rem 0.8rem 0.75rem;
@@ -1367,7 +1579,7 @@ h3 {
   }
 
   .view-toggle {
-    max-width: 22rem;
+    max-width: 32rem;
   }
 }
 

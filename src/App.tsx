@@ -12,14 +12,19 @@ import {
   walletSavings,
 } from "./lib/coupons";
 import { useWallet } from "./lib/wallet";
+import { getMembership, nearbyReminders, useClubs, type ScanHit } from "./lib/club";
 import { useBookletLocation } from "./lib/location";
 import { formatMoney, isExpired } from "./lib/format";
 import type { Coupon, Interest, SortKey } from "./types";
 import { CouponDetail } from "./components/CouponDetail";
+import { ClubDesk } from "./components/ClubDesk";
 import { DealSection } from "./components/DealSection";
 import { EmptyState } from "./components/EmptyState";
 import { FeaturedDeal } from "./components/FeaturedDeal";
 import { Header } from "./components/Header";
+import { ClubPinBar, NearbyReminders } from "./components/NearbyReminders";
+import { RegisterPass } from "./components/RegisterPass";
+import { ScanDesk } from "./components/ScanDesk";
 import { Ticket } from "./components/Ticket";
 import { TicketGrid } from "./components/TicketGrid";
 import { Toast } from "./components/Toast";
@@ -52,8 +57,16 @@ function walletRank(coupon: Coupon, used: boolean, now: Date): number {
   return 0;
 }
 
+type RegisterState = {
+  title: string;
+  merchant: string;
+  value: string;
+  hint: string;
+};
+
 export default function App() {
   const wallet = useWallet();
+  const clubs = useClubs();
   const geo = useBookletLocation();
   const now = new Date();
   const [view, setView] = useState<AppView>("browse");
@@ -62,6 +75,8 @@ export default function App() {
   const [sort, setSort] = useState<SortKey>("ending");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [pass, setPass] = useState<RegisterState | null>(null);
+  const [scanning, setScanning] = useState(false);
   const toastTimer = useRef<number | null>(null);
 
   const savings = walletSavings(COUPONS, wallet.entries, now);
@@ -83,13 +98,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (!selectedId) return;
+    if (!selectedId && !pass && !scanning) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previous;
     };
-  }, [selectedId]);
+  }, [selectedId, pass, scanning]);
 
   const handleCopy = useCallback(
     async (coupon: Coupon) => {
@@ -113,6 +128,50 @@ export default function App() {
     },
     [wallet],
   );
+
+  const showRegister = useCallback(
+    (value: string, merchant: string, title: string, hint: string) => {
+      setSelectedId(null);
+      setScanning(false);
+      setPass({ value, merchant, title, hint });
+    },
+    [],
+  );
+
+  const handleJoin = useCallback(
+    (id: string) => {
+      clubs.join(id);
+      const membership = getMembership(id);
+      showToast(membership ? `Joined ${membership.name}` : "Joined club");
+    },
+    [clubs, showToast],
+  );
+
+  const handleScanHit = useCallback(
+    (hit: ScanHit) => {
+      setScanning(false);
+      if (hit.kind === "coupon") {
+        const coupon = getCoupon(hit.id);
+        setSelectedId(hit.id);
+        showToast(coupon ? `Found ${coupon.merchant}` : "Found that clip");
+        return;
+      }
+      const membership = getMembership(hit.id);
+      if (!membership) return;
+      if (!clubs.has(membership.id)) clubs.join(membership.id);
+      setPass({
+        value: membership.memberNumber,
+        merchant: membership.merchant,
+        title: membership.name,
+        hint: "Hold the membership barcode under the register scanner.",
+      });
+      showToast(`Showing ${membership.name}`);
+    },
+    [clubs, showToast],
+  );
+
+  const reminders = nearbyReminders(clubs.ids, geo.coords, now);
+  const showPinBar = view === "club" || clubs.ids.length > 0;
 
   const visible = (() => {
     if (view === "wallet") {
@@ -179,6 +238,41 @@ export default function App() {
       <ViewToggle view={view} onChange={setView} />
 
       <main id="panel-deals" role="tabpanel" aria-labelledby={`tab-${view}`}>
+        {showPinBar ? (
+          <ClubPinBar
+            enrolledCount={clubs.ids.length}
+            coords={geo.coords}
+            geoStatus={geo.status}
+            geoSource={geo.source}
+            onRequestGps={geo.requestGps}
+            onUseTideglass={geo.useTideglass}
+            onClearGeo={geo.clear}
+            onScan={() => setScanning(true)}
+          />
+        ) : null}
+
+        <NearbyReminders
+          rows={reminders}
+          onOpenCoupon={(id) => setSelectedId(id)}
+          onShowPass={showRegister}
+          onScan={() => setScanning(true)}
+        />
+
+        {view === "club" ? (
+          <ClubDesk
+            enrolledIds={clubs.ids}
+            now={now}
+            onJoin={handleJoin}
+            onLeave={(id) => {
+              clubs.leave(id);
+              showToast("Left that club");
+            }}
+            onShowPass={showRegister}
+            onOpenCoupon={(id) => setSelectedId(id)}
+            onScan={() => setScanning(true)}
+          />
+        ) : (
+          <>
         {view === "browse" &&
         featured &&
         interest === "grocery" &&
@@ -287,6 +381,8 @@ export default function App() {
         ) : (
           <TicketGrid>{gridCoupons.map((coupon) => ticketFor(coupon))}</TicketGrid>
         )}
+          </>
+        )}
       </main>
 
       {selected ? (
@@ -310,6 +406,32 @@ export default function App() {
           onRequestGps={geo.requestGps}
           onUseTideglass={geo.useTideglass}
           onClearGeo={geo.clear}
+          onShowRegister={() =>
+            showRegister(
+              selected.code,
+              selected.merchant,
+              selected.title,
+              "Hold the offer barcode under the register scanner.",
+            )
+          }
+        />
+      ) : null}
+
+      {pass ? (
+        <RegisterPass
+          title={pass.title}
+          merchant={pass.merchant}
+          value={pass.value}
+          hint={pass.hint}
+          onClose={() => setPass(null)}
+        />
+      ) : null}
+
+      {scanning ? (
+        <ScanDesk
+          onHit={handleScanHit}
+          onMiss={(raw) => showToast(`No match for ${raw || "that code"}`)}
+          onClose={() => setScanning(false)}
         />
       ) : null}
 

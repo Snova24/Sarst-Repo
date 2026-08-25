@@ -1,4 +1,4 @@
-export type AppView = "browse" | "wallet";
+export type AppView = "browse" | "wallet" | "club";
 
 type ViewToggleProps = {
   view: AppView;
@@ -29,6 +29,17 @@ export function ViewToggle({ view, onChange }: ViewToggleProps) {
         onClick={() => onChange("wallet")}
       >
         Wallet
+      </button>
+      <button
+        type="button"
+        role="tab"
+        id="tab-club"
+        aria-selected={view === "club"}
+        aria-controls="panel-deals"
+        className={view === "club" ? "is-active" : ""}
+        onClick={() => onChange("club")}
+      >
+        Club
       </button>
     </div>
   );

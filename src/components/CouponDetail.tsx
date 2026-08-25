@@ -11,6 +11,7 @@ import {
 import type { Coords } from "../lib/geo";
 import type { GeoStatus } from "../lib/location";
 import { ActionList } from "./ActionList";
+import { Barcode } from "./Barcode";
 import { MoneyPanel } from "./MoneyPanel";
 import { PunchBar } from "./PunchBar";
 import { WorthIt } from "./WorthIt";
@@ -32,6 +33,7 @@ type CouponDetailProps = {
   onRequestGps: () => void;
   onUseTideglass: () => void;
   onClearGeo: () => void;
+  onShowRegister: () => void;
 };
 
 export function CouponDetail({
@@ -51,6 +53,7 @@ export function CouponDetail({
   onRequestGps,
   onUseTideglass,
   onClearGeo,
+  onShowRegister,
 }: CouponDetailProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const expired = isExpired(coupon.expiresAt, now);
@@ -153,6 +156,9 @@ export function CouponDetail({
             {codeLocked ? "••••••••" : coupon.code}
           </code>
         </div>
+        {!codeLocked ? (
+          <Barcode value={coupon.code} label={coupon.code} />
+        ) : null}
 
         <section className="sheet-terms">
           <h3>Legal line</h3>
@@ -176,6 +182,14 @@ export function CouponDetail({
             disabled={codeLocked}
           >
             {codeLocked ? "Code locked" : "Copy code"}
+          </button>
+          <button
+            type="button"
+            className="btn btn-clip"
+            onClick={onShowRegister}
+            disabled={codeLocked}
+          >
+            Show at register
           </button>
           <button type="button" className="btn btn-clip" onClick={onClip}>
             {clipped ? "Unclip" : "Clip"}

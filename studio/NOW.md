@@ -15,6 +15,6 @@
 
 ## Slice for v1
 
-A stranger can: pick an interest (or High value), browse the matching tickets, stamp punch cards, read bank-bonus safe exits, compare 0% cards vs 0% loans, clip to a wallet, and see estimated savings. Wallet survives refresh.
+A stranger can: pick an interest (or High value), browse the matching tickets, stamp punch cards, read bank-bonus safe exits, compare 0% cards vs 0% loans, clip to a wallet, join a merchant club, get a location nag for nearby perks, and flash a barcode at the register. Wallet and clubs survive refresh.
 
 Do not add auth, payments, merchant dashboards, or scraping.

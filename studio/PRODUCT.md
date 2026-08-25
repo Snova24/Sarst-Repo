@@ -17,9 +17,12 @@ Someone who collects grocery, dining, and retail codes and loses them in screens
 - **Bank bonuses** — ads that claim hundreds to open a checking account, with requirements, clawbacks, fees, and a dated **safe exit** so you can close and leave.
 - **0% credit** — a section for balance-transfer cards and 0% personal loans: intro APR, then-APR, fees, payoff clock, clean exit.
 - **Wallet** — clipped coupons, ending-soon first, mark used, remove.
+- **Club** — a membership collection. Join Harbor Pantry, Driftwood, and the rest. Memberships live in `localStorage` key `clipbook.clubs.v1`.
+- **Location nags** — with GPS or a Tideglass pin, Clipbook reminds you which club perks apply within ~1.25 miles, then you flash the barcode.
+- **Register barcodes** — Code 39 on the club card and on unlocked tickets. Scan a shelf tag or type `HARBOR10` / `HP-482910` at the desk.
 - **Worth-it lab** — every ticket runs the math: claimed benefit minus fees, archive/web/shelf prices vs the advertised “was,” GPS or a Tideglass pin for in-store range, and terms in **Simple** or **Detailed**. Inflated was-prices and always-on fake sales get a Skip. Live Wayback fetches are a later pipe; the booklet ships a local price file that works the same way.
 
-No accounts. Wallet lives in `localStorage` key `clipbook.wallet.v1`.
+No accounts. Wallet lives in `localStorage` key `clipbook.wallet.v1`. Clubs live in `clipbook.clubs.v1`.
 
 ## Visual
 
