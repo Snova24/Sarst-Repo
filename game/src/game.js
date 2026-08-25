@@ -30,7 +30,33 @@ let lastShot = 0;
 let last = performance.now();
 let iFrames = 0;
 let aggroIn = 0;
+let bumpSafe = 0;
+let bumpArmed = false;
 let canvasArmed = false;
+
+function loadSprite(file) {
+  const img = new Image();
+  img.ready = false;
+  img.onload = () => {
+    img.ready = true;
+  };
+  img.onerror = () => {
+    img.ready = false;
+  };
+  img.src = `assets/${file}`;
+  return img;
+}
+
+const spr = {
+  player: loadSprite("player.png"),
+  drone: loadSprite("drone.png"),
+  node: loadSprite("node.png"),
+};
+
+function blit(img, r, fallback) {
+  if (img.ready) ctx.drawImage(img, r.x, r.y, r.w, r.h);
+  else fill(r, fallback);
+}
 
 const player = {
   x: W / 2 - 14,
@@ -90,9 +116,13 @@ function spawnWave() {
       x = W - 36;
       y = 40 + Math.random() * (H - 80);
     }
-    drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 55 + waveIndex * 16 });
+    drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 40 + waveIndex * 18 });
   }
-  aggroIn = waveIndex === 0 ? 1.8 : 0.45;
+  // Core PR #8 lock + Playtest 60149a0: freeze long enough to shoot NODE;
+  // bump-safe starts when chase starts so reading the HUD does not burn it.
+  aggroIn = waveIndex === 0 ? 3.5 : 0.45;
+  bumpSafe = 0;
+  bumpArmed = waveIndex === 0;
   const spots = [
     [180, 140],
     [760, 140],
@@ -105,7 +135,10 @@ function spawnWave() {
     nodes.push({ x: nx, y: ny, w: 40, h: 40, on: false });
   }
   mode = "play";
-  statusEl.textContent = `WAVE ${waveIndex + 1} — kill RED drones AND shoot BLUE NODE ON`;
+  statusEl.textContent =
+    waveIndex === 0
+      ? "WAVE 1 — drones frozen. SHOOT THE BLUE NODE ON first"
+      : `WAVE ${waveIndex + 1} — kill RED drones AND shoot BLUE NODE ON`;
 }
 
 function resetRun() {
@@ -245,7 +278,16 @@ function tick(now) {
       clampPlayer();
     }
 
+    const wasAggro = aggroIn;
     aggroIn = Math.max(0, aggroIn - dt);
+    if (bumpArmed && wasAggro > 0 && aggroIn <= 0) {
+      bumpSafe = 5.5;
+      bumpArmed = false;
+      if (mode === "play") {
+        statusEl.textContent = "WAVE 1 — kill RED drones AND shoot BLUE NODE ON";
+      }
+    }
+    bumpSafe = Math.max(0, bumpSafe - dt);
     for (const d of drones) {
       if (aggroIn > 0) continue;
       const cx = player.x + player.w / 2 - (d.x + d.w / 2);
@@ -254,8 +296,12 @@ function tick(now) {
       d.x += (cx / len) * d.speed * dt;
       d.y += (cy / len) * d.speed * dt;
       if (iFrames <= 0 && overlaps(player, d)) {
+        player.x += (cx / len) * 28;
+        player.y += (cy / len) * 28;
+        clampPlayer();
+        iFrames = bumpSafe > 0 ? 0.45 : 0.7;
+        if (bumpSafe > 0) continue;
         player.hp -= 1;
-        iFrames = 0.7;
         if (player.hp <= 0) {
           mode = "lose";
           statusEl.textContent = "POWER DOWN";
@@ -317,16 +363,19 @@ function drawNode(node, now) {
   const pulse = node.on ? 1 : 0.55 + 0.45 * Math.abs(Math.sin(now / 220));
   ctx.save();
   ctx.globalAlpha = pulse;
-  ctx.fillStyle = node.on ? "#7dffb3" : "#4d8dff";
-  ctx.fillRect(node.x, node.y, node.w, node.h);
+  if (spr.node.ready) ctx.drawImage(spr.node, node.x, node.y, node.w, node.h);
+  else {
+    ctx.fillStyle = node.on ? "#7dffb3" : "#4d8dff";
+    ctx.fillRect(node.x, node.y, node.w, node.h);
+  }
   ctx.strokeStyle = node.on ? "#e8edf4" : "#ffe08a";
   ctx.lineWidth = 3;
   ctx.strokeRect(node.x, node.y, node.w, node.h);
   ctx.restore();
-  ctx.fillStyle = "#141820";
+  ctx.fillStyle = node.on ? "#141820" : "#ffe08a";
   ctx.font = "11px ui-sans-serif, system-ui, sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText(node.on ? "ON" : "NODE", node.x + node.w / 2, node.y + node.h / 2 + 4);
+  ctx.fillText(node.on ? "ON" : "NODE", node.x + node.w / 2, node.y + node.h + 12);
   if (!node.on) {
     ctx.fillStyle = "#ffe08a";
     ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
@@ -342,8 +391,8 @@ function draw() {
 
   const now = performance.now();
   for (const node of nodes) drawNode(node, now);
-  for (const d of drones) fill(d, "#d45b5b");
-  ctx.fillStyle = "#141820";
+  for (const d of drones) blit(spr.drone, d, "#d45b5b");
+  ctx.fillStyle = "#e8edf4";
   ctx.font = "9px ui-sans-serif, system-ui, sans-serif";
   ctx.textAlign = "center";
   for (const d of drones) ctx.fillText("DRONE", d.x + d.w / 2, d.y - 4);
@@ -368,9 +417,11 @@ function draw() {
   ctx.moveTo(cx, cy);
   ctx.lineTo(mouse.x, mouse.y);
   ctx.stroke();
-  fill(player, iFrames > 0 ? "#9aa4b8" : "#e8edf4");
-  ctx.fillStyle = "#141820";
-  ctx.fillRect(cx - 3, cy - 3, 6, 6);
+  blit(spr.player, player, iFrames > 0 ? "#9aa4b8" : "#e8edf4");
+  if (!spr.player.ready) {
+    ctx.fillStyle = "#141820";
+    ctx.fillRect(cx - 3, cy - 3, 6, 6);
+  }
   ctx.fillStyle = "#8b95a8";
   ctx.font = "9px ui-sans-serif, system-ui, sans-serif";
   ctx.fillText("YOU", cx, player.y - 6);

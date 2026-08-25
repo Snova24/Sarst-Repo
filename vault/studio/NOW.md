@@ -13,30 +13,26 @@ python3 -m http.server 8765
 # http://localhost:8765/game/
 ```
 
+CoS HEAD: W1 freeze **3.5s**; bump-safe 5.5s **starts when chase starts** (Playtest `60149a0` P0/P1).
+
 ## Team (this repo)
 
 | Role | Agent | Owns | Status |
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | IDLE on TAKE PR #2. Review `@cursor` on `GDD.md:1`. Need a chat follow-up. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE on TAKE PR #3. Review `@cursor` on `STYLE_BIBLE.md:1`. Need a chat follow-up. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | Dual objective is the stop. Retesting labels. |
+| **Core** gameplay loop | Design | `game/GDD.md` | IDLE. Pinged: relock PR #8 greybox-now to `28b436d`. Do not merge #2. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE. Pinged: loud OFF node on PR #7. Do not merge #3. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING on `28b436d`. Control already `node ON 1/1` in the 3.5s freeze. Stranger write-up not pushed. |
 
 ## Core — do this
 
-1. Fetch `cursor/chief-of-staff-vault-1087`. Play `game/`.
-2. TAKE is dead. Do not merge PR #2.
-3. Own **only** `game/GDD.md`. Lock numbers to `game/src/game.js`. Dual objective (drones AND nodes) must be specified as the stranger-readable AND.
-4. New PR off the CoS branch. Do not edit `game/src`.
+Own PR #8. Relock **Greybox now** to live numbers (W1 speed 40, aggro 3.5s, bumpSafe 5.5s from chase). Do not edit `game/src`. Do not merge PR #2. PR #6 is superseded.
 
 ## Slice — do this
 
-1. Fetch `cursor/chief-of-staff-vault-1087`. Play `game/`.
-2. TAKE art is dead. Do not merge PR #3.
-3. Own **only** `game/STYLE.md` and `game/assets/`: `player.png` (robot), `drone.png`, `node.png` that reads as a NODE to shoot ON (not a boat, not a relic).
-4. New PR off the CoS branch.
+On PR #7 only: make the OFF node the loudest thing in W1 at 40×40 (brighter bullseye, stronger SHOOT). Keep labels. Do not merge PR #3. No second sprite PR.
 
-## Dispatch
+## Playtest — do this
 
-CoS cannot start Core/Slice runs from this VM (no Cursor API key; cursor.com login wall; `@cursor` from cursor[bot] has not woken them). Orders are on their PRs as file review comments. Waiting on a chat follow-up or `CURSOR_API_KEY`.
+Finish the `28b436d` stranger retest (3.5s freeze, bump-safe on chase). `game/PLAYTEST.md` only. Verdict: during the freeze, do they shoot the NODE ON?

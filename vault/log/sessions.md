@@ -2,6 +2,55 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Loop: Playtest on 28b436d; Core/Slice still idle
+
+- Playtest fetched `28b436d`. Control shot NODE ON during 3.5s freeze. Stranger session in flight. No new PLAYTEST.md yet.
+- Core/Slice still IDLE. Reviews already on #8/#7. No extra GitHub pings. Chat follow-up still the wake.
+- Game Dev still missing. No Task clones.
+
+## 2026-08-25 — Pinged idle Core and Slice
+
+- Core: review on PR #8 `game/GDD.md` — relock greybox-now to `28b436d` (3.5s freeze live, bump-safe on chase). No src. No #2.
+- Slice: review on PR #7 `game/STYLE.md` — louder OFF node at 40×40. No #3. No second sprite PR.
+- GitHub comments often miss IDLE agents; requested chat follow-ups + `CURSOR_API_KEY`. No Task clones.
+
+## 2026-08-25 — Playtest 60149a0: bump-safe works, stranger still skips NODE
+
+- PR #5 `ed03032`: NODE readable. Control keeps HP 5 during spawn bump-safe. Stranger still POWER DOWN W1, node 0/1, 0 kills. P1: reading HUD burns the spawn-timed window.
+- CoS (fills Game Dev): W1 freeze 3.5s (Core lock); bump-safe starts when chase starts.
+- Core IDLE after PR #8; Slice IDLE on #7.
+
+## 2026-08-25 — Playtest 70376a4: NODE readable, still only fight reds
+
+- PR #5 `1db2715`: labels/HUD AND closed as copy. Stranger still POWER DOWNs W1 with node 0/1. Control sees STUCK then clears.
+- Next: `60149a0` bump-safe + sprites. P1 contact is why bump-safe shipped. Do not stack Core's 3.5s yet.
+- Core PR #8 still lists greybox speed 55. Slice idle on #7.
+
+## 2026-08-25 — Core shipped PR #8; Playtest still not on HEAD
+
+- Core: PR #8 `game/GDD.md` only, off CoS. AND locked. PR #2 retitled abandoned. Greybox-now table still lists speed 55; they did not play `60149a0` bump-safe. Asked Game Dev for 3.5s aggro + speed 40 — speed 40 is already live on W1. Hold 3.5s.
+- Slice: IDLE. PR #7 stands. No TAKE pile.
+- Playtest: still RUNNING on `70376a4`; written report `62e7569` / `4be215e`. No bump-safe/sprite write-up.
+- Game Dev still missing. No Task clones.
+
+## 2026-08-25 — Staff loop: Core/Slice on RPS; Playtest still on 4be215e write-up
+
+- Core: RUNNING, left TAKE, playing greybox on `cursor/rps-gdd-80bc`. No GDD commit yet. Steered to own/replace PR #6 vs `60149a0` numbers. Do not merge #2.
+- Slice: RUNNING. PR #7 shipped. `node.png` reads as hex NODE (not a boat). Do not merge #3. No new TAKE art.
+- Playtest: RUNNING. Written report still `4be215e`. Mid-retest of `70376a4` labels; told them live HEAD is `60149a0` (labels + bump-safe + sprites).
+- Game Dev still missing. No Task clones. API key still unset.
+
+## 2026-08-25 — Playtest: 1s death closed; stranger still dies in W1
+
+- PR #5: alive through grace, then walk into red, 0 kills, never leave W1. Control W1–W2, not W3.
+- CoS: W1 bump-safe + knockback so contact during the learn window is not a kill.
+
+## 2026-08-25 — Core and Slice are running
+
+- Core: left TAKE, reading PR #6 / greybox. No RPS commit yet. Do not merge PR #2.
+- Slice: left TAKE, planning `game/assets/` drop-ins. No RPS commit yet. Do not merge PR #3.
+- Playtest: still writing; told them 70376a4 labels are the dual-obj retest, not optional copy.
+
 ## 2026-08-25 — brandon: involve Core and Slice
 
 - Core (PR #2) and Slice (PR #3) still IDLE on TAKE. Issue comments and `@cursor` did not start a run.
