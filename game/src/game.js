@@ -123,7 +123,8 @@ function releaseW1Horde() {
   w1AwaitNode = false;
   spawnDrones(WAVES[0].drones);
   aggroIn = 0.45;
-  bumpSafe = 0;
+  // Cover the edge walk-in (~6s) plus a contact learn window.
+  bumpSafe = 12;
   bumpArmed = true;
   if (mode === "play") {
     statusEl.textContent = "WAVE 1 — horde incoming. Kill RED drones";
@@ -317,10 +318,8 @@ function tick(now) {
       d.x += (cx / len) * d.speed * dt;
       d.y += (cy / len) * d.speed * dt;
       if (iFrames <= 0 && overlaps(player, d)) {
-        // Node-gate W1: drones walk in from the edges. Start bump-safe on first
-        // contact, not when chase starts (that window expires before they arrive).
         if (bumpArmed) {
-          bumpSafe = 5.5;
+          bumpSafe = Math.max(bumpSafe, 5.5);
           bumpArmed = false;
         }
         player.x += (cx / len) * 28;
@@ -458,6 +457,12 @@ function draw() {
   ctx.fillRect(16, H - 22, 120, 8);
   ctx.fillStyle = "#7dffb3";
   ctx.fillRect(16, H - 22, 120 * (player.hp / player.maxHp), 8);
+  if (bumpSafe > 0 && mode === "play") {
+    ctx.fillStyle = "#7dffb3";
+    ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("BUMP SAFE", 16, H - 28);
+  }
 
   if (mode === "pick") {
     ctx.fillStyle = "rgba(8,10,14,0.62)";
