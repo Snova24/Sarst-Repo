@@ -1,6 +1,6 @@
 # Clipbook
 
-A Sunday circular you actually keep. Browse grocery clips, bank signup bonuses with a safe-exit clock, and 0% credit (balance transfers and personal loans).
+A Sunday circular you actually keep. Filter by interest, start with the high-value strip, then clip grocery codes, bank bonuses, and 0% credit.
 
 ## Run
 
