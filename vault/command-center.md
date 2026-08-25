@@ -1,10 +1,10 @@
 # Command center
 
-Updated: 2026-08-25 — Core and Slice left TAKE; Playtest retest of `60149a0` still in flight.
+Updated: 2026-08-25 — Core shipped PR #8; Playtest still has not retested `60149a0`.
 
 ## This week
 
-1. Core locks `game/GDD.md` to live greybox numbers (own/replace PR #6).
+1. Core relocks PR #8 "greybox now" to `60149a0` (W1 speed 40 already live; bumpSafe 5.5s).
 2. Playtest re-runs `60149a0` (labels + bump-safe + sprites).
 3. Game Dev juices combat when they appear.
 
@@ -15,16 +15,17 @@ Updated: 2026-08-25 — Core and Slice left TAKE; Playtest retest of `60149a0` s
 - [x] Attempt PR-comment dispatch (Design/Art idle; Playtest heard it)
 - [x] Playtest verdict: stranger cannot SOLVE (W1 ~1s)
 - [x] CoS wave-1 fairness (3 drones, grace, first click focuses)
-- [x] Design/Art leave TAKE (Core on RPS GDD; Slice shipped PR #7)
-- [ ] Core commits `game/GDD.md` (PR #6 still the clone lock)
+- [x] Design/Art leave TAKE (Core PR #8; Slice PR #7)
+- [x] Core commits `game/GDD.md` (PR #8; PR #6 superseded)
+- [ ] Core relocks greybox-now numbers to `60149a0`
 - [ ] Stranger can finish wave 1 on bump-safe + labeled build
 
 ## Waiting on
 
-- Core to own PR #6 after they finish playing the greybox.
+- Core to relock PR #8 to HEAD `60149a0` (they played speed 55 / 1.8s).
 - Playtest stranger retest of CoS HEAD `60149a0` (not `4be215e`).
 - Game Dev (`robot puzzle shooter`) — not visible.
-- `CURSOR_API_KEY` only if someone goes IDLE on TAKE again.
+- Hold Core's 3.5s aggro ask until that retest. W1 speed 40 is already live.
 
 ## Risks / stuck
 

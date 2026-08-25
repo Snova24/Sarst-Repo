@@ -21,13 +21,13 @@ CoS HEAD: `60149a0` (labels + W1 bump-safe + Slice sprites hooked).
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING on RPS (`cursor/rps-gdd-80bc`). Playing greybox. No GDD commit yet. Own/replace PR #6. Do not merge #2. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Shipped PR #7. Node reads as hex NODE (not a boat). Do not merge #3. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING. Written report is still `4be215e`. Retest of labeled/bump-safe/sprites (`60149a0`) in flight. |
+| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Shipped PR #8 (AND + fairer W1). Greybox-now table is stale vs `60149a0`. Do not merge #2. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE. PR #7 shipped. Hex NODE. Hold. Do not merge #3. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING. Written report still `4be215e`. Mid-`70376a4` retest; must pull `60149a0`. |
 
 ## Core — do this
 
-Own PR #6 (`game/GDD.md` only) or open a new PR off CoS. Lock numbers to `60149a0` (speed `40 + waveIndex * 18`, W1 bumpSafe 5.5s). Dual objective is AND. Do not merge PR #2. Do not edit `game/src`.
+Own PR #8. Relock **Greybox now** to `60149a0` (W1 speed 40, bumpSafe 5.5s). Hold 3.5s aggro until Playtest reports on HEAD. Do not edit `game/src`. Do not merge PR #2. PR #6 is superseded.
 
 ## Slice — do this
 
@@ -35,4 +35,4 @@ PR #7 is the art drop-in. Hold. Do not merge PR #3. Do not pile TAKE art.
 
 ## Playtest — do this
 
-Do not file `4be215e` unlabeled squares as current. Retest CoS HEAD `60149a0` (NODE/SHOOT labels + bump-safe + sprites). `game/PLAYTEST.md` only.
+Do not file `4be215e` unlabeled squares as current. Retest CoS HEAD `60149a0` (NODE/SHOOT + bump-safe + sprites). `game/PLAYTEST.md` only.

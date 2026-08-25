@@ -2,6 +2,13 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Core shipped PR #8; Playtest still not on HEAD
+
+- Core: PR #8 `game/GDD.md` only, off CoS. AND locked. PR #2 retitled abandoned. Greybox-now table still lists speed 55; they did not play `60149a0` bump-safe. Asked Game Dev for 3.5s aggro + speed 40 — speed 40 is already live on W1. Hold 3.5s.
+- Slice: IDLE. PR #7 stands. No TAKE pile.
+- Playtest: still RUNNING on `70376a4`; written report `62e7569` / `4be215e`. No bump-safe/sprite write-up.
+- Game Dev still missing. No Task clones.
+
 ## 2026-08-25 — Staff loop: Core/Slice on RPS; Playtest still on 4be215e write-up
 
 - Core: RUNNING, left TAKE, playing greybox on `cursor/rps-gdd-80bc`. No GDD commit yet. Steered to own/replace PR #6 vs `60149a0` numbers. Do not merge #2.
