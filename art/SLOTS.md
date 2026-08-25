@@ -32,4 +32,4 @@ PNGs include a charcoal backplate. Knock out `#1B1F2A` **or** draw on charcoal. 
 
 ## Preview
 
-[`preview.html`](preview.html) is the readability check, not the game.
+[`preview.html`](preview.html) is the readability check, **not** the game. No Move / Take / clock on that page.

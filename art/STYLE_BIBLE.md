@@ -61,4 +61,4 @@ No sneak toggle, roll, jump, weapons, or alarm phase to animate.
 - Life pips or score in the HUD PNG.
 - Blocking Game Dev on alpha knockouts (chroma `#1B1F2A` or draw on charcoal).
 
-Greybox: [`tokens.css`](tokens.css). Files: [`slots/`](slots/). List: [`ASSET_LIST.md`](ASSET_LIST.md).
+Greybox: [`tokens.css`](tokens.css). Files: [`slots/`](slots/). List: [`ASSET_LIST.md`](ASSET_LIST.md). Preview: [`preview.html`](preview.html) is a still board, not a playable TAKE.

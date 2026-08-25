@@ -11,4 +11,4 @@ Style bible + must-have drop-ins for the locked 5-minute loop in `GDD.md`. **No 
 | [preview.html](preview.html) | Readability board |
 | [slots/](slots/) | PNGs to hook |
 
-Open `preview.html`. Prefer slot names `relic` / `door` / `guard` / `shadow` / `cone`.
+Open `preview.html` for the board. It is **not the game** (no Move / Take / clock). Prefer slot names `relic` / `door` / `guard` / `shadow` / `cone`.
