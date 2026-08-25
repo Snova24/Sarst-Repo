@@ -10,18 +10,19 @@
     <main class="shell">
       <header class="hud">
         <h1>Robot Puzzle Shooter</h1>
-        <p id="status">WASD move · first click focuses · then click/space shoot</p>
+        <p id="status">WASD move · click/space shoot · kill RED and shoot BLUE NODE ON</p>
         <p id="meter">
           <span id="wave">W1</span>
           · HP <span id="hp">5</span>
-          · nodes <span id="loot">0/1</span>
-          · <span id="kills">0</span> down
+          · node ON <span id="loot">0/1</span>
+          · <span id="kills">0</span> drones down
         </p>
       </header>
       <canvas id="view" width="960" height="540" tabindex="0" aria-label="Robot Puzzle Shooter arena"></canvas>
       <p class="hint">
-        WASD to move. First click focuses; then click or space to shoot. Red drones hurt you. Blue
-        squares are nodes — shoot them ON. Pick one upgrade. Survive 3 waves. R retries.
+        Two jobs every wave: kill every RED drone AND shoot every BLUE node until it turns green
+        (ON). Wave does not end on kills alone. WASD move. Click or space to shoot. Survive 3 waves.
+        R retries.
       </p>
     </main>
     <script type="module" src="src/game.js"></script>

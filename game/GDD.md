@@ -39,7 +39,7 @@ You are a scrap robot in an arena sim. Horde comes in waves. You shoot **nodes**
 | 2 | 8 | 1 | |
 | 3 | 12 | 2 | |
 
-Playtest 2026-08-25: 6 drones from all edges + click-to-focus-shoots = POWER DOWN in ~1s. Wave 1 must be survivable standing still for a beat.
+Playtest 2026-08-25 (after W1 tune): stranger can clear drones and still miss the wave because the blue square does not read as a second win condition. Arena must label NODE / SHOOT; if drones are down and a node is off, status is STUCK.
 
 ## Upgrade pool (Brotato-style)
 

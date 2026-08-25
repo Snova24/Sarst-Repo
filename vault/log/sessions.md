@@ -2,6 +2,11 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest retest: dual objective is the stop
+
+- After W1 tune: stranger who shoots red still leaves the wave stuck (`nodes 0/1`). Control can SOLVE.
+- CoS labels NODE / DRONE / YOU, dashed line to unlit nodes, STUCK banner when drones are down.
+
 ## 2026-08-25 — Timer: Design/Art still TAKE; Playtest retesting fairness
 
 - Design last activity still TAKE PR #2. Art last activity still TAKE PR #3. No new PRs. Dashboard follow-up blocked (login wall + no API key). `@cursor` did not wake them.

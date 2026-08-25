@@ -102,13 +102,10 @@ function spawnWave() {
   ];
   for (let n = 0; n < spec.nodes; n += 1) {
     const [nx, ny] = spots[n];
-    nodes.push({ x: nx, y: ny, w: 26, h: 26, on: false });
+    nodes.push({ x: nx, y: ny, w: 40, h: 40, on: false });
   }
   mode = "play";
-  statusEl.textContent =
-    waveIndex === 0
-      ? "WAVE 1 — WASD first. Red = drones. Blue = shoot ON."
-      : `WAVE ${waveIndex + 1} — kill drones, shoot nodes ON`;
+  statusEl.textContent = `WAVE ${waveIndex + 1} — kill RED drones AND shoot BLUE NODE ON`;
 }
 
 function resetRun() {
@@ -223,6 +220,7 @@ canvas.addEventListener("mousedown", (event) => {
   if (!canvasArmed) {
     canvasArmed = true;
     canvas.focus();
+    if (mode === "play") statusEl.textContent = "Click again or press SPACE to shoot";
     return;
   }
   if (mode === "play") fire(performance.now());
@@ -288,6 +286,10 @@ function tick(now) {
       return true;
     });
 
+    if (drones.length === 0 && nodes.some((n) => !n.on) && mode === "play") {
+      statusEl.textContent = `WAVE ${waveIndex + 1} STUCK — drones down. SHOOT THE BLUE NODE ON`;
+    }
+
     if (waveClear()) {
       if (waveIndex >= WAVES.length - 1) {
         mode = "win";
@@ -311,18 +313,56 @@ function fill(r, color) {
   ctx.fillRect(r.x, r.y, r.w, r.h);
 }
 
+function drawNode(node, now) {
+  const pulse = node.on ? 1 : 0.55 + 0.45 * Math.abs(Math.sin(now / 220));
+  ctx.save();
+  ctx.globalAlpha = pulse;
+  ctx.fillStyle = node.on ? "#7dffb3" : "#4d8dff";
+  ctx.fillRect(node.x, node.y, node.w, node.h);
+  ctx.strokeStyle = node.on ? "#e8edf4" : "#ffe08a";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(node.x, node.y, node.w, node.h);
+  ctx.restore();
+  ctx.fillStyle = "#141820";
+  ctx.font = "11px ui-sans-serif, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(node.on ? "ON" : "NODE", node.x + node.w / 2, node.y + node.h / 2 + 4);
+  if (!node.on) {
+    ctx.fillStyle = "#ffe08a";
+    ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
+    ctx.fillText("SHOOT", node.x + node.w / 2, node.y - 8);
+  }
+}
+
 function draw() {
   ctx.fillStyle = "#141820";
   ctx.fillRect(0, 0, W, H);
   ctx.strokeStyle = "#2a3140";
   ctx.strokeRect(6, 6, W - 12, H - 12);
 
-  for (const node of nodes) fill(node, node.on ? "#7dffb3" : "#4d8dff");
+  const now = performance.now();
+  for (const node of nodes) drawNode(node, now);
   for (const d of drones) fill(d, "#d45b5b");
+  ctx.fillStyle = "#141820";
+  ctx.font = "9px ui-sans-serif, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  for (const d of drones) ctx.fillText("DRONE", d.x + d.w / 2, d.y - 4);
   for (const shot of shots) fill(shot, "#ffe08a");
 
   const cx = player.x + player.w / 2;
   const cy = player.y + player.h / 2;
+  if (mode === "play") {
+    for (const node of nodes) {
+      if (node.on) continue;
+      ctx.strokeStyle = "rgba(77,141,255,0.45)";
+      ctx.setLineDash([6, 6]);
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(node.x + node.w / 2, node.y + node.h / 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
   ctx.strokeStyle = "rgba(255,255,255,0.2)";
   ctx.beginPath();
   ctx.moveTo(cx, cy);
@@ -331,6 +371,9 @@ function draw() {
   fill(player, iFrames > 0 ? "#9aa4b8" : "#e8edf4");
   ctx.fillStyle = "#141820";
   ctx.fillRect(cx - 3, cy - 3, 6, 6);
+  ctx.fillStyle = "#8b95a8";
+  ctx.font = "9px ui-sans-serif, system-ui, sans-serif";
+  ctx.fillText("YOU", cx, player.y - 6);
 
   ctx.fillStyle = "#2a3140";
   ctx.fillRect(16, H - 22, 120, 8);
