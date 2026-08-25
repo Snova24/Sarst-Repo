@@ -24,7 +24,7 @@ What a stranger actually finds:
 | `main` README | GitHub Skills Copilot / Codespaces course | No — that is a different product |
 | PR #1 | The Vault (Chief of Staff markdown) | No |
 | PR #2 `GDD.md` | Paper spec for **TAKE** | No — rules, not a game |
-| Art agent | Style bible / PNGs in progress, no engine | No |
+| PR #3 `art/preview.html` | Static style board + PNG slots | No — pictures, no Move/Take/clock |
 
 Game Dev (`Core gameplay loop`) shipped the spec and went **idle**. No implementer is building the paper map.
 
