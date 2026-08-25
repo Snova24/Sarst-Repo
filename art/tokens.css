@@ -1,0 +1,29 @@
+/* Vault slice — chromatic roles. Greybox with these until slots/*.png are hooked. */
+:root {
+  --vault-charcoal: #1b1f2a;
+  --vault-steel: #3d4555;
+  --vault-cream: #f4ede1;
+  --vault-amber: #e6a23c;
+  --vault-teal: #2a9d8f;
+  --vault-oxide: #c44536;
+  --vault-outline: #0e1118;
+
+  --role-player: var(--vault-cream);
+  --role-interact: var(--vault-amber);
+  --role-goal: var(--vault-teal);
+  --role-fail: var(--vault-oxide);
+  --role-room: var(--vault-steel);
+  --role-void: var(--vault-charcoal);
+}
+
+.token {
+  box-sizing: border-box;
+  border: 4px solid var(--vault-outline);
+}
+
+.token-player { background: var(--role-player); }
+.token-goal { background: var(--role-goal); }
+.token-hazard { background: var(--role-fail); }
+.token-pickup { background: var(--role-interact); }
+.token-floor { background: var(--role-room); }
+.token-wall { background: var(--role-void); }
