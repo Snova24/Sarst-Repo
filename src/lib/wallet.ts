@@ -1,0 +1,127 @@
+import { useCallback, useState } from "react";
+import type { WalletEntry } from "../types";
+
+export const STORAGE_KEY = "clipbook.wallet.v1";
+
+let memoryStore: WalletEntry[] = [];
+
+export function loadWallet(): WalletEntry[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    try {
+      const parsed: unknown = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed as WalletEntry[];
+    } catch {
+      return [];
+    }
+  } catch {
+    return memoryStore;
+  }
+}
+
+export function saveWallet(entries: WalletEntry[]): void {
+  memoryStore = entries;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  } catch {
+    // localStorage unavailable — keep the in-memory copy
+  }
+}
+
+export function useWallet() {
+  const [entries, setEntries] = useState<WalletEntry[]>(() => loadWallet());
+
+  const clip = useCallback((id: string) => {
+    setEntries((prev) => {
+      if (prev.some((entry) => entry.couponId === id)) return prev;
+      const next = [...prev, { couponId: id, clippedAt: new Date().toISOString() }];
+      saveWallet(next);
+      return next;
+    });
+  }, []);
+
+  const unclip = useCallback((id: string) => {
+    setEntries((prev) => {
+      const next = prev.filter((entry) => entry.couponId !== id);
+      saveWallet(next);
+      return next;
+    });
+  }, []);
+
+  const markUsed = useCallback((id: string) => {
+    setEntries((prev) => {
+      const next = prev.map((entry) =>
+        entry.couponId === id ? { ...entry, usedAt: new Date().toISOString() } : entry,
+      );
+      saveWallet(next);
+      return next;
+    });
+  }, []);
+
+  const markUnused = useCallback((id: string) => {
+    setEntries((prev) => {
+      const next = prev.map((entry) => {
+        if (entry.couponId !== id) return entry;
+        const nextEntry: WalletEntry = {
+          couponId: entry.couponId,
+          clippedAt: entry.clippedAt,
+        };
+        if (entry.completedActionIds?.length) {
+          nextEntry.completedActionIds = entry.completedActionIds;
+        }
+        return nextEntry;
+      });
+      saveWallet(next);
+      return next;
+    });
+  }, []);
+
+  const toggleAction = useCallback((couponId: string, actionId: string) => {
+    setEntries((prev) => {
+      const existing = prev.find((entry) => entry.couponId === couponId);
+      const clippedAt = existing?.clippedAt ?? new Date().toISOString();
+      const current = new Set(existing?.completedActionIds ?? []);
+      if (current.has(actionId)) current.delete(actionId);
+      else current.add(actionId);
+      const completedActionIds = [...current];
+      const nextEntry: WalletEntry = { couponId, clippedAt };
+      if (existing?.usedAt) nextEntry.usedAt = existing.usedAt;
+      if (completedActionIds.length) nextEntry.completedActionIds = completedActionIds;
+      const next = existing
+        ? prev.map((entry) => (entry.couponId === couponId ? nextEntry : entry))
+        : [...prev, nextEntry];
+      saveWallet(next);
+      return next;
+    });
+  }, []);
+
+  const completedActions = useCallback(
+    (id: string) =>
+      entries.find((entry) => entry.couponId === id)?.completedActionIds ?? [],
+    [entries],
+  );
+
+  const isClipped = useCallback(
+    (id: string) => entries.some((entry) => entry.couponId === id),
+    [entries],
+  );
+
+  const isUsed = useCallback(
+    (id: string) => entries.some((entry) => entry.couponId === id && Boolean(entry.usedAt)),
+    [entries],
+  );
+
+  return {
+    entries,
+    clip,
+    unclip,
+    markUsed,
+    markUnused,
+    toggleAction,
+    completedActions,
+    isClipped,
+    isUsed,
+  };
+}
