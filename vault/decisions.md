@@ -2,6 +2,12 @@
 
 Log choices that should still make sense in six months. Newest first.
 
+## 2026-08-25 — Product repo is Snova24/Snova24-scrapforge
+
+- **Decision:** The game lives at https://github.com/Snova24/Snova24-scrapforge (brandon: `Snova24/scrapforge`). The Vault is memory. scrapforge is empty; **robot puzzle shooter** makes the first playable commit. This CoS environment cannot push there.
+- **Why:** brandon named the repo. Staff were building into the wrong place.
+- **Revisit if:** a different scrapforge URL appears with actual code.
+
 ## 2026-08-25 — Original Game Dev is robot puzzle shooter; that is the game
 
 - **Decision:** Implementer is the Cloud Agent named **robot puzzle shooter**. The 5-minute slice is a robot puzzle shooter (shoot nodes, exit). Design’s TAKE spec (PR #2) and the heist greybox are parked. Core gameplay loop is Design, not Game Dev.

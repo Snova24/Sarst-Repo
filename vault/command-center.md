@@ -1,29 +1,28 @@
 # Command center
 
-Updated: 2026-08-25 — original Game Dev is **robot puzzle shooter**. Slice retargeted.
+Updated: 2026-08-25 — product repo is scrapforge (empty).
 
 ## This week
 
-1. Paste the Game Dev block in `vault/studio/prompts.md` into **robot puzzle shooter**.
-2. Design abandons TAKE (PR #2). Art and Playtest work the RPS greybox.
-3. If RPS already has another repo, put that URL in `vault/projects/the-game.md`.
+1. Paste Game Dev prompt into **robot puzzle shooter** so it initializes `Snova24/Snova24-scrapforge`.
+2. Design / Art / Playtest **leave The Vault** as a game repo after that first commit.
+3. CoS tracks from here; does not push to scrapforge (no write access from this env).
 
 ## Today
 
-- [x] Name the implementer: robot puzzle shooter
-- [x] Retarget GDD + greybox to robot / shoot-nodes / exit
-- [ ] brandon pastes prompts (CoS cannot see that agent from this environment)
+- [x] Repo named: https://github.com/Snova24/Snova24-scrapforge (alias `Snova24/scrapforge`)
+- [x] Confirmed empty — Game Dev must make the first commit
+- [ ] brandon pastes prompts
 
 ## Waiting on
 
-- **robot puzzle shooter** — playable / repo URL
-- Core gameplay loop — GDD tighten for RPS, not TAKE
-- Art, Playtest — RPS only
-- brandon — paste + optional agent URL
+- **robot puzzle shooter** — init scrapforge
+- brandon — paste (that agent is not in this environment)
+- Design/Art/Playtest — hold game work until scrapforge has a playable
 
 ## Risks / stuck
 
-Game Dev is not in the Sarst-Repo agent list. Until the prompt is pasted, that agent will not know the studio exists. Do not merge PR #2.
+Empty product repo + staff already branching on Sarst-Repo. They will keep inventing TAKE/Vault games unless redirected.
 
 ## Inbox
 

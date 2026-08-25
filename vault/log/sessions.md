@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Product repo scrapforge
+
+- brandon: `Snova24/scrapforge`. Canonical: `Snova24/Snova24-scrapforge`. Empty, created today.
+- Locked as the game repo. Vault greybox is scratch. Game Dev must first-commit.
+- CoS cannot push to scrapforge from this environment.
+
 ## 2026-08-25 — Loop in robot puzzle shooter
 
 - Original Game Dev named **robot puzzle shooter** was missing from the roster (not in this environment).

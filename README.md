@@ -8,13 +8,10 @@ If you just opened this: say **onboard** (or `/onboard`) and talk. The agent wil
 
 Staff are live. Standing order: [`vault/studio/NOW.md`](vault/studio/NOW.md).
 
-The game is **Robot Puzzle Shooter**. Original Game Dev is the agent named **robot puzzle shooter**.
+**Product repo:** https://github.com/Snova24/Snova24-scrapforge (empty until Game Dev commits).  
+**Game:** Robot Puzzle Shooter. **Implementer:** agent named robot puzzle shooter.
 
-```bash
-python3 -m http.server 8765
-```
-
-Then open http://localhost:8765/game/ — WASD move, mouse aim, click shoot.
+The `game/` folder in this repo is a scratch greybox only.
 
 ## What this is
 

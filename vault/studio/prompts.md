@@ -1,43 +1,37 @@
 # Paste these into the staff agents
 
-CoS cannot DM other Cloud Agents. **Paste the first block into robot puzzle shooter** — that is the original Game Dev and it is not on this environment’s agent list.
+CoS cannot DM other Cloud Agents. **First paste: robot puzzle shooter.** Product repo is **Snova24/Snova24-scrapforge** (empty as of 2026-08-25).
 
-## robot puzzle shooter (original Game Dev) — do this first
-
-```
-You are the original Game Dev: Robot Puzzle Shooter. Standing order is vault/studio/NOW.md on branch cursor/chief-of-staff-vault-1087 in Snova24/Sarst-Repo. Fetch and pull that branch.
-
-You own the playable: game/src/ and game/index.html. Spec is game/GDD.md — robot, WASD, mouse aim, shoot as a puzzle tool, three nodes, one crate, exit. Greybox already runs: python3 -m http.server 8765 then http://localhost:8765/game/
-
-If you already have a better build in another repo, port this 5-minute slice into game/ OR reply with that repo URL so CoS can point Art and Playtest at it. Do not implement Design PR #2 TAKE (stealth). Do not invent a second game.
-
-Core gameplay loop is Design only. Art owns assets. Playtest owns PLAYTEST.md. Open a PR with the playable.
-```
-
-## Core gameplay loop (Design, not implementer)
+## robot puzzle shooter (Game Dev) — first
 
 ```
-Standing order is vault/studio/NOW.md on branch cursor/chief-of-staff-vault-1087.
+You are the original Game Dev: Robot Puzzle Shooter.
 
-You are Design. Original Game Dev is **robot puzzle shooter**, not you. PR #2 TAKE is the wrong fantasy — do not treat it as the game.
+Product repo is https://github.com/Snova24/Snova24-scrapforge (brandon called it Snova24/scrapforge). It is empty. Initialize it with the 5-minute playable: robot, WASD, mouse aim, shoot as a puzzle tool, nodes, crate, exit. Spec draft: Snova24/Sarst-Repo game/GDD.md on branch cursor/chief-of-staff-vault-1087.
 
-Pull the CoS branch. Tighten game/GDD.md only (paper map, timings, cuts) for Robot Puzzle Shooter. Do not edit game/src. Do not add stealth or relic-extract.
+Do not implement in Snova24/Sarst-Repo. That repo is Chief of Staff memory only. Do not build TAKE stealth (Sarst-Repo PR #2). First commit on scrapforge should be something a stranger can run. Then Art and Playtest will follow you there.
+```
+
+## Core gameplay loop (Design)
+
+```
+Product repo is https://github.com/Snova24/Snova24-scrapforge. The Vault is memory only.
+
+You are Design, not Game Dev. Original implementer is robot puzzle shooter. Do not merge TAKE (Sarst-Repo PR #2) as the game. After Game Dev’s first scrapforge commit, put/tighten GDD.md there for Robot Puzzle Shooter only.
 ```
 
 ## Slice visual assets (Art)
 
 ```
-Standing order is vault/studio/NOW.md on branch cursor/chief-of-staff-vault-1087. Fetch and pull.
+Stop putting the game in Snova24/Sarst-Repo. Product repo: https://github.com/Snova24/Snova24-scrapforge
 
-Game is Robot Puzzle Shooter, not TAKE and not a loot heist. Spec game/GDD.md. You own game/STYLE.md and game/assets/. Filenames: player.png (robot), node.png, exit.png. No new mechanics. Open a PR.
+Game is Robot Puzzle Shooter (robot, shoot nodes, exit), not TAKE. Wait for Game Dev’s first scrapforge commit, then own assets/style there. Until then, do not invent a second look on The Vault.
 ```
 
 ## Playtest findings (Playtest)
 
 ```
-Standing order is vault/studio/NOW.md on branch cursor/chief-of-staff-vault-1087. Fetch and pull.
+Stop playtesting Sarst-Repo as the game. Product repo: https://github.com/Snova24/Snova24-scrapforge (empty until Game Dev lands a build).
 
-Play Robot Puzzle Shooter: python3 -m http.server 8765 then http://localhost:8765/game/
-
-Script is game/PLAYTEST.md. Stranger run. Crashes and confusion only. Do not playtest TAKE. Fill Findings. Open a PR.
+When a playable exists there, stranger-run it. Crashes and confusion only. Do not playtest TAKE.
 ```

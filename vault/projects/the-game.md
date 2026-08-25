@@ -1,4 +1,4 @@
-# Project — Robot Puzzle Shooter
+# Project — Robot Puzzle Shooter / Scrapforge
 
 Slug: `the-game`
 Status: `active`
@@ -6,60 +6,63 @@ Last updated: 2026-08-25
 
 ## Why this exists
 
-brandon’s original Game Dev agent is named **robot puzzle shooter**. That is the game. The Vault is the CoS memory around it.
+brandon’s game. Original Game Dev: **robot puzzle shooter**. Product repo: **scrapforge**.
 
 ## Outcome
 
-A stranger can finish a 5-minute RPS slice: move, shoot nodes, exit.
+A stranger can play a 5-minute slice **from scrapforge**.
 
 ## Locked
 
 | | |
 | --- | --- |
-| Title | Robot Puzzle Shooter |
-| Engine | HTML5 greybox in `game/` until Game Dev names another stack/repo |
-| Spec | [../../game/GDD.md](../../game/GDD.md) |
+| Title | Robot Puzzle Shooter (working) |
+| Product repo | https://github.com/Snova24/Snova24-scrapforge |
+| Alias brandon used | `Snova24/scrapforge` |
+| Repo state 2026-08-25 | **Empty** — no commits, no default branch |
+| Spec draft | [../../game/GDD.md](../../game/GDD.md) in The Vault until scrapforge has GDD |
 | Standing order | [../studio/NOW.md](../studio/NOW.md) |
 
 ## Parked
 
-- https://github.com/Snova24/Sarst-Repo/pull/2 — TAKE stealth spec (wrong fantasy)
+- https://github.com/Snova24/Sarst-Repo/pull/2 — TAKE
+- Sarst-Repo `game/` — scratch greybox, not the product
 
 ## Links
 
-- Play greybox: http://localhost:8765/game/ (server from repo root)
+- Product: https://github.com/Snova24/Snova24-scrapforge
+- Vault: https://github.com/Snova24/Sarst-Repo/pull/1
 - Design: https://cursor.com/agents/bc-14df8331-383a-4bd4-b7a7-5c187dda80bc
 - Art: https://cursor.com/agents/bc-6f6ed739-7b8e-487d-8b76-2cb2c152940a
 - Playtest: https://cursor.com/agents/bc-016cebd0-fd39-4b95-a735-930757896489
-- Game Dev **robot puzzle shooter**: *URL unknown in this environment*
+- Game Dev **robot puzzle shooter**: paste prompt; not visible from The Vault env
 
 ## Now
 
-- [ ] brandon pastes Game Dev prompt into **robot puzzle shooter**
-- [ ] Drop that agent’s URL / repo into this vault if it lives elsewhere
-- [ ] Design retargets off TAKE
-- [ ] Art + Playtest on RPS greybox
+- [x] Product repo identified
+- [ ] robot puzzle shooter first commit on scrapforge
+- [ ] Design/Art/Playtest move to scrapforge after that commit
+- [ ] brandon pastes prompts
 
 ## Waiting on
 
-brandon (paste + URL). robot puzzle shooter (playable).
+robot puzzle shooter (init scrapforge). brandon (paste).
 
 ## Risks
 
-- Two games in flight (TAKE vs RPS). RPS wins.
-- Game Dev not visible here → studio keeps guessing unless the prompt is pasted.
+- Staff keep shipping into The Vault because scrapforge is empty.
+- This CoS token cannot push to scrapforge (Sarst-Repo only). Game Dev must.
 
 ## People
 
 - brandon — owner
-- robot puzzle shooter — Game Dev
+- robot puzzle shooter — Game Dev, owns scrapforge
 - Core gameplay loop — Design
 - Slice visual assets — Art
 - Playtest findings — Playtest
-- Chief of Staff
+- Chief of Staff — The Vault
 
 ## Log
 
-- 2026-08-25 — brandon: loop in original Game Dev **robot puzzle shooter**. Retargeted slice off TAKE/heist.
-- 2026-08-25 — Parallel staff spawned; CoS had locked a default extract slice (superseded).
-- 2026-08-24 — Asked for optimal production roster.
+- 2026-08-25 — brandon: `Snova24/scrapforge`. Canonical GitHub name `Snova24/Snova24-scrapforge`. Empty. Locked as product repo.
+- 2026-08-25 — Looped in robot puzzle shooter; retargeted off TAKE/heist.

@@ -11,8 +11,9 @@ You are a robot. Read the room. Shoot the right things. Walk out.
 ## Platform
 
 - **Title:** Robot Puzzle Shooter (working title)
-- **Engine:** HTML5 canvas + vanilla JS in this repo (`game/`) unless the original Game Dev already has another stack — then they own the port into `game/` or they give CoS the real repo URL
-- **Session:** ~5 minutes (a few 90-second solves)
+- **Product repo:** https://github.com/Snova24/Snova24-scrapforge (empty until Game Dev’s first commit)
+- **Scratch:** HTML5 greybox in *this* repo (`game/`) — not the product
+- **Session:** ~5 minutes
 
 ## Verbs (only these)
 

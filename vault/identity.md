@@ -21,7 +21,7 @@ Last updated: 2026-08-25
 
 ## Current context
 
-Producing **Robot Puzzle Shooter**. Original Game Dev agent is named **robot puzzle shooter** (URL not visible from this vault environment). Parallel Design/Art/Playtest are on this repo. CoS coordinates via `vault/studio/NOW.md`.
+Producing **Robot Puzzle Shooter** in https://github.com/Snova24/Snova24-scrapforge (alias `Snova24/scrapforge`). Repo is empty as of 2026-08-25. Original Game Dev: **robot puzzle shooter**. This vault is CoS memory only.
 
 ## Constraints
 
