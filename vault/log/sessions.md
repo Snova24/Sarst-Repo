@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Pinged idle Core and Slice
+
+- Core: review on PR #8 `game/GDD.md` — relock greybox-now to `28b436d` (3.5s freeze live, bump-safe on chase). No src. No #2.
+- Slice: review on PR #7 `game/STYLE.md` — louder OFF node at 40×40. No #3. No second sprite PR.
+- GitHub comments often miss IDLE agents; requested chat follow-ups + `CURSOR_API_KEY`. No Task clones.
+
 ## 2026-08-25 — Playtest 60149a0: bump-safe works, stranger still skips NODE
 
 - PR #5 `ed03032`: NODE readable. Control keeps HP 5 during spawn bump-safe. Stranger still POWER DOWN W1, node 0/1, 0 kills. P1: reading HUD burns the spawn-timed window.

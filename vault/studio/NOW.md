@@ -21,8 +21,8 @@ CoS HEAD: W1 freeze **3.5s**; bump-safe 5.5s **starts when chase starts** (Playt
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | IDLE after PR #8. Relock greybox-now to live 3.5s freeze + chase-timed bump-safe. Do not merge #2. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE. PR #7 shipped. Hex NODE. Hold. Do not merge #3. |
+| **Core** gameplay loop | Design | `game/GDD.md` | IDLE. Pinged: relock PR #8 greybox-now to `28b436d`. Do not merge #2. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE. Pinged: loud OFF node on PR #7. Do not merge #3. |
 | Playtest | Playtest findings | `game/PLAYTEST.md` | `60149a0` done: NODE readable, bump-safe works, stranger still W1. Retest next CoS src push. |
 
 ## Core — do this
@@ -31,7 +31,7 @@ Own PR #8. Relock **Greybox now** to live numbers (W1 speed 40, aggro 3.5s, bump
 
 ## Slice — do this
 
-PR #7 is the art drop-in. Hold. Do not merge PR #3. Do not pile TAKE art.
+On PR #7 only: make the OFF node the loudest thing in W1 at 40×40 (brighter bullseye, stronger SHOOT). Keep labels. Do not merge PR #3. No second sprite PR.
 
 ## Playtest — do this
 
