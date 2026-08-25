@@ -33,16 +33,4 @@ New PR off CoS. `player.png` robot, `drone.png`, `node.png` that reads as a NODE
 
 ## Playtest — do this
 
-Retest after the next CoS `game/src` push: W1 bump-safe (contact knocks you, no HP for ~5.5s). 1s death is closed.
-
-## Core — do this
-
-Own PR #6 (`game/GDD.md` only) or open a new PR off CoS. Do not merge PR #2. Do not edit `game/src`. Dual objective is AND.
-
-## Slice — do this
-
-New PR off CoS. `player.png` robot, `drone.png`, `node.png` that reads as a NODE (not a boat). Do not merge PR #3.
-
-## Playtest — do this
-
-Retest `70376a4` (NODE/SHOOT, STUCK banner, dashed line). Do not file the 4be215e unlabeled-square report as current.
+Retest after the next CoS `game/src` push (`c8c82e1`): W1 bump-safe (contact knocks you, no HP for ~5.5s). 1s death is closed.
