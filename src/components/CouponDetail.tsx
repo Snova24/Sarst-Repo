@@ -8,9 +8,12 @@ import {
   formatMoney,
   isExpired,
 } from "../lib/format";
+import type { Coords } from "../lib/geo";
+import type { GeoStatus } from "../lib/location";
 import { ActionList } from "./ActionList";
 import { MoneyPanel } from "./MoneyPanel";
 import { PunchBar } from "./PunchBar";
+import { WorthIt } from "./WorthIt";
 
 type CouponDetailProps = {
   coupon: Coupon;
@@ -23,6 +26,12 @@ type CouponDetailProps = {
   onCopy: () => void;
   onToggleUsed: () => void;
   onToggleAction: (actionId: string) => void;
+  here: Coords | null;
+  geoStatus: GeoStatus;
+  geoSource: "gps" | "tideglass" | null;
+  onRequestGps: () => void;
+  onUseTideglass: () => void;
+  onClearGeo: () => void;
 };
 
 export function CouponDetail({
@@ -36,6 +45,12 @@ export function CouponDetail({
   onCopy,
   onToggleUsed,
   onToggleAction,
+  here,
+  geoStatus,
+  geoSource,
+  onRequestGps,
+  onUseTideglass,
+  onClearGeo,
 }: CouponDetailProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const expired = isExpired(coupon.expiresAt, now);
@@ -85,6 +100,16 @@ export function CouponDetail({
         <h2 className="sheet-title">{coupon.title}</h2>
         <p className="sheet-description">{coupon.description}</p>
 
+        <WorthIt
+          coupon={coupon}
+          here={here}
+          geoStatus={geoStatus}
+          geoSource={geoSource}
+          onRequestGps={onRequestGps}
+          onUseTideglass={onUseTideglass}
+          onClearGeo={onClearGeo}
+        />
+
         <dl className="sheet-meta">
           <div>
             <dt>{money ? "Offer ends" : "Expires"}</dt>
@@ -130,7 +155,7 @@ export function CouponDetail({
         </div>
 
         <section className="sheet-terms">
-          <h3>Terms</h3>
+          <h3>Legal line</h3>
           <p>{coupon.terms}</p>
         </section>
 

@@ -316,7 +316,8 @@ h3 {
 .ticket-copy:focus-visible,
 .featured-copy:focus-visible,
 .sheet-close:focus-visible,
-.action-row:focus-visible {
+.action-row:focus-visible,
+.worth-toggle button:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 2px;
 }
@@ -1191,6 +1192,149 @@ h3 {
   box-shadow: 3px 3px 0 var(--ink);
   font-family: Fraunces, Georgia, serif;
   transform: rotate(-1deg);
+}
+
+.worth {
+  margin: 0.9rem 0 0.5rem;
+  padding: 0.85rem 0.8rem 0.75rem;
+  border: 1px solid var(--ink);
+  background: color-mix(in srgb, var(--sage) 7%, var(--ticket));
+}
+
+.worth.skip {
+  background: color-mix(in srgb, var(--clip) 8%, var(--ticket));
+}
+
+.worth-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.worth-verdict {
+  margin: 0;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.35rem;
+}
+
+.worth-verdict.is-worth {
+  color: var(--sage);
+}
+
+.worth-verdict.is-skip {
+  color: var(--clip-deep);
+}
+
+.worth-verdict.is-borderline {
+  color: #8a6a1c;
+}
+
+.worth-toggle {
+  display: flex;
+  border: 1px solid var(--ink);
+}
+
+.worth-toggle button {
+  min-height: 36px;
+  padding: 0.25rem 0.65rem;
+  border: 0;
+  background: var(--ticket);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.worth-toggle button.is-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.worth-headline {
+  margin: 0.35rem 0 0.15rem;
+  font-weight: 600;
+}
+
+.worth-legit {
+  margin: 0 0 0.7rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.worth-math {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem;
+  margin: 0 0 0.75rem;
+}
+
+.worth-math dt {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.worth-math dd {
+  margin: 0.1rem 0 0;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.worth-geo {
+  margin-bottom: 0.7rem;
+}
+
+.worth-geo p {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+}
+
+.worth-geo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.worth-geo-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.worth-simple,
+.worth-detailed ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.worth-simple li + li,
+.worth-detailed li + li {
+  margin-top: 0.3rem;
+}
+
+.worth-detailed h4 {
+  margin: 0.75rem 0 0.3rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.worth-archive {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.worth-archive th,
+.worth-archive td {
+  text-align: left;
+  padding: 0.3rem 0.35rem 0.3rem 0;
+  border-bottom: 1px dashed var(--rule);
+  vertical-align: top;
 }
 
 @media (min-width: 640px) {

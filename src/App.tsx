@@ -12,6 +12,7 @@ import {
   walletSavings,
 } from "./lib/coupons";
 import { useWallet } from "./lib/wallet";
+import { useBookletLocation } from "./lib/location";
 import { formatMoney, isExpired } from "./lib/format";
 import type { Coupon, Interest, SortKey } from "./types";
 import { CouponDetail } from "./components/CouponDetail";
@@ -53,6 +54,7 @@ function walletRank(coupon: Coupon, used: boolean, now: Date): number {
 
 export default function App() {
   const wallet = useWallet();
+  const geo = useBookletLocation();
   const now = new Date();
   const [view, setView] = useState<AppView>("browse");
   const [search, setSearch] = useState("");
@@ -302,6 +304,12 @@ export default function App() {
             else wallet.markUsed(selected.id);
           }}
           onToggleAction={(actionId) => wallet.toggleAction(selected.id, actionId)}
+          here={geo.coords}
+          geoStatus={geo.status}
+          geoSource={geo.source}
+          onRequestGps={geo.requestGps}
+          onUseTideglass={geo.useTideglass}
+          onClearGeo={geo.clear}
         />
       ) : null}
 

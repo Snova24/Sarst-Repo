@@ -17,7 +17,7 @@ Someone who collects grocery, dining, and retail codes and loses them in screens
 - **Bank bonuses** — ads that claim hundreds to open a checking account, with requirements, clawbacks, fees, and a dated **safe exit** so you can close and leave.
 - **0% credit** — a section for balance-transfer cards and 0% personal loans: intro APR, then-APR, fees, payoff clock, clean exit.
 - **Wallet** — clipped coupons, ending-soon first, mark used, remove.
-- **Savings** — rough dollars still available from unused, unlocked wallet items.
+- **Worth-it lab** — every ticket runs the math: claimed benefit minus fees, archive/web/shelf prices vs the advertised “was,” GPS or a Tideglass pin for in-store range, and terms in **Simple** or **Detailed**. Inflated was-prices and always-on fake sales get a Skip. Live Wayback fetches are a later pipe; the booklet ships a local price file that works the same way.
 
 No accounts. Wallet lives in `localStorage` key `clipbook.wallet.v1`.
 
@@ -32,4 +32,4 @@ Paper coupon insert, not a SaaS dashboard.
 
 ## Out of scope
 
-Auth, backend, real merchant APIs, maps, barcode scanning, browser extension.
+Auth, backend, live merchant scraping, and a real Wayback network crawl (the price file stands in until that pipe exists).

@@ -85,6 +85,34 @@ export interface Coupon {
   money?: MoneyOffer;
 }
 
+export interface PriceSnapshot {
+  at: string;
+  price: number;
+  source: "shelf" | "web" | "archive";
+  note?: string;
+}
+
+export interface GeoPlace {
+  label: string;
+  lat: number;
+  lng: number;
+  online: boolean;
+}
+
+export interface DealIntel {
+  advertisedWas?: number;
+  advertisedNow?: number;
+  typicalPrice?: number;
+  archive: PriceSnapshot[];
+  place?: GeoPlace;
+  hassleHours: number;
+  simpleTerms: string[];
+  monthlyFee?: number;
+  oneTimeFee?: number;
+  percentFee?: number;
+  annualFee?: number;
+}
+
 export interface WalletEntry {
   couponId: string;
   clippedAt: string;
