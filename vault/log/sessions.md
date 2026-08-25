@@ -2,6 +2,13 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Core and Slice woke; both on the RPS lane
+
+- Core: relocking `game/GDD.md` on PR #8 to `28b436d` (not TAKE). Local edit, not pushed.
+- Slice: louder OFF node on PR #7 (not TAKE, no second PR). Local art, not pushed.
+- Playtest: still on `28b436d` stranger retest; control can shoot NODE in freeze.
+- No extra GitHub pings. No Task clones.
+
 ## 2026-08-25 — Loop: Playtest on 28b436d; Core/Slice still idle
 
 - Playtest fetched `28b436d`. Control shot NODE ON during 3.5s freeze. Stranger session in flight. No new PLAYTEST.md yet.

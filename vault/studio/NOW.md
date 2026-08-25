@@ -21,8 +21,8 @@ CoS HEAD: W1 freeze **3.5s**; bump-safe 5.5s **starts when chase starts** (Playt
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | IDLE. Pinged: relock PR #8 greybox-now to `28b436d`. Do not merge #2. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE. Pinged: loud OFF node on PR #7. Do not merge #3. |
+| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Relocking PR #8 greybox-now to `28b436d`. Not TAKE. Push then stop. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Louder OFF node on PR #7. Not TAKE. No second PR. |
 | Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING on `28b436d`. Control already `node ON 1/1` in the 3.5s freeze. Stranger write-up not pushed. |
 
 ## Core — do this

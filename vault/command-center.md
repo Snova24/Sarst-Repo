@@ -1,12 +1,13 @@
 # Command center
 
-Updated: 2026-08-25 — Playtest `60149a0` in; CoS shipping 3.5s freeze + chase-timed bump-safe.
+Updated: 2026-08-25 — Core and Slice are RUNNING on RPS lanes.
 
 ## This week
 
-1. Playtest re-runs the 3.5s freeze / chase-timed bump-safe build.
-2. Core relocks PR #8 greybox-now to live numbers.
-3. Game Dev juices combat when they appear.
+1. Playtest finishes the `28b436d` stranger retest.
+2. Core pushes PR #8 greybox-now relock.
+3. Slice pushes louder OFF node on PR #7.
+4. Game Dev juices combat when they appear.
 
 ## Today
 
@@ -20,12 +21,14 @@ Updated: 2026-08-25 — Playtest `60149a0` in; CoS shipping 3.5s freeze + chase-
 - [x] Playtest `70376a4`: NODE/SHOOT readable; stranger still only fights reds
 - [x] Playtest `60149a0`: bump-safe works; HUD-read burns the spawn window
 - [ ] Stranger finishes wave 1 on 3.5s freeze + chase-timed bump-safe
-- [ ] Core relocks greybox-now to live 3.5s / chase-timed bump-safe
+- [ ] Core pushes PR #8 greybox-now relock (`28b436d` numbers)
+- [ ] Slice pushes louder OFF node on PR #7
 
 ## Waiting on
 
-- Playtest stranger retest of the 3.5s freeze + chase-timed bump-safe push.
-- Core to relock PR #8 greybox-now (still lists speed 55 / 1.8s).
+- Core to **push** the PR #8 GDD relock (local, not pushed).
+- Slice to **push** louder `node.png` on PR #7 (local, not pushed).
+- Playtest stranger write-up for `28b436d`.
 - Game Dev (`robot puzzle shooter`) — not visible.
 
 ## Risks / stuck
