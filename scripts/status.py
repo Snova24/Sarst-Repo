@@ -19,6 +19,14 @@ SPINE = [
     "decisions.md",
     "inbox.md",
     "log/sessions.md",
+    "studio/NOW.md",
+]
+
+GAME = [
+    "GDD.md",
+    "index.html",
+    "src/game.js",
+    "PLAYTEST.md",
 ]
 
 SKILLS = [
@@ -58,6 +66,11 @@ def main() -> None:
     for rel in SPINE:
         path = VAULT / rel
         check(path.is_file() and path.stat().st_size > 0, f"vault/{rel}")
+
+    game = ROOT / "game"
+    for rel in GAME:
+        path = game / rel
+        check(path.is_file() and path.stat().st_size > 0, f"game/{rel}")
 
     for skill in SKILLS:
         skill_md = ROOT / ".cursor/skills" / skill / "SKILL.md"

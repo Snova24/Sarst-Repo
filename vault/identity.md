@@ -1,6 +1,6 @@
 # Identity
 
-Last updated: 2026-08-24
+Last updated: 2026-08-25
 
 ## Basics
 
@@ -21,13 +21,11 @@ Last updated: 2026-08-24
 
 ## Current context
 
-Producing a game. A Game Dev Cloud Agent is already working (repo/engine not yet linked into this vault). This repo is the Chief of Staff layer around that work — see `vault/studio/roster.md` and `vault/projects/the-game.md`.
-
-[TODO] Working title, engine, platform, game repo URL.
+Producing **The Vault**, an HTML5 5-minute extraction slice in this repo (`game/`). brandon spawned Game Design, Art, and Playtest all at once on Sarst-Repo. CoS locked a default loop so they can work in parallel. Override if the fantasy is wrong.
 
 ## Constraints
 
-[TODO] Hours, energy, family, health, hard nos.
+Staff must stay in file lanes (`vault/studio/NOW.md`). Game lives in `game/`, memory in `vault/`.
 
 ## Preferences (agent)
 
@@ -40,7 +38,7 @@ Producing a game. A Game Dev Cloud Agent is already working (repo/engine not yet
 These are the onboard gaps. Do not fill them in by guessing.
 
 - [ ] Timezone and typical working hours
-- [ ] Current job / company / whether this vault is personal, work, or both
-- [ ] Top 3 outcomes for the next 90 days
+- [x] Current job / company / whether this vault is personal, work, or both — personal production OS + the game in this repo
+- [x] Top 3 outcomes for the next 90 days — 5-minute playable Vault slice
 - [ ] People who matter this season
 - [ ] Tools he already uses (calendar, mail, notes, task app)

@@ -8,14 +8,19 @@ Status: `open` · `waiting` · `blocked` · `done`
 
 | ID | Commitment | Owner | Due | Status | Notes |
 | --- | --- | --- | --- | --- | --- |
-| C-001 | Finish Chief of Staff onboard (identity, goals, people, constraints) | brandon | 2026-08-31 | open | First session in The Vault |
-| C-002 | Keep Game Dev as sole implementer; spawn Design/Art/QA only on roster triggers | brandon + CoS | 2026-08-31 | open | [studio/roster.md](studio/roster.md) |
-| C-003 | Give CoS game title, engine, and repo URL | brandon | 2026-08-27 | open | Game Dev run is not visible from Sarst-Repo |
+| C-001 | Finish Chief of Staff onboard (identity, goals, people, constraints) | brandon | 2026-08-31 | open | Timezone / hours still open |
+| C-004 | Paste standing-order prompts into Game Dev, Art, Playtest | brandon | 2026-08-25 | open | [studio/prompts.md](studio/prompts.md) |
+| C-005 | Feel pass on greybox (`game/src`, `game/index.html`) | Core gameplay loop | 2026-08-26 | waiting | Lane in NOW.md |
+| C-006 | Style bible + drop-in PNGs | Slice visual assets | 2026-08-26 | waiting | `game/STYLE.md`, `game/assets/` |
+| C-007 | Stranger playtest report | Playtest findings | 2026-08-26 | waiting | `game/PLAYTEST.md` |
 
 ## Waiting on others
 
-_None._
+- Core gameplay loop, Art, Playtest — see C-005..C-007
 
 ## Closed
 
-_None yet._
+| ID | Commitment | Closed | Notes |
+| --- | --- | --- | --- |
+| C-002 | Sequential spawn only | 2026-08-25 | Owner spawned all staff; lanes replace the cap |
+| C-003 | Title / engine / repo | 2026-08-25 | Locked: The Vault, HTML5, this repo |

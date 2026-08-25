@@ -1,26 +1,29 @@
 # Command center
 
-Updated: 2026-08-24 — game production roster locked; Game Dev already working.
+Updated: 2026-08-25 — slice locked, greybox shipped, staff spawned in parallel.
 
 ## This week
 
-1. Protect Game Dev: playable 5-minute loop, no second implementer.
-2. Spawn **Game Design** only if that loop is still undefined — see [studio/roster.md](studio/roster.md).
-3. Tell CoS the game title, engine, and repo so this vault can see the work.
+1. Paste standing-order prompts into Game Dev, Art, Playtest (`vault/studio/prompts.md`).
+2. Game Dev juices `game/src` against locked `game/GDD.md`.
+3. Art drop-in sprites; Playtest fills `game/PLAYTEST.md`.
 
 ## Today
 
-- [ ] Do not spin extra agents. Game Dev + CoS is the team until a trigger in the roster fires.
-- [ ] Drop working title / engine / game repo URL into this vault (`/capture` is fine).
+- [x] Lock default loop (The Vault extraction) so staff stop rediscovering an empty repo
+- [x] Ship greybox at `game/`
+- [ ] brandon pastes prompts into the three staff agents (CoS cannot DM them)
 
 ## Waiting on
 
-- Game Dev: playable loop
-- brandon: title, engine, repo (not visible from The Vault)
+- Core gameplay loop — feel pass on greybox
+- Slice visual assets — STYLE.md + PNGs
+- Playtest findings — stranger run
+- brandon — override fantasy if heist/extract is wrong
 
 ## Risks / stuck
 
-Staffing too wide (art/audio/marketing) before the loop is fun. Game Dev agent is not in this environment — CoS cannot inspect its PRs until the repo is linked.
+All staff landed on The Vault repo with no game. They were idle-discovering. Unblocked with a default slice. Collision risk if anyone edits outside their lane.
 
 ## Inbox
 

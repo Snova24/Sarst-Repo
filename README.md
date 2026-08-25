@@ -4,6 +4,16 @@ Persistent memory and operating system for **Brandon Davis**, run by Cursor agen
 
 If you just opened this: say **onboard** (or `/onboard`) and talk. The agent will fill `vault/identity.md`, goals, and constraints from the conversation.
 
+## The game (in this repo)
+
+Staff are live. Standing order: [`vault/studio/NOW.md`](vault/studio/NOW.md).
+
+```bash
+python3 -m http.server 8765
+```
+
+Then open http://localhost:8765/game/ — WASD move, E grab, extract before lock-down.
+
 ## What this is
 
 A Chief of Staff does the work *around* the work:

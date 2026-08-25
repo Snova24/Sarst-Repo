@@ -19,7 +19,9 @@ Read this first. Then open only the files you need.
 | --- | --- |
 | [people/](people/) | One file per person. Copy [templates/person.md](templates/person.md) |
 | [projects/](projects/) | One file per active project. Copy [templates/project.md](templates/project.md) |
-| [studio/roster.md](studio/roster.md) | Cloud Agent staffing for the game. Cap 3 concurrent. |
+| [studio/NOW.md](studio/NOW.md) | Standing order for live staff — read this first |
+| [studio/roster.md](studio/roster.md) | Roles, lanes, when to spawn |
+| [studio/prompts.md](studio/prompts.md) | Paste-prompts to kick staff |
 | [journal/](journal/) | Dated notes (`YYYY-MM-DD.md`) |
 | [weekly/](weekly/) | Week reviews (`YYYY-Www.md`) |
 | [log/sessions.md](log/sessions.md) | Short session trail so the next agent is not cold |

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Vault — slice</title>
+    <link rel="stylesheet" href="src/game.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hud">
+        <h1>The Vault</h1>
+        <p id="status">WASD move · E grab · get out</p>
+        <p id="meter"><span id="loot">0/3</span> · <span id="timer">—</span></p>
+      </header>
+      <canvas id="view" width="960" height="540" aria-label="The Vault playfield"></canvas>
+      <p class="hint">Extract is the green alcove. Grab gold. Return before lock-down. R retries.</p>
+    </main>
+    <script type="module" src="src/game.js"></script>
+  </body>
+</html>

@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Unblock the parallel studio
+
+- brandon spawned Core gameplay loop, Slice visual assets, Playtest findings on this repo. All three were stuck: no game, no title, no engine.
+- Locked default slice (The Vault HTML5 extract) and shipped `game/` greybox.
+- Next: brandon pastes `vault/studio/prompts.md` into each staff agent.
+
 ## 2026-08-24 — Staff the game around Game Dev
 
 - brandon: Game Dev agent is working; asked for optimal production agents.

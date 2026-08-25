@@ -6,14 +6,14 @@ A goal is an outcome with a reason, not a task. Tasks live in [commitments.md](c
 
 ## North star
 
-[TODO] One sentence: what would make the next 90 days a win? Default until onboard: a 5-minute playable game slice, not a full game.
+A stranger can finish a 5-minute run of The Vault (extract with loot before lock-down).
 
 ## Now (max 3)
 
 | Goal | Why it matters | How we'll know | Status |
 | --- | --- | --- | --- |
-| Ship a 5-minute vertical slice | Game Dev is already running; production fails if we staff a studio before a loop exists | Stranger can play 5 minutes with win/lose; roster stays ≤3 concurrent agents | In progress |
-| Stand up The Vault as a working Chief of Staff | Memory and priorities were starting from zero each session | Identity filled, weekly review used once | In progress |
+| Ship a 5-minute vertical slice | Staff are live; they need a locked loop, not a second discovery pass | Stranger win/lose on `game/`; Playtest files findings | In progress — greybox up |
+| Run the parallel studio without collisions | brandon spawned Design, Art, Playtest together | Each agent stays in file lanes in `vault/studio/NOW.md` | In progress |
 
 ## Next
 
