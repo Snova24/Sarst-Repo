@@ -1,94 +1,79 @@
-<header>
+# The Vault — Chief of Staff
 
-<!--
-  <<< Author notes: Course header >>>
-  Read <https://skills.github.com/quickstart> for more information about how to build courses using this template.
-  Include a 1280×640 image, course name in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Next to "About", add description & tags; disable releases, packages, & environments.
-  Add your open source license, GitHub uses the MIT license.
--->
+Persistent memory and operating system for **Brandon Davis**, run by Cursor agents. Chat is cheap. This repo is the source of truth.
 
-# Code with GitHub Copilot
+If you just opened this: say **onboard** (or `/onboard`) and talk. The agent will fill `vault/identity.md`, goals, and constraints from the conversation.
 
-_GitHub Copilot can help you code by offering autocomplete-style suggestions right in VS Code and Codespaces._
+## The game (in this repo)
 
-</header>
+Staff are live. Standing order: [`vault/studio/NOW.md`](vault/studio/NOW.md).
 
-<!--
-  <<< Author notes: Step 1 >>>
-  Choose 3-5 steps for your course.
-  The first step is always the hardest, so pick something easy!
-  Link to docs.github.com for further explanations.
-  Encourage users to open new tabs for steps!
--->
+**Game (this repo):** Robot Puzzle Shooter — Brotato-style waves + puzzle nodes.
 
-## Step 1: Leverage Codespaces with VS Code for Copilot
+```bash
+python3 -m http.server 8765
+```
 
-_Welcome to "Develop With AI Powered Code Suggestions Using GitHub Copilot and VS Code"! :wave:_
+http://localhost:8765/game/ — WASD, mouse aim, click shoot, pick upgrades, survive 3 waves.
 
-GitHub Copilot is an AI pair programmer that helps you write code faster and with less work. It draws context from comments and code to suggest individual lines and whole functions instantly. GitHub Copilot is powered by OpenAI Codex, a generative pretrained language model created by OpenAI.
+## What this is
 
-**Copilot works with many code editors including VS Code, Visual Studio, JetBrains IDE, and Neovim.**
+A Chief of Staff does the work *around* the work:
 
-Additionally, GitHub Copilot is trained on all languages that appear in public repositories. For each language, the quality of suggestions you receive may depend on the volume and diversity of training data for that language.
+- remembers who you are and what you promised
+- captures dumps so they do not live in your head
+- puts a recommended next action in front of you
+- prepares meetings from people and project files
+- closes the week so next week is not a reset
 
-Using Copilot inside a Codespace shows just how easy it is to get up and running with GitHub's suite of [Collaborative Coding](https://github.com/features#features-collaboration) tools.
+It does **not** silently take over engineering, invent a calendar it cannot see, or keep a second todo list in chat.
 
-> **Note**
-> This skills exercise will focus on leveraging GitHub Codespace. It is recommended that you complete the GitHub skill, [Codespaces](https://github.com/skills/code-with-codespaces), before moving forward with this exercise.
+## How to use it
 
-### :keyboard: Activity: Enable Copilot inside a Codespace
+Open this repo in Cursor (desktop or a [Cloud Agent](https://cursor.com/agents)). Then speak in plain language:
 
-**We recommend opening another browser tab to work through the following activities so you can keep these instructions open for reference.**
+| You say | The agent runs |
+| --- | --- |
+| `onboard` / "set this up" | First-run interview → identity, goals, people |
+| `brief me` / "what's on my plate" | Command center + commitments + inbox |
+| `capture` + a dump | Files notes, promises, people, projects |
+| `what should I do` | Prioritize against goals |
+| `prep me for X` | Meeting brief from vault files |
+| `weekly review` | Week wrap, carry-forward, command center refresh |
+| `remember that…` | Durable write to the right file |
 
-Before you open up a codespace on a repository, you can create a development container and define specific extensions or configurations that will be used or installed in your codespace. Let's create this development container and add copilot to the list of extensions.
+You can also invoke skills directly: `/onboard`, `/briefing`, `/capture`, `/prioritize`, `/meeting-prep`, `/weekly-review`, `/learn`.
 
-1. Navigating back to your **Code** tab of your repository, click the **Add file** drop-down button, and then click `Create new file`.
-1. Type or paste the following in the empty text field prompt to name your file.
-   ```
-   .devcontainer/devcontainer.json
-   ```
-1. In the body of the new **.devcontainer/devcontainer.json** file, add the following content:
-   ```
-   {
-       // Name this configuration
-       "name": "Codespace for Skills!",
-       "customizations": {
-           "vscode": {
-               "extensions": [
-                   "GitHub.copilot"
-               ]
-           }
-       }
-   }
-   ```
-1. Select the option to **Commit directly to the `main` branch**, and then click the **Commit new file** button.
-1. Navigate back to the home page of your repository by clicking the **Code** tab located at the top left of the screen.
-1. Click the **Code** button located in the middle of the page.
-1. Click the **Codespaces** tab on the box that pops up.
-1. Click the **Create codespace on main** button.
+## Layout
 
-   **Wait about 2 minutes for the codespace to spin itself up.**
+```
+AGENTS.md                 # How every agent should behave
+.cursor/rules/            # Always-on CoS rule
+.cursor/skills/           # Playbooks (briefing, capture, …)
+vault/
+  INDEX.md                # Map of the vault
+  identity.md             # Who brandon is
+  command-center.md       # This week / today
+  goals.md                # Season outcomes
+  commitments.md          # Open loops
+  decisions.md            # Choices that should stick
+  inbox.md                # Unfiled capture
+  people/  projects/  journal/  weekly/  log/
+scripts/status.py         # Sanity-check the spine
+```
 
-1. Verify your codespace is running. The browser should contain a VS Code web-based editor and a terminal should be present such as the below:
-   ![Screen Shot 2023-03-09 at 9 09 07 AM](https://user-images.githubusercontent.com/26442605/224102962-d0222578-3f10-4566-856d-8d59f28fcf2e.png)
-1. The `copilot` extension should show up in the VS Code extension list. Click the extensions sidebar tab. You should see the following:
-   ![Screen Shot 2023-03-09 at 9 04 13 AM](https://user-images.githubusercontent.com/26442605/224102514-7d6d2f51-f435-401d-a529-7bae3ae3e511.png)
+## After every useful session
 
-**Wait about 60 seconds then refresh your repository landing page for the next step.**
+The agent should have updated vault files. **Merge the PR** (Cloud Agents) or commit so the next session starts warm. If it stayed in chat only, the memory did not land.
 
-<footer>
+## Health check
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+```bash
+python3 scripts/status.py
+```
 
----
+Prints whether the spine files exist, how many inbox items are open, and the current command center.
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/code-with-copilot) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
+## What this replaced
 
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+This repository started life as a GitHub Skills "Code with Copilot" course template. The Vault is the actual product.
