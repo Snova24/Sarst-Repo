@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Timer: Design/Art still TAKE; Playtest retesting fairness
+
+- Design last activity still TAKE PR #2. Art last activity still TAKE PR #3. No new PRs. Dashboard follow-up blocked (login wall + no API key). `@cursor` did not wake them.
+- Playtest is on `4be215e` now (stranger retest in flight).
+- Game Dev still not in this environment.
+
 ## 2026-08-25 — Playtest verdict in; CoS fills Game Dev P0
 
 - Playtest: stranger cannot SOLVE. Wave 1 ~1s death. Click-to-focus shoots. PR #5 updated.
