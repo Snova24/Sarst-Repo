@@ -34,6 +34,7 @@ let bumpSafe = 0;
 let bumpArmed = false;
 let canvasArmed = false;
 let w1AwaitNode = false;
+let w1ImmuneUntil = 0;
 
 function loadSprite(file) {
   const img = new Image();
@@ -123,9 +124,9 @@ function releaseW1Horde() {
   w1AwaitNode = false;
   spawnDrones(WAVES[0].drones);
   aggroIn = 0.45;
-  // Cover the edge walk-in (~6s) plus a contact learn window.
-  bumpSafe = 12;
+  bumpSafe = 20;
   bumpArmed = true;
+  w1ImmuneUntil = performance.now() + 20000;
   if (mode === "play") {
     statusEl.textContent = "WAVE 1 — horde incoming. Kill RED drones";
   }
@@ -143,6 +144,7 @@ function spawnWave() {
   aggroIn = waveIndex === 0 ? 0 : 0.45;
   bumpSafe = 0;
   bumpArmed = false;
+  w1ImmuneUntil = 0;
   const spots = [
     [180, 140],
     [760, 140],
@@ -309,7 +311,6 @@ function tick(now) {
         ? "WAVE 1 — kill RED drones"
         : "WAVE 1 — kill RED drones AND shoot BLUE NODE ON";
     }
-    bumpSafe = Math.max(0, bumpSafe - dt);
     for (const d of drones) {
       if (aggroIn > 0) continue;
       const cx = player.x + player.w / 2 - (d.x + d.w / 2);
@@ -317,7 +318,8 @@ function tick(now) {
       const len = Math.hypot(cx, cy) || 1;
       d.x += (cx / len) * d.speed * dt;
       d.y += (cy / len) * d.speed * dt;
-      if (iFrames <= 0 && overlaps(player, d)) {
+      const immune = bumpSafe > 0 || performance.now() < w1ImmuneUntil;
+      if (overlaps(player, d)) {
         if (bumpArmed) {
           bumpSafe = Math.max(bumpSafe, 5.5);
           bumpArmed = false;
@@ -325,8 +327,12 @@ function tick(now) {
         player.x += (cx / len) * 28;
         player.y += (cy / len) * 28;
         clampPlayer();
-        iFrames = bumpSafe > 0 ? 0.45 : 0.7;
-        if (bumpSafe > 0) continue;
+        if (immune || bumpSafe > 0) {
+          iFrames = 0.45;
+          continue;
+        }
+        if (iFrames > 0) continue;
+        iFrames = 0.7;
         player.hp -= 1;
         if (player.hp <= 0) {
           mode = "lose";
@@ -334,6 +340,7 @@ function tick(now) {
         }
       }
     }
+    bumpSafe = Math.max(0, bumpSafe - dt);
 
     shots = shots.filter((shot) => {
       shot.x += shot.vx * dt;
@@ -457,7 +464,7 @@ function draw() {
   ctx.fillRect(16, H - 22, 120, 8);
   ctx.fillStyle = "#7dffb3";
   ctx.fillRect(16, H - 22, 120 * (player.hp / player.maxHp), 8);
-  if (bumpSafe > 0 && mode === "play") {
+  if ((bumpSafe > 0 || performance.now() < w1ImmuneUntil) && mode === "play") {
     ctx.fillStyle = "#7dffb3";
     ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
     ctx.textAlign = "left";
@@ -499,4 +506,13 @@ function draw() {
 }
 
 resetRun();
+window.__rps = () => ({
+  hp: player.hp,
+  bumpSafe,
+  immune: performance.now() < w1ImmuneUntil,
+  drones: drones.length,
+  nodeOn: nodes.filter((n) => n.on).length,
+  w1AwaitNode,
+  mode,
+});
 requestAnimationFrame(tick);
