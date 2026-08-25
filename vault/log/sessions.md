@@ -2,6 +2,11 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest 4eaa11c: they shoot NODE ON when nothing red is on screen
+
+- PR #5 `a97b24a`: gate closed. Walk-in immunity holds (HP 5). SOLVE not shown.
+- Next: stranger through W1 horde + W2–W3. Core still owes Greybox-now relock. Slice hold.
+
 ## 2026-08-25 — Playtest 79ff71e: HUD closed; still skip NODE. W1 node gate.
 
 - PR #5 `43f8e61`: freeze copy survives focus click. Uncoached still does not shoot NODE. Control can.

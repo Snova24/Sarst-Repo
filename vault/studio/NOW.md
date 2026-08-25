@@ -13,7 +13,7 @@ python3 -m http.server 8765
 # http://localhost:8765/game/
 ```
 
-CoS HEAD `4eaa11c`: W1 **node gate** — no drones until NODE ON, then 3-drone horde. 20s bump-safe after horde spawn. Do not restack freeze.
+CoS HEAD: W1 **node gate** (Playtest closed: they shoot NODE ON). Then 3-drone horde + 20s bump-safe. Next unknown: SOLVED.
 
 ## Team (this repo)
 
@@ -21,13 +21,13 @@ CoS HEAD `4eaa11c`: W1 **node gate** — no drones until NODE ON, then 3-drone h
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | IDLE. Relock Greybox now to W1 node gate. Do not merge #2. |
+| **Core** gameplay loop | Design | `game/GDD.md` | IDLE. Relock Greybox now to node gate. Do not merge #2. |
 | **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | Hold on louder node PR #7. Do not merge #3. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | `79ff71e` in: HUD closed, still skip NODE. Retest `4eaa11c` node gate. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | Gate closed on `4eaa11c`. Continue stranger through SOLVED. |
 
 ## Core — do this
 
-Playtest `43f8e61`: freeze copy stays; stranger still skips NODE. Relock **Greybox now** on PR #8: W1 drones spawn **after** the node is ON (not another freeze). Do not edit `src`. Do not merge #2.
+Playtest confirmed the node gate. Relock **Greybox now** on PR #8: W1 drones spawn after NODE ON. 20s bump-safe from horde spawn. Do not edit `src`. Do not merge #2. Do not restack freeze.
 
 ## Slice — do this
 
@@ -35,4 +35,4 @@ Hold. Loud OFF node is already on CoS. Do not merge PR #3. No second sprite PR.
 
 ## Playtest — do this
 
-`79ff71e` P0 received (HUD closed, still skip NODE). Retest CoS `4eaa11c` (node gate + 20s bump-safe). `game/PLAYTEST.md` only. Verdict: with no reds on screen, do they shoot the NODE ON?
+Gate received: they shoot NODE ON when nothing red is on screen. Do not re-file the gate. Continue stranger on current CoS through W1 horde, upgrades, W2–W3. Verdict: can a stranger SOLVE today?

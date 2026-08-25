@@ -1,11 +1,11 @@
 # Command center
 
-Updated: 2026-08-25 — W1 node gate shipped; waiting on Playtest.
+Updated: 2026-08-25 — node gate closed; waiting on SOLVED + Core relock.
 
 ## This week
 
-1. Playtest retests W1 node gate on `4eaa11c` (no drones until NODE ON).
-2. Core relocks Greybox now to that gate (not another freeze).
+1. Playtest continues stranger through SOLVED on the node-gate greybox.
+2. Core relocks Greybox now to the live node gate.
 3. Game Dev juices combat when they appear.
 
 ## Today
@@ -22,14 +22,16 @@ Updated: 2026-08-25 — W1 node gate shipped; waiting on Playtest.
 - [x] Playtest `28b436d`: freeze unused; first click wipes NODE order
 - [x] Playtest `79ff71e`: freeze copy stays; stranger still skips NODE
 - [x] W1 node gate (no drones until NODE ON)
-- [ ] Stranger shoots NODE when W1 has no reds
+- [x] Playtest `4eaa11c`: with nothing red, they shoot NODE ON
+- [ ] Stranger SOLVE (W1 horde after immunity, then W2–W3)
 - [x] Core pushes PR #8 greybox-now relock (`28b436d` numbers)
+- [ ] Core relocks Greybox now to W1 node gate
 - [x] Slice pushes louder OFF node on PR #7
 
 ## Waiting on
 
-- Playtest retest of W1 node gate on `4eaa11c` (drones spawn after NODE ON).
-- Core relock of Greybox now to that gate.
+- Playtest stranger SOLVE on the node-gate greybox (W1 horde + W2–W3).
+- Core relock of Greybox now to the node gate.
 - Game Dev (`robot puzzle shooter`) — not visible.
 
 ## Risks / stuck
