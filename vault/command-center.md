@@ -25,6 +25,8 @@ Updated: 2026-08-25 — product repo is scrapforge (empty).
 
 `Snova24/alpha-budget-docs` is Play Store privacy/terms, not a game. Public GitHub for Snova24 has only 3 repos. This CoS token cannot push to scrapforge (`permissions.push: false`).
 
+**2026-08-25:** First commit for scrapforge was created locally (`README.md`, message `first commit`). `git push -u origin main` failed: `Permission to Snova24/Snova24-scrapforge.git denied to cursor[bot]`. Need GitHub App write access on that repo.
+
 ## Waiting on
 
 - **robot puzzle shooter** — init scrapforge
