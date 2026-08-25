@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest 79ff71e: HUD closed; still skip NODE. W1 node gate.
+
+- PR #5 `43f8e61`: freeze copy survives focus click. Uncoached still does not shoot NODE. Control can.
+- CoS: W1 has no drones until NODE ON, then 3-drone horde (0.45s aggro + bump-safe on chase). Not another freeze.
+- Core: relock Greybox now. Slice: hold.
+
 ## 2026-08-25 — Loop: Core IDLE on lock; Playtest still owes HUD-fix retest
 
 - Core IDLE on PR #8 (`8dec6bc`). Slice RUNNING but no new art after louder node `39e44d5`.

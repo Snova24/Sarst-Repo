@@ -33,6 +33,7 @@ let aggroIn = 0;
 let bumpSafe = 0;
 let bumpArmed = false;
 let canvasArmed = false;
+let w1AwaitNode = false;
 
 function loadSprite(file) {
   const img = new Image();
@@ -94,12 +95,9 @@ function clampPlayer() {
   player.y = Math.max(8, Math.min(H - player.h - 8, player.y));
 }
 
-function spawnWave() {
-  const spec = WAVES[waveIndex];
+function spawnDrones(count) {
   drones = [];
-  nodes = [];
-  shots = [];
-  for (let i = 0; i < spec.drones; i += 1) {
+  for (let i = 0; i < count; i += 1) {
     const edge = i % 4;
     let x = 40;
     let y = 40;
@@ -118,11 +116,32 @@ function spawnWave() {
     }
     drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 40 + waveIndex * 18 });
   }
-  // Core PR #8 lock + Playtest 60149a0: freeze long enough to shoot NODE;
-  // bump-safe starts when chase starts so reading the HUD does not burn it.
-  aggroIn = waveIndex === 0 ? 3.5 : 0.45;
+}
+
+function releaseW1Horde() {
+  if (!w1AwaitNode) return;
+  w1AwaitNode = false;
+  spawnDrones(WAVES[0].drones);
+  aggroIn = 0.45;
   bumpSafe = 0;
-  bumpArmed = waveIndex === 0;
+  bumpArmed = true;
+  if (mode === "play") {
+    statusEl.textContent = "WAVE 1 — horde incoming. Kill RED drones";
+  }
+}
+
+function spawnWave() {
+  const spec = WAVES[waveIndex];
+  drones = [];
+  nodes = [];
+  shots = [];
+  // Playtest 79ff71e: freeze + HUD do not get a stranger to shoot NODE.
+  // W1 has no reds until the node is ON, then the 3-drone horde spawns.
+  w1AwaitNode = waveIndex === 0;
+  if (!w1AwaitNode) spawnDrones(spec.drones);
+  aggroIn = waveIndex === 0 ? 0 : 0.45;
+  bumpSafe = 0;
+  bumpArmed = false;
   const spots = [
     [180, 140],
     [760, 140],
@@ -137,7 +156,7 @@ function spawnWave() {
   mode = "play";
   statusEl.textContent =
     waveIndex === 0
-      ? "WAVE 1 — drones frozen. SHOOT THE BLUE NODE ON first"
+      ? "WAVE 1 — no drones yet. SHOOT THE BLUE NODE ON to start the horde"
       : `WAVE ${waveIndex + 1} — kill RED drones AND shoot BLUE NODE ON`;
 }
 
@@ -158,6 +177,7 @@ function resetRun() {
 }
 
 function waveClear() {
+  if (w1AwaitNode) return false;
   return drones.length === 0 && nodes.length > 0 && nodes.every((n) => n.on);
 }
 
@@ -254,7 +274,7 @@ canvas.addEventListener("mousedown", (event) => {
   if (!canvasArmed) {
     canvasArmed = true;
     canvas.focus();
-    if (mode === "play" && aggroIn <= 0) {
+    if (mode === "play" && aggroIn <= 0 && !w1AwaitNode) {
       statusEl.textContent = "Click again or press SPACE to shoot";
     }
     return;
@@ -287,7 +307,9 @@ function tick(now) {
       bumpSafe = 5.5;
       bumpArmed = false;
       if (mode === "play") {
-        statusEl.textContent = "WAVE 1 — kill RED drones AND shoot BLUE NODE ON";
+        statusEl.textContent = nodes.every((n) => n.on)
+          ? "WAVE 1 — kill RED drones"
+          : "WAVE 1 — kill RED drones AND shoot BLUE NODE ON";
       }
     }
     bumpSafe = Math.max(0, bumpSafe - dt);
@@ -319,6 +341,7 @@ function tick(now) {
       for (const node of nodes) {
         if (!node.on && overlaps(shot, node)) {
           node.on = true;
+          if (waveIndex === 0) releaseW1Horde();
           return shot.pierce-- > 0;
         }
       }
@@ -335,7 +358,7 @@ function tick(now) {
       return true;
     });
 
-    if (drones.length === 0 && nodes.some((n) => !n.on) && mode === "play") {
+    if (!w1AwaitNode && drones.length === 0 && nodes.some((n) => !n.on) && mode === "play") {
       statusEl.textContent = `WAVE ${waveIndex + 1} STUCK — drones down. SHOOT THE BLUE NODE ON`;
     }
 

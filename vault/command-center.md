@@ -1,11 +1,11 @@
 # Command center
 
-Updated: 2026-08-25 — waiting on Playtest HUD-fix retest of `79ff71e`.
+Updated: 2026-08-25 — W1 node gate shipped; waiting on Playtest.
 
 ## This week
 
-1. Playtest retests CoS HEAD `79ff71e` (freeze copy survives first click).
-2. If stranger still skips NODE with HUD intact, next `src` fill is behavioral (not another freeze).
+1. Playtest retests W1 node gate (no drones until NODE ON).
+2. Core relocks Greybox now to that gate (not another freeze).
 3. Game Dev juices combat when they appear.
 
 ## Today
@@ -20,13 +20,16 @@ Updated: 2026-08-25 — waiting on Playtest HUD-fix retest of `79ff71e`.
 - [x] Playtest `70376a4`: NODE/SHOOT readable; stranger still only fights reds
 - [x] Playtest `60149a0`: bump-safe works; HUD-read burns the spawn window
 - [x] Playtest `28b436d`: freeze unused; first click wipes NODE order
-- [ ] Stranger shoots NODE during freeze after HUD fix
+- [x] Playtest `79ff71e`: freeze copy stays; stranger still skips NODE
+- [x] W1 node gate (no drones until NODE ON)
+- [ ] Stranger shoots NODE when W1 has no reds
 - [x] Core pushes PR #8 greybox-now relock (`28b436d` numbers)
 - [x] Slice pushes louder OFF node on PR #7
 
 ## Waiting on
 
-- Playtest retest of first-click HUD fix (`79ff71e`: freeze order stays).
+- Playtest retest of W1 node gate (drones spawn after NODE ON).
+- Core relock of Greybox now to that gate.
 - Game Dev (`robot puzzle shooter`) — not visible.
 
 ## Risks / stuck
