@@ -1,11 +1,11 @@
 # Assets
 
-Drop-ins for the RPS greybox. Game runs without them.
+Drop-ins for Robot Puzzle Shooter. Greybox runs if any file is missing.
 
-| File | Role |
-| --- | --- |
-| `player.png` | You — scrap robot |
-| `drone.png` | Wave chaser |
-| `node.png` | Puzzle node to shoot ON |
+| File | Role | Size |
+| --- | --- | --- |
+| `player.png` | Scrap robot (cream, mint visor) | 56×56 RGB on `#141820` |
+| `drone.png` | Cheap red chaser (yellow eye) | 44×44 RGB on `#141820` |
+| `node.png` | Hexagonal NODE to shoot ON | 80×80 RGB on `#141820` |
 
-Chroma / backplate: `#141820`.
+No relic, guard, shadow, door, or cone slots.
