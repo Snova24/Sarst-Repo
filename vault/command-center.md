@@ -1,13 +1,12 @@
 # Command center
 
-Updated: 2026-08-25 — Core and Slice are RUNNING on RPS lanes.
+Updated: 2026-08-25 — waiting on Playtest HUD-fix retest of `79ff71e`.
 
 ## This week
 
-1. Playtest finishes the `28b436d` stranger retest.
-2. Core pushes PR #8 greybox-now relock.
-3. Slice pushes louder OFF node on PR #7.
-4. Game Dev juices combat when they appear.
+1. Playtest retests CoS HEAD `79ff71e` (freeze copy survives first click).
+2. If stranger still skips NODE with HUD intact, next `src` fill is behavioral (not another freeze).
+3. Game Dev juices combat when they appear.
 
 ## Today
 

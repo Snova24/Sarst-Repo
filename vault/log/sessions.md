@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Loop: Core IDLE on lock; Playtest still owes HUD-fix retest
+
+- Core IDLE on PR #8 (`8dec6bc`). Slice RUNNING but no new art after louder node `39e44d5`.
+- Playtest RUNNING; written HEAD still `cd63993` / `28b436d`. No `79ff71e` report yet. Do not ping.
+- Game Dev still missing. No Task clones.
+
 ## 2026-08-25 — Core pushed GDD relock
 
 - PR #8 `fe6a66f`: Greybox now matches live W1 40 / 3.5s / bumpSafe from chase. Copy-bug note already fixed in `src` (`79ff71e`).

@@ -23,7 +23,7 @@ CoS HEAD: W1 freeze 3.5s; bump-safe on chase; first click no longer wipes freeze
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
 | **Core** gameplay loop | Design | `game/GDD.md` | IDLE. PR #8 relocked to live numbers. Hold. Do not merge #2. |
 | **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | Shipped louder OFF node PR #7. Hold. Do not merge #3. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | `28b436d` in: freeze unused, first click wipes order. Retest HUD fix. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING. Last written: `28b436d` freeze unused. Retest `79ff71e` HUD fix. |
 
 ## Core — do this
 
