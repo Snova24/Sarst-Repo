@@ -2,6 +2,13 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — CoS talking to each staff agent
+
+- brandon: do not ask him to paste; communicate with each agent; he watches and steers.
+- PR comments on #2/#3/#5 did not wake anyone. Design never heard of RPS. Art unsubscribed. Playtest is already retesting the Brotato greybox but has not pushed the new write-up.
+- Task `resume` on staff bcIds spawned clone subagents — aborted; that is not a DM.
+- Next: follow-up inside each agent's Cursor conversation (Design / Art / Playtest). Game Dev still not in this environment.
+
 ## 2026-08-25 — Reset to RPS + Brotato in this repo
 
 - brandon: scrap production so far; team stays on Sarst-Repo; still Robot Puzzle Shooter; upgrades like Brotato.

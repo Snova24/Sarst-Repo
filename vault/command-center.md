@@ -1,26 +1,33 @@
 # Command center
 
-Updated: 2026-08-25 — reset. Game is RPS + Brotato, in this repo.
+Updated: 2026-08-25 — CoS talking to staff. brandon watching.
 
 ## This week
 
-1. Paste reset prompts (`vault/studio/prompts.md`) into Game Dev, Design, Art, Playtest.
-2. Play `game/` — 3 waves, nodes + drones, upgrade cards.
-3. Ignore scrapforge and TAKE PRs.
+1. Get Design/Art off TAKE and onto Robot Puzzle Shooter in `game/`.
+2. Playtest finishes the Brotato write-up (stranger fail W1).
+3. Game Dev juices wave 1 + dual-objective HUD when they appear.
 
 ## Today
 
 - [x] Scrap prior product direction
 - [x] Ship new greybox (Brotato waves + puzzle nodes)
+- [x] Attempt PR-comment dispatch (failed: staff did not read comments)
+- [ ] Follow-ups landed in Design / Art / Playtest Cursor chats
 - [ ] Team works `game/` only
 
 ## Waiting on
 
-Staff on the new slice. brandon to paste prompts.
+- Design IDLE — still thinks TAKE. Needs a follow-up in their agent chat.
+- Art IDLE — TAKE slots shipped; unsubscribed from repo PRs.
+- Playtest RUNNING — on the right greybox; PLAYTEST.md still stale.
+- Game Dev (`robot puzzle shooter`) — not visible in this environment.
 
 ## Risks / stuck
 
-Old PRs (#2 TAKE, #3 TAKE art, #4/#5 playtest of dead greyboxes) will confuse the team if merged.
+Idle Cloud Agents do not see GitHub PR comments. CoS cannot DM by bcId; dashboard follow-up is the working channel.
+
+Old PRs (#2 TAKE, #3 TAKE art, #4 no-playable, #5 old loot greybox) must not merge as the game.
 
 ## Inbox
 

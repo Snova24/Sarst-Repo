@@ -1,4 +1,6 @@
-# Paste into staff agents
+# Orders CoS sends to staff agents
+
+brandon is watching, not pasting. CoS delivers these into each agent's Cursor conversation. GitHub PR comments do not wake idle agents.
 
 Product is **Snova24/Sarst-Repo** `game/` on branch `cursor/chief-of-staff-vault-1087`. Scrapforge and TAKE are dead.
 

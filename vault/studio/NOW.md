@@ -15,13 +15,13 @@ python3 -m http.server 8765
 
 ## Team (this repo)
 
-| Role | Agent | Owns |
-| --- | --- | --- |
-| CoS | Chief of staff | `vault/` |
-| Game Dev | **robot puzzle shooter** (and implementers on this repo) | `game/src/`, `game/index.html` |
-| Design | Core gameplay loop | `game/GDD.md` (numbers only) |
-| Art | Slice visual assets | `game/STYLE.md`, `game/assets/` |
-| Playtest | Playtest findings | `game/PLAYTEST.md` |
+| Role | Agent | Owns | Status |
+| --- | --- | --- | --- |
+| CoS | Chief of staff | `vault/` | talking to staff |
+| Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
+| Design | Core gameplay loop | `game/GDD.md` (numbers only) | IDLE on TAKE PR #2 — did not see PR comments |
+| Art | Slice visual assets | `game/STYLE.md`, `game/assets/` | IDLE on TAKE PR #3 — unsubscribed from PRs |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING the Brotato greybox; write-up not pushed yet |
 
 ## Do this now
 
@@ -30,13 +30,13 @@ python3 -m http.server 8765
 3. Do not open PRs for TAKE. Do not use scrapforge.
 4. Make the Brotato slice feel better, look better, or get a stranger through 3 waves.
 
-## Dispatch (CoS \u2192 staff)
+## Dispatch (CoS → staff)
 
-Orders posted 2026-08-25 as PR comments (brandon is watching, not pasting):
+PR comments do **not** wake idle Cloud Agents. CoS is sending follow-ups into each agent's own Cursor conversation.
 
-- Design: https://github.com/Snova24/Sarst-Repo/pull/2#issuecomment
-- Art: https://github.com/Snova24/Sarst-Repo/pull/3
-- Playtest: https://github.com/Snova24/Sarst-Repo/pull/5 (PR #4 parked)
-- Hub: https://github.com/Snova24/Sarst-Repo/pull/1
+- Design: https://cursor.com/agents/bc-14df8331-383a-4bd4-b7a7-5c187dda80bc
+- Art: https://cursor.com/agents/bc-6f6ed739-7b8e-487d-8b76-2cb2c152940a
+- Playtest: https://cursor.com/agents/bc-016cebd0-fd39-4b95-a735-930757896489
+- Hub PR: https://github.com/Snova24/Sarst-Repo/pull/1
 
-**robot puzzle shooter** is not in this environment \u2014 no PR to ping. If they show up, they own `game/src/`.
+**robot puzzle shooter** is not in this environment — cannot message them from here.
