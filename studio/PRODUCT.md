@@ -9,7 +9,8 @@ Someone who collects grocery, dining, and retail codes and loses them in screens
 ## V1 surface
 
 - **Browse** — ticket-style cards for every live deal, featured deal on top.
-- **Filter** — category chips + search (merchant, title, code).
+- **Filter** — interest chips (groceries, dining, shopping, travel, out, tech, bank bonuses, 0% cards, 0% loans, punch cards) plus a **High value** chip.
+- **Get the most** — a section ranked by dollar value ($80+) so the biggest bonuses and 0% windows sit at the top.
 - **Sort** — ending soon, biggest save, newest.
 - **Detail** — merchant, terms, expiry, min spend, copy code, clip / unclip.
 - **Punch cards** — some deals lock the code until you confirm each listed task. Stamping a task clips the ticket and fills a progress bar. Undo is allowed. Savings only count after the card is full.

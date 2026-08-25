@@ -3,13 +3,23 @@ import { COUPONS } from "../data/catalog";
 import { CATEGORIES } from "../types";
 import type { Coupon, CouponQuery } from "../types";
 import { estimatedSave, isExpired } from "./format";
-import { actionProgress, filterCoupons, getCoupon, isUnlocked, walletSavings } from "./coupons";
+import {
+  HIGH_VALUE_MIN,
+  actionProgress,
+  dealValue,
+  filterCoupons,
+  getCoupon,
+  isHighValue,
+  isUnlocked,
+  matchesInterest,
+  walletSavings,
+} from "./coupons";
 
 const NOW = new Date("2026-08-25T12:00:00");
 
 const baseQuery: CouponQuery = {
   search: "",
-  category: "all",
+  interest: "all",
   sort: "ending",
 };
 
@@ -129,6 +139,20 @@ describe("catalog", () => {
   });
 });
 
+describe("high value", () => {
+  it("flags deals worth at least $80 and ranks bank bonuses and 0% windows first", () => {
+    const live = COUPONS.filter((c) => !isExpired(c.expiresAt, NOW));
+    const high = live.filter(isHighValue);
+    expect(HIGH_VALUE_MIN).toBe(80);
+    expect(high.length).toBeGreaterThanOrEqual(6);
+    expect(high.every((c) => dealValue(c) >= HIGH_VALUE_MIN)).toBe(true);
+    expect(matchesInterest(high[0], "highValue")).toBe(true);
+    const ranked = filterCoupons(COUPONS, { ...baseQuery, interest: "highValue" }, NOW);
+    expect(ranked.every(isHighValue)).toBe(true);
+    expect(dealValue(ranked[0])).toBeGreaterThanOrEqual(dealValue(ranked[ranked.length - 1]));
+  });
+});
+
 describe("actionProgress", () => {
   const punch = coupon({
     id: "punch-live",
@@ -197,7 +221,7 @@ describe("filterCoupons", () => {
     ).toEqual(["task-live"]);
   });
 
-  it("keeps only punch-card deals when tasksOnly is set", () => {
+  it("keeps only punch-card deals when the punch-card interest is set", () => {
     const withTasks = [
       fixtures[0],
       coupon({
@@ -211,14 +235,14 @@ describe("filterCoupons", () => {
       }),
     ];
     expect(
-      filterCoupons(withTasks, { ...baseQuery, tasksOnly: true }, NOW).map((c) => c.id),
+      filterCoupons(withTasks, { ...baseQuery, interest: "tasks" }, NOW).map((c) => c.id),
     ).toEqual(["task-live"]);
   });
 
   it("filters bank bonuses and matches clawback / 0% search terms", () => {
     const harbor = COUPONS.find((c) => c.id === "harbor-mutual-300");
     expect(harbor).toBeDefined();
-    const banks = filterCoupons(COUPONS, { ...baseQuery, category: "bank" }, NOW);
+    const banks = filterCoupons(COUPONS, { ...baseQuery, interest: "bank" }, NOW);
     expect(banks.every((c) => c.category === "bank")).toBe(true);
     expect(banks.some((c) => c.id === "harbor-mutual-300")).toBe(true);
     const claw = filterCoupons(COUPONS, { ...baseQuery, search: "clawback" }, NOW);
@@ -227,11 +251,30 @@ describe("filterCoupons", () => {
     expect(transfers.some((c) => c.money?.kind === "balanceTransfer")).toBe(true);
   });
 
-  it("filters by exact category and treats all as unfiltered", () => {
-    expect(filterCoupons(fixtures, { ...baseQuery, category: "dining" }, NOW).map((c) => c.id)).toEqual([
+  it("groups shopping as retail, beauty, and home", () => {
+    const shopping = filterCoupons(COUPONS, { ...baseQuery, interest: "shopping" }, NOW);
+    expect(shopping.length).toBeGreaterThan(0);
+    expect(
+      shopping.every(
+        (c) => c.category === "retail" || c.category === "beauty" || c.category === "home",
+      ),
+    ).toBe(true);
+  });
+
+  it("splits 0% cards and 0% loans", () => {
+    const cards = filterCoupons(COUPONS, { ...baseQuery, interest: "zeroAprCard" }, NOW);
+    const loans = filterCoupons(COUPONS, { ...baseQuery, interest: "zeroAprLoan" }, NOW);
+    expect(cards.every((c) => c.money?.kind === "balanceTransfer")).toBe(true);
+    expect(loans.every((c) => c.money?.kind === "personalLoan")).toBe(true);
+    expect(cards.length).toBeGreaterThanOrEqual(2);
+    expect(loans.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("filters by dining interest and treats all as unfiltered", () => {
+    expect(filterCoupons(fixtures, { ...baseQuery, interest: "dining" }, NOW).map((c) => c.id)).toEqual([
       "beta-live",
     ]);
-    expect(filterCoupons(fixtures, { ...baseQuery, category: "all" }, NOW)).toHaveLength(3);
+    expect(filterCoupons(fixtures, { ...baseQuery, interest: "all" }, NOW)).toHaveLength(3);
   });
 
   it("sorts by ending soon, biggest save, and newest", () => {

@@ -94,11 +94,25 @@ export interface WalletEntry {
 
 export type SortKey = "ending" | "save" | "newest";
 
+export const INTERESTS = [
+  "highValue",
+  "grocery",
+  "dining",
+  "shopping",
+  "travel",
+  "out",
+  "tech",
+  "bank",
+  "zeroAprCard",
+  "zeroAprLoan",
+  "tasks",
+] as const;
+
+export type Interest = (typeof INTERESTS)[number];
+
 export interface CouponQuery {
   search: string;
-  category: Category | "all";
+  interest: Interest | "all";
   sort: SortKey;
   walletOnly?: boolean;
-  /** Punch-card deals that require confirmed tasks. */
-  tasksOnly?: boolean;
 }

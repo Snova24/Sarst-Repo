@@ -1,17 +1,19 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { COUPONS } from "./data/catalog";
 import {
+  dealValue,
   filterCoupons,
   getCoupon,
   isBalanceTransfer,
   isBankBonus,
+  isHighValue,
   isPersonalLoan,
   isUnlocked,
   walletSavings,
 } from "./lib/coupons";
 import { useWallet } from "./lib/wallet";
 import { formatMoney, isExpired } from "./lib/format";
-import type { Category, Coupon, SortKey } from "./types";
+import type { Coupon, Interest, SortKey } from "./types";
 import { CouponDetail } from "./components/CouponDetail";
 import { DealSection } from "./components/DealSection";
 import { EmptyState } from "./components/EmptyState";
@@ -54,9 +56,8 @@ export default function App() {
   const now = new Date();
   const [view, setView] = useState<AppView>("browse");
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<Category | "all">("all");
+  const [interest, setInterest] = useState<Interest | "all">("all");
   const [sort, setSort] = useState<SortKey>("ending");
-  const [tasksOnly, setTasksOnly] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number | null>(null);
@@ -116,7 +117,7 @@ export default function App() {
       const clipped = COUPONS.filter((coupon) => wallet.isClipped(coupon.id));
       const filtered = filterCoupons(
         clipped,
-        { search, category, sort, walletOnly: true, tasksOnly },
+        { search, interest, sort, walletOnly: true },
         now,
       );
       return [...filtered].sort(
@@ -125,7 +126,7 @@ export default function App() {
           walletRank(b, wallet.isUsed(b.id), now),
       );
     }
-    return filterCoupons(COUPONS, { search, category, sort, tasksOnly }, now);
+    return filterCoupons(COUPONS, { search, interest, sort }, now);
   })();
 
   const gridCoupons =
@@ -135,14 +136,20 @@ export default function App() {
 
   const showSections =
     view === "browse" &&
-    !tasksOnly &&
-    (category === "all" || category === "bank" || category === "credit");
+    (interest === "all" ||
+      interest === "highValue" ||
+      interest === "bank" ||
+      interest === "zeroAprCard" ||
+      interest === "zeroAprLoan");
+  const highValue = [...gridCoupons]
+    .filter(isHighValue)
+    .sort((a, b) => dealValue(b) - dealValue(a));
   const circular = gridCoupons.filter((coupon) => !coupon.money);
   const bankBonuses = gridCoupons.filter(isBankBonus);
   const balanceTransfers = gridCoupons.filter(isBalanceTransfer);
   const personalLoans = gridCoupons.filter(isPersonalLoan);
 
-  const ticketFor = (coupon: Coupon) => (
+  const ticketFor = (coupon: Coupon, showWorth = false) => (
     <Ticket
       key={coupon.id}
       coupon={coupon}
@@ -150,6 +157,7 @@ export default function App() {
       clipped={wallet.isClipped(coupon.id)}
       used={wallet.isUsed(coupon.id)}
       completedActionIds={wallet.completedActions(coupon.id)}
+      showWorth={showWorth}
       onOpen={() => setSelectedId(coupon.id)}
       onClip={() => handleClip(coupon.id)}
       onCopy={() => void handleCopy(coupon)}
@@ -171,6 +179,7 @@ export default function App() {
       <main id="panel-deals" role="tabpanel" aria-labelledby={`tab-${view}`}>
         {view === "browse" &&
         featured &&
+        interest === "grocery" &&
         visible.some((coupon) => coupon.id === featured.id) ? (
           <FeaturedDeal
             coupon={featured}
@@ -186,13 +195,11 @@ export default function App() {
         {!walletEmpty ? (
           <Toolbar
             search={search}
-            category={category}
+            interest={interest}
             sort={sort}
-            tasksOnly={tasksOnly}
             onSearch={setSearch}
-            onCategory={setCategory}
+            onInterest={setInterest}
             onSort={setSort}
-            onTasksOnly={setTasksOnly}
           />
         ) : null}
 
@@ -206,59 +213,77 @@ export default function App() {
         ) : noMatches ? (
           <EmptyState
             title={view === "wallet" ? "No clipped deals match" : "No deals match"}
-            body="Try another category, clear the search, or switch the sort."
+            body="Try another interest, clear the search, or switch the sort."
           />
         ) : showSections ? (
           <>
-            {circular.length > 0 ? (
+            {(interest === "all" || interest === "highValue") && highValue.length > 0 ? (
+              <DealSection
+                kicker="Get the most"
+                title="Highest value discounts and benefits"
+                lede="The fattest dollars in this circular — bank bonuses, 0% interest windows, and anything worth $80 or more. Start here if you want Clipbook to pay for itself."
+              >
+                <TicketGrid>{highValue.map((coupon) => ticketFor(coupon, true))}</TicketGrid>
+              </DealSection>
+            ) : null}
+            {interest === "all" && circular.length > 0 ? (
               <DealSection
                 kicker="The circular"
                 title="Clip and save"
-                lede="Grocery, dining, and the rest of the paper insert. Copy a code, clip it, spend it."
+                lede="Grocery, dining, shopping, and the rest of the paper insert. Copy a code, clip it, spend it."
               >
-                <TicketGrid>{circular.map(ticketFor)}</TicketGrid>
+                <TicketGrid>{circular.map((coupon) => ticketFor(coupon))}</TicketGrid>
               </DealSection>
             ) : null}
-            {bankBonuses.length > 0 ? (
+            {(interest === "all" || interest === "bank") && bankBonuses.length > 0 ? (
               <DealSection
                 kicker="Sneaky bank ads"
                 title="Hundreds of dollars to open an account"
                 lede="They advertise $250–$400 for signing up. Direct deposit, monthly fees, and clawbacks are how they keep you. Stamp the path, wait out the hold, then close and wipe your hands."
               >
-                <TicketGrid>{bankBonuses.map(ticketFor)}</TicketGrid>
+                <TicketGrid>{bankBonuses.map((coupon) => ticketFor(coupon))}</TicketGrid>
               </DealSection>
             ) : null}
-            {balanceTransfers.length > 0 || personalLoans.length > 0 ? (
+            {(interest === "all" ||
+              interest === "zeroAprCard" ||
+              interest === "zeroAprLoan") &&
+            (balanceTransfers.length > 0 || personalLoans.length > 0) ? (
               <DealSection
                 kicker="0% intro"
                 title="Credit cards and personal loans"
                 lede="Balance transfers and personal loans that start at 0%. Fees, then-APR, and a dated payoff are the real terms. Safe exit is $0 before the window ends — then close or walk."
               >
-                {balanceTransfers.length > 0 ? (
+                {(interest === "all" || interest === "zeroAprCard") &&
+                balanceTransfers.length > 0 ? (
                   <div className="deal-subsection">
                     <h3>Balance transfers · 0% interest</h3>
                     <p>
                       Move existing card debt. Watch the transfer fee, the late-payment
                       trap, and the month the leftover starts compounding.
                     </p>
-                    <TicketGrid>{balanceTransfers.map(ticketFor)}</TicketGrid>
+                    <TicketGrid>
+                      {balanceTransfers.map((coupon) => ticketFor(coupon))}
+                    </TicketGrid>
                   </div>
                 ) : null}
-                {personalLoans.length > 0 ? (
+                {(interest === "all" || interest === "zeroAprLoan") &&
+                personalLoans.length > 0 ? (
                   <div className="deal-subsection">
                     <h3>Personal loans · 0% interest</h3>
                     <p>
                       Origination fees are interest by another name. Payoff letter,
                       then you are done — there is no account to keep.
                     </p>
-                    <TicketGrid>{personalLoans.map(ticketFor)}</TicketGrid>
+                    <TicketGrid>
+                      {personalLoans.map((coupon) => ticketFor(coupon))}
+                    </TicketGrid>
                   </div>
                 ) : null}
               </DealSection>
             ) : null}
           </>
         ) : (
-          <TicketGrid>{gridCoupons.map(ticketFor)}</TicketGrid>
+          <TicketGrid>{gridCoupons.map((coupon) => ticketFor(coupon))}</TicketGrid>
         )}
       </main>
 

@@ -352,6 +352,47 @@ h3 {
   color: #fbf6ee;
 }
 
+.chip-value {
+  border-color: var(--gold);
+}
+
+.chip-value.is-active {
+  background: var(--gold);
+  border-color: #8a6a1c;
+  color: var(--ink);
+}
+
+.interest-board {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.chip-row {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.chip-row-label {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.ticket-worth {
+  margin-top: 0.2rem;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--sage);
+}
+
+.ticket.is-high-value {
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--gold) 65%, rgba(28, 24, 20, 0.12));
+}
+
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -1167,7 +1208,7 @@ h3 {
     align-items: end;
   }
 
-  .chips {
+  .interest-board {
     grid-column: 1 / -1;
   }
 

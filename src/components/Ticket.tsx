@@ -1,11 +1,12 @@
 import type { CSSProperties } from "react";
 import type { Coupon } from "../types";
-import { actionProgress, isActionDeal, locksCode } from "../lib/coupons";
+import { actionProgress, dealValue, isActionDeal, isHighValue, locksCode } from "../lib/coupons";
 import {
   CATEGORY_LABEL,
   MONEY_KIND_LABEL,
   formatDiscount,
   formatExpiry,
+  formatMoney,
   isExpired,
 } from "../lib/format";
 import { PunchBar } from "./PunchBar";
@@ -19,6 +20,7 @@ type TicketProps = {
   onOpen: () => void;
   onClip: () => void;
   onCopy: () => void;
+  showWorth?: boolean;
 };
 
 export function Ticket({
@@ -30,6 +32,7 @@ export function Ticket({
   onOpen,
   onClip,
   onCopy,
+  showWorth = false,
 }: TicketProps) {
   const expired = isExpired(coupon.expiresAt, now);
   const punch = actionProgress(coupon, completedActionIds);
@@ -43,6 +46,7 @@ export function Ticket({
     clipped ? "is-clipped" : "",
     taskDeal ? "is-punch" : "",
     punch.unlocked && taskDeal ? "is-unlocked" : "",
+    isHighValue(coupon) ? "is-high-value" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -83,6 +87,9 @@ export function Ticket({
         ) : null}
         <span className="ticket-merchant">{coupon.merchant}</span>
         <span className="ticket-title">{coupon.title}</span>
+        {showWorth ? (
+          <span className="ticket-worth">About {formatMoney(dealValue(coupon))} if you finish it</span>
+        ) : null}
         <span className="ticket-expiry">{formatExpiry(coupon.expiresAt, now)}</span>
         {money ? (
           <span className="ticket-exit">Clean exit · {money.holdMonths} months</span>

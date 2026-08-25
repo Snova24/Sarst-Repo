@@ -1,6 +1,45 @@
 import { COUPONS } from "../data/catalog";
-import type { Coupon, CouponQuery, SortKey, WalletEntry } from "../types";
+import type { Coupon, CouponQuery, Interest, SortKey, WalletEntry } from "../types";
 import { discountScore, estimatedSave, isExpired } from "./format";
+
+export const HIGH_VALUE_MIN = 80;
+
+export function dealValue(coupon: Coupon): number {
+  return estimatedSave(coupon.discount, coupon.minSpend, coupon.money);
+}
+
+export function isHighValue(coupon: Coupon): boolean {
+  return dealValue(coupon) >= HIGH_VALUE_MIN;
+}
+
+export function matchesInterest(coupon: Coupon, interest: Interest | "all"): boolean {
+  switch (interest) {
+    case "all":
+      return true;
+    case "highValue":
+      return isHighValue(coupon);
+    case "grocery":
+      return coupon.category === "grocery";
+    case "dining":
+      return coupon.category === "dining";
+    case "shopping":
+      return coupon.category === "retail" || coupon.category === "beauty" || coupon.category === "home";
+    case "travel":
+      return coupon.category === "travel";
+    case "out":
+      return coupon.category === "entertainment";
+    case "tech":
+      return coupon.category === "tech";
+    case "bank":
+      return coupon.category === "bank";
+    case "zeroAprCard":
+      return isBalanceTransfer(coupon);
+    case "zeroAprLoan":
+      return isPersonalLoan(coupon);
+    case "tasks":
+      return isActionDeal(coupon);
+  }
+}
 
 export function getCoupon(id: string): Coupon | undefined {
   return COUPONS.find((coupon) => coupon.id === id);
@@ -105,8 +144,7 @@ export function filterCoupons(
 ): Coupon[] {
   const filtered = coupons.filter((coupon) => {
     if (!matchesSearch(coupon, query.search)) return false;
-    if (query.category !== "all" && coupon.category !== query.category) return false;
-    if (query.tasksOnly && !isActionDeal(coupon)) return false;
+    if (!matchesInterest(coupon, query.interest)) return false;
     if (!query.walletOnly && isExpired(coupon.expiresAt, now)) return false;
     return true;
   });
@@ -116,6 +154,10 @@ export function filterCoupons(
       const aExpired = isExpired(a.expiresAt, now);
       const bExpired = isExpired(b.expiresAt, now);
       if (aExpired !== bExpired) return aExpired ? 1 : -1;
+    }
+    if (query.interest === "highValue") {
+      const byValue = dealValue(b) - dealValue(a);
+      if (byValue !== 0) return byValue;
     }
     return compareBySort(a, b, query.sort);
   });

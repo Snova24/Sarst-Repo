@@ -1,4 +1,4 @@
-import type { Discount, MoneyOffer } from "../types";
+import type { Discount, Interest, MoneyOffer } from "../types";
 
 export function formatDiscount(discount: Discount): string {
   switch (discount.kind) {
@@ -100,3 +100,27 @@ export const MONEY_KIND_LABEL: Record<string, string> = {
   balanceTransfer: "0% BT",
   personalLoan: "0% loan",
 };
+
+export const INTEREST_LABEL: Record<Interest | "all", string> = {
+  all: "All",
+  highValue: "High value",
+  grocery: "Groceries",
+  dining: "Dining",
+  shopping: "Shopping",
+  travel: "Travel",
+  out: "Out",
+  tech: "Tech",
+  bank: "Bank bonuses",
+  zeroAprCard: "0% cards",
+  zeroAprLoan: "0% loans",
+  tasks: "Punch cards",
+};
+
+export const INTEREST_GROUPS: { label: string; items: Interest[] }[] = [
+  { label: "Get the most", items: ["highValue"] },
+  {
+    label: "Interests",
+    items: ["grocery", "dining", "shopping", "travel", "out", "tech", "tasks"],
+  },
+  { label: "Money", items: ["bank", "zeroAprCard", "zeroAprLoan"] },
+];

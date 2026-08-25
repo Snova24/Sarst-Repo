@@ -1,16 +1,13 @@
-import { CATEGORIES } from "../types";
-import type { Category, SortKey } from "../types";
-import { CATEGORY_LABEL } from "../lib/format";
+import type { Interest, SortKey } from "../types";
+import { INTEREST_GROUPS, INTEREST_LABEL } from "../lib/format";
 
 type ToolbarProps = {
   search: string;
-  category: Category | "all";
+  interest: Interest | "all";
   sort: SortKey;
-  tasksOnly: boolean;
   onSearch: (value: string) => void;
-  onCategory: (value: Category | "all") => void;
+  onInterest: (value: Interest | "all") => void;
   onSort: (value: SortKey) => void;
-  onTasksOnly: (value: boolean) => void;
 };
 
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
@@ -21,13 +18,11 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
 
 export function Toolbar({
   search,
-  category,
+  interest,
   sort,
-  tasksOnly,
   onSearch,
-  onCategory,
+  onInterest,
   onSort,
-  onTasksOnly,
 }: ToolbarProps) {
   return (
     <div className="toolbar">
@@ -46,33 +41,39 @@ export function Toolbar({
         />
       </form>
 
-      <div className="chips" role="group" aria-label="Category">
-        <button
-          type="button"
-          className={`chip ${category === "all" ? "is-active" : ""}`}
-          aria-pressed={category === "all"}
-          onClick={() => onCategory("all")}
-        >
-          All
-        </button>
-        <button
-          type="button"
-          className={`chip chip-tasks ${tasksOnly ? "is-active" : ""}`}
-          aria-pressed={tasksOnly}
-          onClick={() => onTasksOnly(!tasksOnly)}
-        >
-          Tasks
-        </button>
-        {CATEGORIES.map((item) => (
-          <button
-            key={item}
-            type="button"
-            className={`chip ${category === item ? "is-active" : ""}`}
-            aria-pressed={category === item}
-            onClick={() => onCategory(item)}
-          >
-            {CATEGORY_LABEL[item]}
-          </button>
+      <div className="interest-board" role="group" aria-label="Filter by interest">
+        <div className="chip-row">
+          <p className="chip-row-label">Show</p>
+          <div className="chips">
+            <button
+              type="button"
+              className={`chip ${interest === "all" ? "is-active" : ""}`}
+              aria-pressed={interest === "all"}
+              onClick={() => onInterest("all")}
+            >
+              All
+            </button>
+          </div>
+        </div>
+        {INTEREST_GROUPS.map((group) => (
+          <div className="chip-row" key={group.label}>
+            <p className="chip-row-label">{group.label}</p>
+            <div className="chips">
+              {group.items.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  className={`chip${item === "highValue" ? " chip-value" : item === "tasks" ? " chip-tasks" : ""} ${
+                    interest === item ? "is-active" : ""
+                  }`}
+                  aria-pressed={interest === item}
+                  onClick={() => onInterest(interest === item ? "all" : item)}
+                >
+                  {INTEREST_LABEL[item]}
+                </button>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
 
