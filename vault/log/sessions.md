@@ -2,6 +2,17 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest: 1s death closed; stranger still dies in W1
+
+- PR #5: alive through grace, then walk into red, 0 kills, never leave W1. Control W1–W2, not W3.
+- CoS: W1 bump-safe + knockback so contact during the learn window is not a kill.
+
+## 2026-08-25 — Core and Slice are running
+
+- Core: left TAKE, reading PR #6 / greybox. No RPS commit yet. Do not merge PR #2.
+- Slice: left TAKE, planning `game/assets/` drop-ins. No RPS commit yet. Do not merge PR #3.
+- Playtest: still writing; told them 70376a4 labels are the dual-obj retest, not optional copy.
+
 ## 2026-08-25 — brandon: involve Core and Slice
 
 - Core (PR #2) and Slice (PR #3) still IDLE on TAKE. Issue comments and `@cursor` did not start a run.

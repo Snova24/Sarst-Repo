@@ -30,6 +30,7 @@ let lastShot = 0;
 let last = performance.now();
 let iFrames = 0;
 let aggroIn = 0;
+let bumpSafe = 0;
 let canvasArmed = false;
 
 const player = {
@@ -90,9 +91,10 @@ function spawnWave() {
       x = W - 36;
       y = 40 + Math.random() * (H - 80);
     }
-    drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 55 + waveIndex * 16 });
+    drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 40 + waveIndex * 18 });
   }
   aggroIn = waveIndex === 0 ? 1.8 : 0.45;
+  bumpSafe = waveIndex === 0 ? 5.5 : 0;
   const spots = [
     [180, 140],
     [760, 140],
@@ -246,6 +248,7 @@ function tick(now) {
     }
 
     aggroIn = Math.max(0, aggroIn - dt);
+    bumpSafe = Math.max(0, bumpSafe - dt);
     for (const d of drones) {
       if (aggroIn > 0) continue;
       const cx = player.x + player.w / 2 - (d.x + d.w / 2);
@@ -254,8 +257,12 @@ function tick(now) {
       d.x += (cx / len) * d.speed * dt;
       d.y += (cy / len) * d.speed * dt;
       if (iFrames <= 0 && overlaps(player, d)) {
+        player.x += (cx / len) * 28;
+        player.y += (cy / len) * 28;
+        clampPlayer();
+        iFrames = bumpSafe > 0 ? 0.45 : 0.7;
+        if (bumpSafe > 0) continue;
         player.hp -= 1;
-        iFrames = 0.7;
         if (player.hp <= 0) {
           mode = "lose";
           statusEl.textContent = "POWER DOWN";
