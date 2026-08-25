@@ -33,6 +33,30 @@ let aggroIn = 0;
 let bumpSafe = 0;
 let canvasArmed = false;
 
+function loadSprite(file) {
+  const img = new Image();
+  img.ready = false;
+  img.onload = () => {
+    img.ready = true;
+  };
+  img.onerror = () => {
+    img.ready = false;
+  };
+  img.src = `assets/${file}`;
+  return img;
+}
+
+const spr = {
+  player: loadSprite("player.png"),
+  drone: loadSprite("drone.png"),
+  node: loadSprite("node.png"),
+};
+
+function blit(img, r, fallback) {
+  if (img.ready) ctx.drawImage(img, r.x, r.y, r.w, r.h);
+  else fill(r, fallback);
+}
+
 const player = {
   x: W / 2 - 14,
   y: H / 2 - 14,
@@ -324,16 +348,19 @@ function drawNode(node, now) {
   const pulse = node.on ? 1 : 0.55 + 0.45 * Math.abs(Math.sin(now / 220));
   ctx.save();
   ctx.globalAlpha = pulse;
-  ctx.fillStyle = node.on ? "#7dffb3" : "#4d8dff";
-  ctx.fillRect(node.x, node.y, node.w, node.h);
+  if (spr.node.ready) ctx.drawImage(spr.node, node.x, node.y, node.w, node.h);
+  else {
+    ctx.fillStyle = node.on ? "#7dffb3" : "#4d8dff";
+    ctx.fillRect(node.x, node.y, node.w, node.h);
+  }
   ctx.strokeStyle = node.on ? "#e8edf4" : "#ffe08a";
   ctx.lineWidth = 3;
   ctx.strokeRect(node.x, node.y, node.w, node.h);
   ctx.restore();
-  ctx.fillStyle = "#141820";
+  ctx.fillStyle = node.on ? "#141820" : "#ffe08a";
   ctx.font = "11px ui-sans-serif, system-ui, sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText(node.on ? "ON" : "NODE", node.x + node.w / 2, node.y + node.h / 2 + 4);
+  ctx.fillText(node.on ? "ON" : "NODE", node.x + node.w / 2, node.y + node.h + 12);
   if (!node.on) {
     ctx.fillStyle = "#ffe08a";
     ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
@@ -349,8 +376,8 @@ function draw() {
 
   const now = performance.now();
   for (const node of nodes) drawNode(node, now);
-  for (const d of drones) fill(d, "#d45b5b");
-  ctx.fillStyle = "#141820";
+  for (const d of drones) blit(spr.drone, d, "#d45b5b");
+  ctx.fillStyle = "#e8edf4";
   ctx.font = "9px ui-sans-serif, system-ui, sans-serif";
   ctx.textAlign = "center";
   for (const d of drones) ctx.fillText("DRONE", d.x + d.w / 2, d.y - 4);
@@ -375,9 +402,11 @@ function draw() {
   ctx.moveTo(cx, cy);
   ctx.lineTo(mouse.x, mouse.y);
   ctx.stroke();
-  fill(player, iFrames > 0 ? "#9aa4b8" : "#e8edf4");
-  ctx.fillStyle = "#141820";
-  ctx.fillRect(cx - 3, cy - 3, 6, 6);
+  blit(spr.player, player, iFrames > 0 ? "#9aa4b8" : "#e8edf4");
+  if (!spr.player.ready) {
+    ctx.fillStyle = "#141820";
+    ctx.fillRect(cx - 3, cy - 3, 6, 6);
+  }
   ctx.fillStyle = "#8b95a8";
   ctx.font = "9px ui-sans-serif, system-ui, sans-serif";
   ctx.fillText("YOU", cx, player.y - 6);

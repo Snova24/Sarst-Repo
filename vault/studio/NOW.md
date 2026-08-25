@@ -20,7 +20,7 @@ python3 -m http.server 8765
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
 | **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Left TAKE. Researching RPS / PR #6. No new commit yet. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Left TAKE. Planning `player.png` / `drone.png` / `node.png` off CoS. No new commit yet. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Shipped PR #7: robot / drone / NODE pylon. CoS hooking drawImage. |
 | Playtest | Playtest findings | `game/PLAYTEST.md` | 1s death closed. New P0: stranger walks into drones after grace (0 kills). CoS adding W1 bump-safe. |
 
 ## Core — do this

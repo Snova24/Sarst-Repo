@@ -1,21 +1,27 @@
 # Style bible — Robot Puzzle Shooter
 
-Art owns this file. Greybox is shapes until drop-ins load.
+Art owns this file and `game/assets/`. Greybox shapes stay until Game Dev hooks the PNGs. **No new mechanics.**
 
-## Look
+Arena: dark floor `#141820`, mint `#7DFFB3`, drone red `#D45B5B`, node-off blue `#4D8DFF`. Brotato-readable top-down. One robot, cheap drones, glowing nodes.
 
-Brotato-adjacent: readable top-down arena, one robot, cheap drones, glowing nodes. Dark floor, one accent (mint).
+## Must-have (this PR)
 
-## Must-have
+| File | Is | Draw size in `game.js` | PNG |
+| --- | --- | --- | --- |
+| `assets/player.png` | Scrap robot (cream hull, mint visor, treads) | 28×28 | 56×56 |
+| `assets/drone.png` | Cheap red chaser (yellow eye) | 22×22 | 44×44 |
+| `assets/node.png` | Puzzle **NODE** to shoot ON — hexagonal pylon + bullseye. Not a boat. Not a relic. | 40×40 | 80×80 |
 
-| File | Stands in for |
-| --- | --- |
-| `player.png` | Robot |
-| `drone.png` | Chaser |
-| `node.png` | Puzzle node |
+PNGs are RGB on `#141820`. Missing files must not crash — greybox rects remain valid.
 
-Optional: projectile, upgrade-card chrome. HUD is HTML.
+## Optional later
 
-## Rules
+Projectile, upgrade-card chrome. HUD stays HTML.
 
-Do not change verbs or the 3-wave / Brotato pick loop in `game/src/game.js`. Missing files must not crash.
+## Hook (Game Dev, not this PR)
+
+`drawImage` the three files over the current `fill()` / `drawNode()` rects. Keep the NODE / SHOOT / YOU labels until Playtest says silhouettes are enough. Do not change waves, upgrades, or verbs.
+
+## Dead
+
+TAKE art (PR #3): relic, guard, shadow, door, cone. Do not merge that look into this arena.
