@@ -2,7 +2,11 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
-## 2026-08-25 — Product repo scrapforge
+## 2026-08-25 — Alpha Budget has no game file to move
+
+- Looked at `Snova24/alpha-budget-docs` (only public Alpha Budget repo): README, index.html, privacy.html, terms.html. GitHub Pages same. One commit. No game.
+- scrapforge still empty; this env cannot push there.
+- Need: private app repo access, exact filename, or Game Dev to commit on scrapforge.
 
 - brandon: `Snova24/scrapforge`. Canonical: `Snova24/Snova24-scrapforge`. Empty, created today.
 - Locked as the game repo. Vault greybox is scratch. Game Dev must first-commit.

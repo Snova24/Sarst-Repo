@@ -13,7 +13,7 @@ Status: `open` · `waiting` · `blocked` · `done`
 | C-005 | First playable commit on scrapforge | **robot puzzle shooter** | 2026-08-26 | waiting | https://github.com/Snova24/Snova24-scrapforge |
 | C-006 | Art on scrapforge (not The Vault) | Slice visual assets | 2026-08-26 | waiting | After C-005 |
 | C-007 | Playtest scrapforge playable | Playtest findings | 2026-08-26 | waiting | After C-005 |
-| C-009 | Retarget off TAKE; GDD on scrapforge | Core gameplay loop | 2026-08-26 | waiting | Do not merge PR #2 |
+| C-010 | Move Game Dev game file from Alpha Budget repo → scrapforge | CoS | 2026-08-25 | blocked | `alpha-budget-docs` has only policy HTML. No game file. This env cannot push to scrapforge. |
 
 ## Waiting on others
 
