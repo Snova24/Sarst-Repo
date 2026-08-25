@@ -39,36 +39,39 @@ Do not add dash, reload, interact, stealth, or a second fire mode.
 4. Survive wave 3 (AND complete) = **SOLVED**.
 5. HP 0 = **POWER DOWN**. R retries.
 
-Wave 1 must teach the AND during the freeze: shoot the node ON *before* drones chase, then kite the pack.
+Wave 1 teach: during the **3.5s freeze**, shoot the NODE ON. When chase starts, **bump-safe** (5.5s, no HP on contact) covers kite — reading the HUD must not burn the learn window.
 
 ## Numbers
 
-### Greybox now (`game/src/game.js`) — do not invent a different game
+### Greybox now — CoS HEAD `28b436d` (`game/src/game.js`)
+
+Formula: drone speed `40 + waveIndex * 18`. Design does not edit `src`.
 
 | | W1 | W2 | W3 |
 | --- | --- | --- | --- |
 | Drones | 3 | 8 | 12 |
 | Nodes | 1 | 1 | 2 |
 | Drone HP | 1 | 1 | 2 |
-| Drone speed | 55 | 71 | 87 |
-| Aggro delay | 1.8 s | 0.45 s | 0.45 s |
+| Drone speed | **40** | 58 | 76 |
+| Aggro delay | **3.5 s** | 0.45 s | 0.45 s |
+| bumpSafe | **5.5 s, starts when chase starts** | — | — |
 
-Baseline: HP 5, move 230, dmg 1, fire 280 ms, pierce 0, extra 0, shot 560, contact 1, i-frames 0.7 s. Arena 960×540. W1/W2 node NW; W3 NW+NE.
+Baseline: HP 5, move 230, dmg 1, fire 280 ms, pierce 0, extra 0, shot 560, contact 1, i-frames 0.7 s (0.45 s while bump-safe). Arena 960×540. W1/W2 node NW; W3 NW+NE. W1 bump-safe: contact knocks, no HP.
 
-**Playtest + Design play (2026-08-25):** this W1 still **POWER DOWN**s an uncoached run in ~2 s. Freeze is not a learn window. Stranger never reaches the upgrade pick.
+**Playtest `60149a0`:** NODE/SHOOT is readable; spawn-timed bump-safe worked; stranger still skipped the node (HUD-read burned the old 1.8s window). **`28b436d` is the retest:** 3.5s freeze + bump-safe on chase. Control already `node ON 1/1` in the freeze. Do not stack another freeze until that retest lands.
 
-### Design lock — Game Dev implements these (Design does not touch `src`)
+### Design lock — live. Do not restack freeze.
 
-Keep 3/8/12 and the AND. Change **only** wave 1 so a moving stranger can finish it.
+The W1 lock from PR #8 (3.5s, speed 40) is **in the greybox**. Next stop is not numbers:
 
-| W1 | Now | **Lock** | Why |
-| --- | --- | --- | --- |
-| Drones | 3 | **3** | Pack is fine if they start slow |
-| Aggro | 1.8 s | **3.5 s** | Time to focus, shoot NODE ON, then kite |
-| Speed | 55 | **40** | Kite is possible after freeze |
-| HP | 1 | **1** | One shot still pops them |
+| | Lock | Owner |
+| --- | --- | --- |
+| AND | Clear = drones dead **and** nodes ON | Design (this file) — done |
+| W1 freeze / speed / bump-safe | 3.5s / 40 / 5.5s from chase | CoS in `src` until Game Dev appears — done |
+| Stranger shoots NODE during freeze | OFF node is the loudest thing in W1 | Art PR #7 |
+| Stranger finishes W1 AND | Freeze-then-node, then kite | Playtest on `28b436d` |
 
-W2/W3 stay 8@71 / 12@2HP@87, 0.45 s aggro. Wave 3 is the wall the two Brotato picks exist to break.
+W2/W3 stay 8@58 / 12@2HP@76, 0.45 s aggro. Wave 3 is the wall the two Brotato picks exist to break. No fourth wave. No extra verb.
 
 Upgrade pool (unchanged — matches `POOL` / `applyCard`):
 
@@ -105,7 +108,7 @@ Scrapforge, Alpha Budget, loot-extract greybox, online, accounts, live-ops, stor
 2. A moving stranger finishes **wave 1** (AND) without a coach. Freeze is long enough to shoot the node.
 3. They see one upgrade pick. They can lose later. They know POWER DOWN vs SOLVED.
 
-If (1) fails: readability (Art/copy), not a new system. If (2) fails: implement the W1 lock above, not a fourth wave.
+If (1) fails: Art/copy (loud OFF node), not a new system. If (2) fails on `28b436d`: Playtest files it — do not stack freeze before that report.
 
 ## Owners
 
