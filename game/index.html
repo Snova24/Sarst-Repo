@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Vault — slice</title>
+    <title>Robot Puzzle Shooter — slice</title>
     <link rel="stylesheet" href="src/game.css" />
   </head>
   <body>
     <main class="shell">
       <header class="hud">
-        <h1>The Vault</h1>
-        <p id="status">WASD move · E grab · get out</p>
+        <h1>Robot Puzzle Shooter</h1>
+        <p id="status">WASD move · mouse aim · click shoot</p>
         <p id="meter"><span id="loot">0/3</span> · <span id="timer">—</span></p>
       </header>
-      <canvas id="view" width="960" height="540" aria-label="The Vault playfield"></canvas>
-      <p class="hint">Extract is the green alcove. Grab gold. Return before lock-down. R retries.</p>
+      <canvas id="view" width="960" height="540" aria-label="Robot Puzzle Shooter playfield"></canvas>
+      <p class="hint">Shoot the three nodes. Blast the crate if a node is blocked. Exit on the right when unlocked. R retries.</p>
     </main>
     <script type="module" src="src/game.js"></script>
   </body>

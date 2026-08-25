@@ -2,6 +2,12 @@
 
 Log choices that should still make sense in six months. Newest first.
 
+## 2026-08-25 — Original Game Dev is robot puzzle shooter; that is the game
+
+- **Decision:** Implementer is the Cloud Agent named **robot puzzle shooter**. The 5-minute slice is a robot puzzle shooter (shoot nodes, exit). Design’s TAKE spec (PR #2) and the heist greybox are parked. Core gameplay loop is Design, not Game Dev.
+- **Why:** brandon said to loop in the original Game Dev by that name. This environment cannot see that agent; brandon pastes the prompt.
+- **Revisit if:** brandon sends the agent URL/repo and the build already lives elsewhere.
+
 ## 2026-08-25 — Default slice: The Vault HTML5 extraction, this repo
 
 - **Decision:** The game is **The Vault**, in `game/` of `Snova24/Sarst-Repo`. Engine is HTML5 canvas. Loop: move, grab loot, extract in 90s. CoS shipped a greybox so parallel staff have a target. File lanes in `vault/studio/NOW.md`.

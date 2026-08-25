@@ -1,9 +1,9 @@
 # Assets
 
-Drop-in filenames for the HTML5 slice. See [../STYLE.md](../STYLE.md).
+Drop-in filenames for Robot Puzzle Shooter. See [../STYLE.md](../STYLE.md).
 
-- `player.png`
-- `loot.png`
-- `extract.png`
+- `player.png` — robot
+- `node.png` — puzzle node
+- `exit.png` — exit bay
 
-Do not add a fourth required file in this slice. Game Dev already draws walls as rects.
+Greybox still runs if these are missing.

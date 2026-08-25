@@ -1,30 +1,29 @@
-# Style bible — The Vault slice
+# Style bible — Robot Puzzle Shooter
 
-Art owns this file. CoS stubbed the contract so Game Dev can ship without art.
+Art owns this file. Greybox is colored shapes until drop-ins load.
 
 ## Look (fill in)
 
-- Mood:
+- Mood: compact robot, readable puzzle toys, dark room
 - Palette (3–5 hex):
-- Shape language:
-- UI: HUD is HTML (`.hud` in `src/game.css`). Do not hide loot count or timer.
+- Robot silhouette:
 
 ## Must-have (this slice)
 
-Drop PNGs using these exact names. Greybox uses colored rects until the file loads.
-
 | File | Stands in for | Size hint |
 | --- | --- | --- |
-| `player.png` | Runner | 64×64, facing right ok |
-| `loot.png` | Payload token | 48×48 |
-| `extract.png` | Extract floor tile | 64×64, tileable-ish |
+| `player.png` | Robot | 64×64 |
+| `node.png` | Puzzle node (off/on can be one art; code tints) | 48×48 |
+| `exit.png` | Exit bay | 64×64 |
 
-## Later (not this PR)
+Optional later: `crate.png`, projectile. Walls stay rects.
 
-Guards, props, particles, logo, audio, second room.
+## Later
+
+Guards, extra props, muzzle flash, logo, audio.
 
 ## Rules
 
-- Do not change verbs or the map layout in `game/src/game.js`.
+- Do not change verbs or the puzzle in `game/src/game.js`.
 - Transparent PNG, dark-friendly.
-- If a file is missing, the game must still run.
+- Missing files must not crash the game.

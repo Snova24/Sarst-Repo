@@ -6,14 +6,14 @@ A goal is an outcome with a reason, not a task. Tasks live in [commitments.md](c
 
 ## North star
 
-A stranger can finish a 5-minute run of The Vault (extract with loot before lock-down).
+A stranger can finish a 5-minute run of **Robot Puzzle Shooter** (shoot nodes, exit).
 
 ## Now (max 3)
 
 | Goal | Why it matters | How we'll know | Status |
 | --- | --- | --- | --- |
-| Ship a 5-minute vertical slice | Staff are live; they need a locked loop, not a second discovery pass | Stranger win/lose on `game/`; Playtest files findings | In progress — greybox up |
-| Run the parallel studio without collisions | brandon spawned Design, Art, Playtest together | Each agent stays in file lanes in `vault/studio/NOW.md` | In progress |
+| Ship the RPS 5-minute slice | Original Game Dev is robot puzzle shooter; TAKE/heist were wrong locks | Stranger win/lose on `game/`; Game Dev in the loop | In progress |
+| Keep lanes | Parallel staff plus original implementer | robot puzzle shooter owns src; Design does not | In progress |
 
 ## Next
 

@@ -1,67 +1,74 @@
-# The Vault — vertical slice spec
+# The Vault slice — Robot Puzzle Shooter
 
-Locked 2026-08-25 by Chief of Staff so Design / Art / Playtest / Game Dev can work in parallel. brandon overrides with one message.
+Locked 2026-08-25 by Chief of Staff after brandon named the original Game Dev **robot puzzle shooter**.
+
+This replaces the heist/extract greybox and parks Design’s **TAKE** stealth spec (PR #2). Shooting is a **puzzle tool**, not a DPS check.
 
 ## Fantasy
 
-You are a runner inside a vault. Take the payload. Get out before lock-down.
+You are a robot. Read the room. Shoot the right things. Walk out.
 
-## Platform / engine
+## Platform
 
-- **Title:** The Vault
-- **Engine:** HTML5 canvas + vanilla JS (this repo, `game/`)
-- **Session:** ~5 minutes (several 90-second runs)
+- **Title:** Robot Puzzle Shooter (working title)
+- **Engine:** HTML5 canvas + vanilla JS in this repo (`game/`) unless the original Game Dev already has another stack — then they own the port into `game/` or they give CoS the real repo URL
+- **Session:** ~5 minutes (a few 90-second solves)
 
 ## Verbs (only these)
 
 | Input | Action |
 | --- | --- |
 | WASD or arrows | Move |
-| E or Space | Grab loot you are touching |
+| Mouse | Aim |
+| Click or Space | Shoot (puzzle tool) |
+| R | Retry |
 
-No combat. No jump. No inventory screen.
+No stealth, no grab-loot, no melee.
 
 ## 5-minute loop
 
-1. Spawn in the extract zone (green).
-2. Enter the vault floor. Three loot tokens are in the room.
-3. A **90-second lock-down** starts when you grab the first token (or when you leave extract — first grab is the trigger).
-4. Carry tokens automatically (touch = hold). You do not drop them.
-5. Return to the extract zone before the timer hits 0.
-6. **Win:** extract with ≥1 token. All 3 is a clean run.
-7. **Lose:** timer hits 0 while you are not in extract, or you never extract. R to retry.
+1. Spawn as a robot on the left.
+2. Three **nodes** in the room must be shot to ON.
+3. One node is blocked by a **crate** — shoot the crate first.
+4. When 3/3 nodes are ON, the **exit** unlocks (right side).
+5. Walk into the exit.
+6. **Win:** exit with 3/3. **Lose:** 90s lock-down after the first shot expires while you are not in the exit.
+7. R retries.
 
 ## Win / lose copy
 
-- Win: `EXTRACTED — n/3`
-- Lose: `LOCKED IN`
-- Idle hint: `WASD move · E grab · get out`
+- Win: `SOLVED`
+- Lose: `POWER DOWN`
+- Idle: `WASD move · mouse aim · click shoot`
 
-## Content budget (slice)
+## Content budget
 
-- 1 room + extract alcove
-- 1 player
-- 3 loot tokens
-- 1 timer
-- Walls that block
+- 1 robot
+- 1 projectile type
+- 3 nodes
+- 1 destructible crate
+- 1 locked exit
+- Walls
 
 ## Explicit non-goals
 
-Combat, guards with AI, story, dialogue, upgrades, crafting, multiplayer, accounts, audio requirement, mobile store page, a second biome.
+- Stealth TAKE (PR #2) — do not merge as the game
+- Vault heist / relic extract
+- Enemy health bars, gun-game arenas, story, upgrades, audio requirement
 
-## Cuts (if we slip)
+## Cuts if we slip
 
-1. Don't require all 3 tokens to win (already: ≥1).
-2. Don't add enemy patrols.
-3. Don't add a second floor.
+1. No extra enemy types.
+2. No second room.
+3. No ammo economy.
 
 ## Art contract
 
-Placeholders are rectangles. Art replaces files in `game/assets/` per `game/assets/README.md` without changing verbs.
+Placeholders are shapes. Drop-ins in `game/assets/` per `game/assets/README.md`.
 
-## Feel targets (Game Dev)
+## Owners
 
-- Movement should feel snappy, not floaty.
-- Grab should be obvious (flash or pop).
-- Timer must be readable at a glance.
-- Retry in one key (`R`).
+- **Game Dev (implementer):** agent **robot puzzle shooter** — `game/src/`, `game/index.html`
+- **Design:** Core gameplay loop — tighten this GDD only, do not own src
+- **Art:** Slice visual assets
+- **Playtest:** Playtest findings

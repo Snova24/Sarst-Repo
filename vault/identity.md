@@ -21,7 +21,7 @@ Last updated: 2026-08-25
 
 ## Current context
 
-Producing **The Vault**, an HTML5 5-minute extraction slice in this repo (`game/`). brandon spawned Game Design, Art, and Playtest all at once on Sarst-Repo. CoS locked a default loop so they can work in parallel. Override if the fantasy is wrong.
+Producing **Robot Puzzle Shooter**. Original Game Dev agent is named **robot puzzle shooter** (URL not visible from this vault environment). Parallel Design/Art/Playtest are on this repo. CoS coordinates via `vault/studio/NOW.md`.
 
 ## Constraints
 

@@ -1,4 +1,4 @@
-# Project — The Vault (game)
+# Project — Robot Puzzle Shooter
 
 Slug: `the-game`
 Status: `active`
@@ -6,57 +6,60 @@ Last updated: 2026-08-25
 
 ## Why this exists
 
-A 5-minute playable extraction slice, produced by a parallel Cloud Agent studio on this repo.
+brandon’s original Game Dev agent is named **robot puzzle shooter**. That is the game. The Vault is the CoS memory around it.
 
 ## Outcome
 
-A stranger can load `game/`, grab loot, extract or get locked in, and retry — without a developer standing there.
+A stranger can finish a 5-minute RPS slice: move, shoot nodes, exit.
 
 ## Locked
 
 | | |
 | --- | --- |
-| Title | The Vault |
-| Engine | HTML5 canvas + vanilla JS |
-| Repo | `github.com/Snova24/Sarst-Repo` (`game/`) |
+| Title | Robot Puzzle Shooter |
+| Engine | HTML5 greybox in `game/` until Game Dev names another stack/repo |
 | Spec | [../../game/GDD.md](../../game/GDD.md) |
 | Standing order | [../studio/NOW.md](../studio/NOW.md) |
 
+## Parked
+
+- https://github.com/Snova24/Sarst-Repo/pull/2 — TAKE stealth spec (wrong fantasy)
+
 ## Links
 
-- Play: `python3 -m http.server 8765` → http://localhost:8765/game/
-- Game Dev: https://cursor.com/agents/bc-14df8331-383a-4bd4-b7a7-5c187dda80bc
+- Play greybox: http://localhost:8765/game/ (server from repo root)
+- Design: https://cursor.com/agents/bc-14df8331-383a-4bd4-b7a7-5c187dda80bc
 - Art: https://cursor.com/agents/bc-6f6ed739-7b8e-487d-8b76-2cb2c152940a
 - Playtest: https://cursor.com/agents/bc-016cebd0-fd39-4b95-a735-930757896489
-- CoS: https://cursor.com/agents/bc-31188be9-f61d-4227-a145-063d34e31087
+- Game Dev **robot puzzle shooter**: *URL unknown in this environment*
 
 ## Now
 
-- [x] Lock loop + ship greybox
-- [ ] Game Dev feel pass
-- [ ] Art drop-ins
-- [ ] Playtest findings
-- [ ] brandon paste prompts (CoS cannot DM staff)
+- [ ] brandon pastes Game Dev prompt into **robot puzzle shooter**
+- [ ] Drop that agent’s URL / repo into this vault if it lives elsewhere
+- [ ] Design retargets off TAKE
+- [ ] Art + Playtest on RPS greybox
 
 ## Waiting on
 
-Staff + brandon (prompts). Fantasy override if heist/extract is wrong.
+brandon (paste + URL). robot puzzle shooter (playable).
 
 ## Risks
 
-- Agents stay on stale `main` (Copilot template) instead of this branch
-- Lane violations (Art editing `game/src`, etc.)
-- Default fantasy is a CoS lock, not a brandon brief
+- Two games in flight (TAKE vs RPS). RPS wins.
+- Game Dev not visible here → studio keeps guessing unless the prompt is pasted.
 
 ## People
 
 - brandon — owner
-- Core gameplay loop — Game Dev
+- robot puzzle shooter — Game Dev
+- Core gameplay loop — Design
 - Slice visual assets — Art
 - Playtest findings — Playtest
-- Chief of Staff — this vault
+- Chief of Staff
 
 ## Log
 
-- 2026-08-25 — Parallel staff spawned; CoS locked HTML5 slice and shipped greybox.
-- 2026-08-24 — brandon: game-dev agent is working; asked for optimal production roster.
+- 2026-08-25 — brandon: loop in original Game Dev **robot puzzle shooter**. Retargeted slice off TAKE/heist.
+- 2026-08-25 — Parallel staff spawned; CoS had locked a default extract slice (superseded).
+- 2026-08-24 — Asked for optimal production roster.

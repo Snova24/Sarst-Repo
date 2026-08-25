@@ -1,32 +1,32 @@
-# Playtest script — The Vault slice
+# Playtest script — Robot Puzzle Shooter
 
-Playtest owns the **Findings** section. CoS wrote the script so this can start immediately.
+Playtest owns **Findings**. Script is for a stranger run of the greybox.
 
 ## How to run
 
-From repo root, on branch `cursor/chief-of-staff-vault-1087`:
+Branch `cursor/chief-of-staff-vault-1087`, repo root:
 
 ```bash
 python3 -m http.server 8765
 ```
 
-Open http://localhost:8765/game/ as a **stranger**. No coaching.
+Open http://localhost:8765/game/
 
 ## Script (5 minutes)
 
-1. Load the page. Can you tell what to do before you move?
-2. Move with WASD. Does it feel stuck or slippery?
-3. Find and grab at least one gold token (E / Space). Does grab register?
-4. Notice the timer. Is lock-down obvious?
-5. Extract to the green alcove with ≥1 token. Win screen?
-6. Retry with R. Die once on purpose (wait out the timer). Lose screen?
-7. Optional: extract with 3/3.
+1. Load. Do you know you are a robot that shoots puzzles, not a stealth thief?
+2. Move WASD. Aim with mouse. Shoot.
+3. Find the crate-blocked node. Can you tell to shoot the crate?
+4. Turn all 3 nodes ON. Does the exit read as open?
+5. Walk into the right-side exit. Win = SOLVED?
+6. Retry R. Lose once by waiting out the clock after a shot. POWER DOWN?
+7. Do **not** play Design PR #2 (TAKE stealth) — that is the wrong game.
 
-Log **crashes and confusion only**. Rank by stops the slice. No feature requests unless the loop is broken.
+Log crashes and confusion only. Rank by stops the slice.
 
 ## Findings
 
-_Status: greybox shipped 2026-08-25. Playtest agent: fill this in after a real run._
+_Status: greybox retargeted to Robot Puzzle Shooter 2026-08-25. Original Game Dev agent is **robot puzzle shooter** (not visible from this environment)._
 
 | Rank | Stops the slice? | What happened |
 | --- | --- | --- |
