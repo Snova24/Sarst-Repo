@@ -43,3 +43,9 @@ See [BUGS.md](BUGS.md). P0-1 is enough to fail acceptance.
 | Know why the run ended | **Fail** — no run |
 
 Re-test when a stranger can launch the paper map without this repo’s authors.
+
+## Retest (same day)
+
+A scratch greybox appeared on the CoS branch (`game/`, http://localhost:8765/game/). Product repo `Snova24/Snova24-scrapforge` is empty.
+
+Stranger session on that greybox: three runs from spawn, **POWER DOWN at 1/3**. Findings: [PR #5](https://github.com/Snova24/Sarst-Repo/pull/5) (`game/PLAYTEST.md`).
