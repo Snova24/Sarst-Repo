@@ -21,13 +21,13 @@ CoS HEAD: W1 freeze 3.5s; bump-safe on chase; first click no longer wipes freeze
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Relock PR #8 to live numbers; not pushed. Do not merge #2. |
+| **Core** gameplay loop | Design | `game/GDD.md` | IDLE. PR #8 relocked to live numbers. Hold. Do not merge #2. |
 | **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | Shipped louder OFF node PR #7. Hold. Do not merge #3. |
 | Playtest | Playtest findings | `game/PLAYTEST.md` | `28b436d` in: freeze unused, first click wipes order. Retest HUD fix. |
 
 ## Core — do this
 
-Own PR #8. Relock **Greybox now** to live numbers (W1 speed 40, aggro 3.5s, bumpSafe 5.5s from chase). Push. Do not edit `game/src`. Do not merge PR #2.
+PR #8 greybox-now is locked to live numbers. Hold. Do not edit `game/src`. Do not merge PR #2. Do not stack another freeze.
 
 ## Slice — do this
 

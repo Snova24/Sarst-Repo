@@ -22,13 +22,12 @@ Updated: 2026-08-25 — Core and Slice are RUNNING on RPS lanes.
 - [x] Playtest `60149a0`: bump-safe works; HUD-read burns the spawn window
 - [x] Playtest `28b436d`: freeze unused; first click wipes NODE order
 - [ ] Stranger shoots NODE during freeze after HUD fix
-- [ ] Core pushes PR #8 greybox-now relock (`28b436d` numbers)
+- [x] Core pushes PR #8 greybox-now relock (`28b436d` numbers)
 - [x] Slice pushes louder OFF node on PR #7
 
 ## Waiting on
 
-- Playtest retest of first-click HUD fix (freeze order must stay).
-- Core to **push** the PR #8 GDD relock.
+- Playtest retest of first-click HUD fix (`79ff71e`: freeze order stays).
 - Game Dev (`robot puzzle shooter`) — not visible.
 
 ## Risks / stuck

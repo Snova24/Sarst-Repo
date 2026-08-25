@@ -2,6 +2,11 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Core pushed GDD relock
+
+- PR #8 `fe6a66f`: Greybox now matches live W1 40 / 3.5s / bumpSafe from chase. Copy-bug note already fixed in `src` (`79ff71e`).
+- Playtest has not retested the HUD fix yet. Slice loud node already on CoS.
+
 ## 2026-08-25 — Playtest 28b436d: freeze unused; first click wipes order
 
 - PR #5 `cd63993`: stranger does not shoot NODE during 3.5s freeze. Control can. First click replaces freeze copy with arming text.
