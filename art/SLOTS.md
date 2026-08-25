@@ -1,37 +1,35 @@
-# Temp → final slots
+# Temp → final slots (TAKE)
 
-Game Dev does not wait on Art for greybox. Hook these paths when look is the remaining unfinished feeling.
-
-## Contract
-
-1. Draw a rect (or engine sprite) whose **name** matches the slot.
-2. Fill with the greybox hex from `ASSET_LIST.md` / `tokens.css`.
-3. Replace the fill with `art/slots/<name>.png` — same pivot, same logical size.
-4. Do not rename files to match an engine default; alias in the engine.
-
-Suggested in-engine names (alias → file):
+Greybox first. Alias these names in the engine. Do not rename files to match engine defaults.
 
 ```
 Player        → art/slots/player.png
+PlayerHold    → art/slots/player_hold.png
 PlayerAct     → art/slots/player_act.png
-Goal          → art/slots/goal.png
-Hazard        → art/slots/hazard.png
-Pickup        → art/slots/pickup.png
-Focus         → art/slots/focus.png
-Floor         → art/slots/floor.png
+Guard         → art/slots/guard.png          (×2 instances)
+Relic         → art/slots/relic.png
+Door          → art/slots/door.png
+Floor         → art/slots/floor.png          (lit)
+Shadow        → art/slots/shadow.png         (×4 volumes)
 Wall          → art/slots/wall.png
-Arena         → art/slots/bg_arena.png
-Hud           → art/slots/hud_panel.png
+Cone          → art/slots/cone.png           (opacity 0.4, rotate with guard)
+Focus         → art/slots/focus.png          (optional adjacent cue)
+Arena         → art/slots/bg_arena.png       (or tile Floor/Wall/Shadow on the paper map)
+Hud           → art/slots/hud_panel.png      (clock in center well; relic icon in teal well)
 StateWin      → art/slots/state_win.png
 StateFail     → art/slots/state_fail.png
 ```
 
-Pivots: tokens **center**; floor/wall **top-left**; HUD **top-center**; win/fail **center**.
+Pivots: tokens **center**; floor/shadow/wall **top-left**; HUD **top-center**; win/fail **center**. Cone pivot: **apex** (the point of the wedge), not the bounding-box center — if the engine can’t, offset in code so the apex sits on the guard.
 
 ## Transparency
 
-PNGs shipped with charcoal backplates (generator has no alpha). Treat `#1B1F2A` as chroma **or** draw them on charcoal. Do not block the loop on a knockout pass.
+PNGs include a charcoal backplate. Knock out `#1B1F2A` **or** draw on charcoal. Cone must be additive/alpha in code even if the file is opaque.
+
+## Leftover
+
+`hazard.png`, `pickup.png`, `goal.png` — aliases or unused. Prefer `relic` / `door`. Do not spawn a hazard to fill the file.
 
 ## Preview
 
-Open [`preview.html`](preview.html) to see palette, tokens, HUD, and win/fail together. That page is the readability check, not a game.
+[`preview.html`](preview.html) is the readability check, not the game.

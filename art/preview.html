@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vault slice — art board</title>
+  <title>TAKE slice 0 — art board</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" />
@@ -16,17 +16,16 @@
       color: var(--vault-cream);
       font-family: "IBM Plex Sans", sans-serif;
     }
-    h1, h2, h3, .label {
+    h1, h2, .label {
       font-family: Rajdhani, sans-serif;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin: 0;
     }
     h1 { font-size: 2rem; font-weight: 700; }
-    h2 { font-size: 1.1rem; color: var(--vault-amber); margin-bottom: 0.75rem; }
+    h2 { font-size: 1.1rem; color: var(--vault-amber); margin: 2rem 0 0.75rem; }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .lede { color: #c9c3b8; max-width: 62ch; margin: 0.5rem 0 2rem; }
-    .grid { display: grid; gap: 1.25rem; }
+    .lede { color: #c9c3b8; max-width: 68ch; margin: 0.5rem 0 1.5rem; }
     .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; }
     .swatch {
       border: 4px solid var(--vault-outline);
@@ -37,7 +36,7 @@
       padding: 0.5rem;
       font-size: 0.75rem;
     }
-    .swatch code { font-size: 0.7rem; color: inherit; }
+    .swatch code { font-size: 0.7rem; }
     .tokens { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; }
     .token-card { text-align: center; }
     .token-card img {
@@ -46,21 +45,12 @@
       object-fit: contain;
       background: var(--vault-charcoal);
       border: 4px solid var(--vault-outline);
-      image-rendering: auto;
     }
     .token-card span { display: block; margin-top: 0.35rem; font-size: 0.8rem; color: #c9c3b8; }
-    .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .boards img, .arena img, .hud img {
-      width: 100%;
-      border: 4px solid var(--vault-outline);
-      display: block;
-    }
-    .hud img { object-fit: cover; object-position: top; }
     .greybox {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0.75rem;
-      margin-top: 0.5rem;
     }
     .greybox .chip {
       height: 64px;
@@ -70,6 +60,12 @@
       font-weight: 700;
       color: var(--vault-outline);
     }
+    .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    img.full {
+      width: 100%;
+      border: 4px solid var(--vault-outline);
+      display: block;
+    }
     footer { margin-top: 2rem; color: #8b91a1; font-size: 0.85rem; }
     @media (max-width: 800px) {
       .swatches, .tokens, .boards, .greybox { grid-template-columns: 1fr 1fr; }
@@ -78,72 +74,60 @@
 </head>
 <body>
   <main class="wrap">
-    <h1>Vault slice</h1>
-    <p class="lede">Style bible board. Four chromatic jobs: cream you, amber interact, teal extract, oxide fail. Sprites are wordless. No new mechanics — remap these slots to the locked verbs.</p>
+    <h1>TAKE — slice 0</h1>
+    <p class="lede">Art board for the locked loop: move through shadow, take the relic, extract before the clock or the cone. Capsule is you. Visor block is the guard. No new verbs.</p>
 
-    <section>
-      <h2>Palette</h2>
-      <div class="swatches">
-        <div class="swatch" style="background:#1B1F2A;color:#F4EDE1"><span>Charcoal</span><code>#1B1F2A</code></div>
-        <div class="swatch" style="background:#3D4555;color:#F4EDE1"><span>Steel</span><code>#3D4555</code></div>
-        <div class="swatch" style="background:#F4EDE1;color:#0E1118"><span>Cream</span><code>#F4EDE1</code></div>
-        <div class="swatch" style="background:#E6A23C;color:#0E1118"><span>Amber</span><code>#E6A23C</code></div>
-        <div class="swatch" style="background:#2A9D8F;color:#0E1118"><span>Teal</span><code>#2A9D8F</code></div>
-        <div class="swatch" style="background:#C44536;color:#F4EDE1"><span>Oxide</span><code>#C44536</code></div>
-      </div>
-    </section>
+    <h2>Palette</h2>
+    <div class="swatches">
+      <div class="swatch" style="background:#1B1F2A;color:#F4EDE1"><span>Shadow / wall</span><code>#1B1F2A</code></div>
+      <div class="swatch" style="background:#3D4555;color:#F4EDE1"><span>Lit floor</span><code>#3D4555</code></div>
+      <div class="swatch" style="background:#F4EDE1;color:#0E1118"><span>You</span><code>#F4EDE1</code></div>
+      <div class="swatch" style="background:#E6A23C;color:#0E1118"><span>Relic / clock</span><code>#E6A23C</code></div>
+      <div class="swatch" style="background:#2A9D8F;color:#0E1118"><span>Door / win</span><code>#2A9D8F</code></div>
+      <div class="swatch" style="background:#C44536;color:#F4EDE1"><span>Guard / cone</span><code>#C44536</code></div>
+    </div>
 
-    <section style="margin-top:2rem">
-      <h2>Must-have tokens</h2>
-      <div class="tokens">
-        <div class="token-card"><img src="slots/player.png" alt="Player idle capsule" /><span>player</span></div>
-        <div class="token-card"><img src="slots/player_act.png" alt="Player acting" /><span>player_act</span></div>
-        <div class="token-card"><img src="slots/goal.png" alt="Goal vault door" /><span>goal</span></div>
-        <div class="token-card"><img src="slots/hazard.png" alt="Hazard seal" /><span>hazard</span></div>
-        <div class="token-card"><img src="slots/pickup.png" alt="Pickup dossier" /><span>pickup</span></div>
-        <div class="token-card"><img src="slots/focus.png" alt="Focus reticle" /><span>focus</span></div>
-      </div>
-    </section>
+    <h2>Must-have tokens</h2>
+    <div class="tokens">
+      <div class="token-card"><img src="slots/player.png" alt="Player empty-handed" /><span>player</span></div>
+      <div class="token-card"><img src="slots/player_hold.png" alt="Player holding relic" /><span>player_hold</span></div>
+      <div class="token-card"><img src="slots/guard.png" alt="Guard visor block" /><span>guard ×2</span></div>
+      <div class="token-card"><img src="slots/relic.png" alt="Relic" /><span>relic</span></div>
+      <div class="token-card"><img src="slots/door.png" alt="Extract door" /><span>door</span></div>
+      <div class="token-card"><img src="slots/cone.png" alt="Sixty degree view cone" /><span>cone</span></div>
+    </div>
 
-    <section style="margin-top:2rem">
-      <h2>Greybox (same roles, no PNGs)</h2>
-      <div class="greybox">
-        <div class="chip token token-player">YOU</div>
-        <div class="chip token token-pickup">ACT</div>
-        <div class="chip token token-goal">WIN</div>
-        <div class="chip token token-hazard">FAIL</div>
-      </div>
-    </section>
+    <h2>Cover vs light</h2>
+    <div class="tokens" style="grid-template-columns:repeat(4,1fr);max-width:640px">
+      <div class="token-card"><img src="slots/floor.png" alt="Lit floor" /><span>floor (lit)</span></div>
+      <div class="token-card"><img src="slots/shadow.png" alt="Shadow volume" /><span>shadow ×4</span></div>
+      <div class="token-card"><img src="slots/wall.png" alt="Wall" /><span>wall</span></div>
+      <div class="token-card"><img src="slots/focus.png" alt="Adjacent take cue" /><span>focus</span></div>
+    </div>
 
-    <section class="arena" style="margin-top:2rem">
-      <h2>Arena + HUD</h2>
-      <img src="slots/bg_arena.png" alt="One-screen vault arena" />
-      <div style="height:0.75rem"></div>
-      <img class="hud" src="slots/hud_panel.png" alt="HUD steel bar with pips and objective well" />
-    </section>
+    <h2>Greybox (same roles, no PNGs)</h2>
+    <div class="greybox">
+      <div class="chip token token-player">YOU</div>
+      <div class="chip token token-relic">RELIC</div>
+      <div class="chip token token-door">DOOR</div>
+      <div class="chip token token-guard">CONE</div>
+    </div>
 
-    <section style="margin-top:2rem">
-      <h2>Tiles</h2>
-      <div class="tokens" style="grid-template-columns:repeat(2,160px)">
-        <div class="token-card"><img src="slots/floor.png" alt="Floor tile" /><span>floor</span></div>
-        <div class="token-card"><img src="slots/wall.png" alt="Wall tile" /><span>wall</span></div>
-      </div>
-    </section>
+    <h2>Arena + HUD</h2>
+    <img class="full" src="slots/bg_arena.png" alt="One-screen arena" />
+    <div style="height:0.75rem"></div>
+    <img class="full" src="slots/hud_panel.png" alt="Clock and relic HUD" />
 
-    <section style="margin-top:2rem">
-      <h2>Win / fail</h2>
-      <div class="boards">
-        <img src="slots/state_win.png" alt="Win state" />
-        <img src="slots/state_fail.png" alt="Fail state" />
-      </div>
-    </section>
+    <h2>Win / caught</h2>
+    <div class="boards">
+      <img class="full" src="slots/state_win.png" alt="Win extract" />
+      <img class="full" src="slots/state_fail.png" alt="Fail caught" />
+    </div>
 
-    <section style="margin-top:2rem">
-      <h2>Style sheet</h2>
-      <img src="slots/style_sheet.png" alt="Palette and token style sheet" style="width:100%;border:4px solid var(--vault-outline)" />
-    </section>
+    <h2>Style sheet</h2>
+    <img class="full" src="slots/style_sheet.png" alt="Palette and token style sheet" />
 
-    <footer>Art only. Drop <code>art/slots/</code> into the loop. Do not add systems to fill unused slots.</footer>
+    <footer>Art only. Loop is GDD.md. Do not add combat art to fill unused slots.</footer>
   </main>
 </body>
 </html>

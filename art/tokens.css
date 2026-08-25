@@ -9,10 +9,15 @@
   --vault-outline: #0e1118;
 
   --role-player: var(--vault-cream);
+  --role-relic: var(--vault-amber);
   --role-interact: var(--vault-amber);
+  --role-extract: var(--vault-teal);
   --role-goal: var(--vault-teal);
+  --role-caught: var(--vault-oxide);
   --role-fail: var(--vault-oxide);
+  --role-lit: var(--vault-steel);
   --role-room: var(--vault-steel);
+  --role-shadow: var(--vault-charcoal);
   --role-void: var(--vault-charcoal);
 }
 
@@ -22,8 +27,12 @@
 }
 
 .token-player { background: var(--role-player); }
+.token-relic { background: var(--role-relic); }
+.token-door { background: var(--role-extract); }
+.token-guard { background: var(--role-caught); }
+.token-shadow { background: var(--role-shadow); color: var(--vault-cream); }
+.token-floor { background: var(--role-lit); }
+.token-wall { background: var(--role-void); color: var(--vault-cream); }
 .token-goal { background: var(--role-goal); }
-.token-hazard { background: var(--role-fail); }
 .token-pickup { background: var(--role-interact); }
-.token-floor { background: var(--role-room); }
-.token-wall { background: var(--role-void); }
+.token-hazard { background: var(--role-fail); }

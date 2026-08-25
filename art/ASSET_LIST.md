@@ -1,57 +1,52 @@
 # Slice assets — must-have vs later
 
-Art for the 5-minute loop only. No new mechanics. If a row is not needed by the locked verbs, skip it — do not invent a use.
+Locked to **TAKE** (`GDD.md`). Content budget is the list. Do not invent a use for leftover files.
 
-## Must-have (in this PR)
+## Must-have (this PR)
 
-These files live in [`slots/`](slots/) and are named for drop-in. Greybox color is the CSS token Game Dev can use *until* the PNG is hooked.
-
-| Slot file | Role | Greybox until hooked | Size |
+| Slot | GDD | Greybox | Size |
 | --- | --- | --- | --- |
-| `player.png` | You | cream capsule | 256² |
-| `player_act.png` | You, doing the verb | cream capsule, lean | 256² |
-| `goal.png` | Win / extract | teal hex | 256² |
-| `hazard.png` | Fail source | oxide spike-seal | 256² |
-| `pickup.png` | Interact / collect | amber diamond | 256² |
-| `focus.png` | Selection / aim | amber corners | 256² |
-| `floor.png` | Walkable | steel tile | 256² |
-| `wall.png` | Blocker | charcoal bulkhead | 256² |
-| `bg_arena.png` | One-screen playfield | charcoal room + one amber pad | 960×640 |
-| `hud_panel.png` | Timer / pips / objective well | steel bar, amber rule | 960×225 |
-| `state_win.png` | Session win | teal door open | 960×640 |
-| `state_fail.png` | Session fail | oxide seal | 960×640 |
-| `style_sheet.png` | Bible sheet (not in-game) | — | 960×640 |
+| `player.png` | You, empty-handed | cream capsule | 256² |
+| `player_hold.png` | You, holding relic | cream + amber diamond | 256² |
+| `player_act.png` | Take (adjacent) | cream lean | 256² |
+| `guard.png` | `G` ×2, one type | steel visor block | 256² |
+| `relic.png` | `R` | amber diamond | 256² |
+| `door.png` | `D` extract | teal hex | 256² |
+| `floor.png` | `.` lit | steel tile | 256² |
+| `shadow.png` | `s` ×4 | charcoal tile | 256² |
+| `wall.png` | `#` | charcoal bulkhead | 256² |
+| `cone.png` | 60° view | oxide wedge; 40% alpha in engine | 256² |
+| `focus.png` | adjacent-Take cue | amber corners | 256² |
+| `bg_arena.png` | one room | charcoal + one amber pad | 960×640 |
+| `hud_panel.png` | clock + relic well | steel bar; **no pips** | 960×175 |
+| `state_win.png` | extract with relic | teal door | 960×640 |
+| `state_fail.png` | Caught or timeout | oxide seal | 960×640 |
+| `style_sheet.png` | bible sheet (not in-game) | — | 960×640 |
 
-Also must-have, **not a PNG:** [`tokens.css`](tokens.css) (and `tokens.json`) so a web or engine build can greybox the same roles before sprites land.
+Also must-have, not a PNG: [`tokens.css`](tokens.css) / [`tokens.json`](tokens.json).
 
-## Must-have if the loop uses it (no file yet — do not block)
-
-Ship only when Game Dev actually draws the verb. Slot names reserved:
-
-| Slot name | When to produce |
-| --- | --- |
-| `player_fail.png` | Hit reaction distinct from `state_fail` |
-| `pip_on.png` / `pip_off.png` | Lives or charges, if not CSS rects |
-| `timer_fill.png` | If the HUD bar is a sprite, not a CSS width |
-| `button_up.png` / `button_down.png` | If there is an on-screen confirm |
-
-Until then: CSS pips and a CSS timer using `--vault-cream` / `--vault-amber`.
+`pickup.png` is the same image as `relic.png`. `goal.png` is the same image as `door.png`. Prefer the TAKE names.
 
 ## Later (not this slice)
 
-- Extra hazards, elite variants, NPC portraits
-- Parallax, debris kits, animated vault-door sheets
-- Store / trailer / icon set beyond the four role tokens
-- Audio-synced VFX, screen-space dirt, normal maps
-- Narrative slides, credits art, locale-specific signage
-- A second biome
+| File / idea | Why wait |
+| --- | --- |
+| `hazard.png` | No traps. Lose is cone or clock. Keep file as leftover; do not place it. |
+| Extra guard types, cameras, lasers | Cut: detection systems |
+| Walk cycle, door open sheet, portraits | Slice is 1-frame poses + tween |
+| Title key art, store, audio-synced VFX | After a stranger can finish 5 minutes |
+| `pip_on` / score / combo HUD | Spec: no score, stars, combo |
+| Second room / relic variants | Cut: meta |
 
 ## Animation list (slice)
 
-| Clip | Frames needed | Notes |
+| Clip | Frames | Notes |
 | --- | --- | --- |
-| `idle` | 1 (held `player.png`) | Bob in code, 2px |
-| `act` | 1 (`player_act.png`) | 120–180ms then back |
-| `win` / `fail` | stills | Full-screen cards, 1s hold |
+| idle | `player.png` | 2px bob in code |
+| hold | `player_hold.png` | swap on Take relic |
+| act | `player_act.png` | 120–180ms on Take |
+| guard | `guard.png` | rotate with polyline; pause 1s at ends |
+| cone | `cone.png` | parent to guard facing |
+| win / fail | stills | 1s + one key to retry |
 
-No walk cycle required if move is a tween. Add a 4-frame walk only if Playtest says the capsule feels stuck.
+No chase cycle. Guards do not change behavior after Take.

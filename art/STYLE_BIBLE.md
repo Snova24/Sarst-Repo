@@ -1,65 +1,64 @@
-# Style bible — Vault slice
+# Style bible — TAKE (slice 0)
 
-One page. Dresses the locked 5-minute loop. Does **not** add verbs, systems, or story.
+One page. Dresses the locked loop in `GDD.md` (PR #2). **No new verbs.**
+
+Loop: *move through shadow, take the relic, leave before the clock or the cone.*
 
 ## Status
 
-The slice is still greybox in this repo. This look is the temp→final contract so Game Dev can swap rectangles for PNGs without waiting on a universe. If Design names different verbs, **remap slots** — do not redraw the IP.
+Placeholders are legal in greybox. This kit is the temp→final set so the room, cone, and relic read at a glance. If Game Dev already drew rects, swap files — do not add combat, alarms, or a second mission to “use” extra art.
 
 ## Pillars
 
-1. **Read the verb in one second.** Silhouette and color role beat detail.
-2. **Four chromatic jobs, no more.** Cream = you. Amber = interact. Teal = extract/win. Oxide = fail/hazard. Steel + charcoal = the room.
-3. **Thick outline, flat fill.** Board-game tokens on an archive floor. No photoreal metal, no painterly noise as gameplay info.
-4. **UI is a filing system.** HUD sits on a steel bar with an amber rule. Empty meters; Game Dev draws numbers in type, never in the sprite.
+1. **Read the commit in one second.** Shadow vs light, relic vs empty hands, cone vs not-in-cone.
+2. **Four chromatic jobs.** Cream = you. Amber = relic / clock / “do Take.” Teal = door / extract / win. Oxide = guard visor, cone, caught. Steel + charcoal = lit floor vs wall. **Shadow is darker steel, not a fifth hue.**
+3. **Thick outline, flat fill.** Board-game tokens. Player is a **capsule**. Guard is an **angular visor block**. Never the same silhouette.
+4. **HUD is a clock + relic well.** No score, stars, combo, or life pips. Type (cream, geometric sans) draws the numbers — never bake digits into the PNG.
 
-## Palette (hex)
+## Palette
 
-| Token | Hex | Job |
+| Token | Hex | Job in TAKE |
 | --- | --- | --- |
-| Charcoal | `#1B1F2A` | Void, outline, unlit wall |
-| Steel | `#3D4555` | Floor, bulkhead, HUD chassis |
-| Cream | `#F4EDE1` | Player, readable type on dark |
-| Amber | `#E6A23C` | Interact, focus, timer, “do this” |
-| Teal | `#2A9D8F` | Goal / extract / win |
-| Oxide | `#C44536` | Hazard / fail |
-| Outline | `#0E1118` | 6px-equivalent rim on every token |
+| Charcoal | `#1B1F2A` | Void, walls, shadow pool, outline |
+| Steel | `#3D4555` | Lit floor `.` |
+| Cream | `#F4EDE1` | Player |
+| Amber | `#E6A23C` | Relic, clock well, Take highlight |
+| Teal | `#2A9D8F` | Door / extract / win |
+| Oxide | `#C44536` | Guard visor, view cone, caught |
+| Outline | `#0E1118` | Rim on every token |
 
-Contrast: cream on charcoal and amber on charcoal must stay ≥ 4.5:1. Never put oxide on teal; never put two roles on one object.
+Cream-on-charcoal and amber-on-charcoal ≥ 4.5:1. Do not put oxide on teal. Cone draws **over** the floor, 35–45% opacity in-engine (PNG is opaque; set alpha in code).
 
-## Shape language
+## Shape language (paper map)
 
-- **Player:** cream capsule + amber chevron. No face. Chevron up = idle, chevron along motion = act.
-- **Goal:** teal hex vault-door + keyhole.
-- **Hazard:** oxide spiked seal + down chevron.
-- **Pickup:** amber diamond dossier.
-- **Focus:** four amber corner brackets + cream dot.
-- **Room:** square steel tiles, rivets, one amber pad max per screen.
+| GDD glyph | Slot | Shape |
+| --- | --- | --- |
+| player | `player.png` / `player_hold.png` | Cream capsule. Empty chest = no relic. Amber diamond on chest = holding. |
+| `G` | `guard.png` | Steel trapezoid, oxide visor. Two instances, one art. |
+| `R` | `relic.png` | Amber diamond dossier. |
+| `D` | `door.png` | Teal hex vault-door. |
+| `s` | `shadow.png` | Dark tile. Four volumes. |
+| `.` | `floor.png` | Steel lit tile. |
+| `#` | `wall.png` | Charcoal bulkhead. |
+| cone | `cone.png` | Oxide 60° wedge. Rotate to patrol facing. |
 
-Octagons/hexes for architecture and UI wells. Capsules for the actor. Diamonds for pickups. Spikes only on fail.
+## Motion (locked verbs only)
 
-## Type
-
-In-game type is **not** in the PNGs (sprites stay wordless). Use a geometric sans (preview uses `Rajdhani`). HUD labels: cream, 18px+ on dark, sentence case, no all-caps walls. One amber word for the current verb.
-
-## Motion (tied to verbs, not new ones)
-
-| Verb slot | What the eye should see |
+| Verb | Eye |
 | --- | --- |
-| Idle | Capsule breathing, chevron up |
-| Move | Capsule translates; no smear frames required |
-| Act | `player_act` + `focus` on the target |
-| Collect | Pickup scales down into the player |
-| Fail | Hazard holds; smash to `state_fail` |
-| Win | Goal door reads open; smash to `state_win` |
+| **Move** | Capsule translates. No walk cycle required. Bob 2px idle. |
+| **Take** (relic) | Relic scales into `player_hold`. One amber flash. |
+| **Take** (extract) | At door while holding → `state_win`. |
+| Caught | Cone overlap while lit → `state_fail`. Instant. |
+| Clock 0 | Same fail card. Greed is a lose. |
 
-Juice budget for the slice: one squash on act, one flash (amber or oxide) on confirm/fail. No particles as information.
+No sneak toggle, roll, jump, weapons, or alarm phase to animate.
 
 ## Do not
 
-- New enemy types, portraits, cutscenes, store key art.
-- Readable letters inside sprites.
-- A second palette “for variety.”
-- Blocking Game Dev on transparency, normal maps, or animation sheets.
+- A second guard type, cameras, lasers, portraits, cutscenes.
+- Letters inside sprites.
+- Life pips or score in the HUD PNG.
+- Blocking Game Dev on alpha knockouts (chroma `#1B1F2A` or draw on charcoal).
 
-CSS tokens: [`tokens.css`](tokens.css). Drop-in files: [`slots/`](slots/). List: [`ASSET_LIST.md`](ASSET_LIST.md).
+Greybox: [`tokens.css`](tokens.css). Files: [`slots/`](slots/). List: [`ASSET_LIST.md`](ASSET_LIST.md).
