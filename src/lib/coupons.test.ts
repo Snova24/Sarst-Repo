@@ -3,7 +3,7 @@ import { COUPONS } from "../data/catalog";
 import { CATEGORIES } from "../types";
 import type { Coupon, CouponQuery } from "../types";
 import { estimatedSave, isExpired } from "./format";
-import { filterCoupons, getCoupon, walletSavings } from "./coupons";
+import { actionProgress, filterCoupons, getCoupon, isUnlocked, walletSavings } from "./coupons";
 
 const NOW = new Date("2026-08-25T12:00:00");
 
@@ -108,6 +108,36 @@ describe("catalog", () => {
     expect(expired).toHaveLength(2);
     expect(expired.every((c) => c.expiresAt < "2026-08-25")).toBe(true);
   });
+
+  it("includes punch-card deals that require confirmed tasks", () => {
+    const punches = COUPONS.filter((c) => (c.actions?.length ?? 0) > 0);
+    expect(punches.length).toBeGreaterThanOrEqual(4);
+    expect(punches.every((c) => (c.actions?.length ?? 0) >= 3)).toBe(true);
+  });
+});
+
+describe("actionProgress", () => {
+  const punch = coupon({
+    id: "punch-live",
+    expiresAt: "2026-09-01",
+    publishedAt: "2026-08-01",
+    actions: [
+      { id: "a", label: "Shop produce" },
+      { id: "b", label: "Grab bakery" },
+      { id: "c", label: "Pick dairy" },
+    ],
+  });
+
+  it("starts locked and unlocks when every task is confirmed", () => {
+    expect(actionProgress(punch, []).done).toBe(0);
+    expect(isUnlocked(punch, [])).toBe(false);
+    expect(actionProgress(punch, ["a", "c"]).done).toBe(2);
+    expect(isUnlocked(punch, ["a", "b", "c"])).toBe(true);
+  });
+
+  it("treats ordinary coupons as already unlocked", () => {
+    expect(isUnlocked(fixtures[0], [])).toBe(true);
+  });
 });
 
 describe("getCoupon", () => {
@@ -137,6 +167,39 @@ describe("filterCoupons", () => {
     expect(filterCoupons(fixtures, { ...baseQuery, search: "beta50" }, NOW).map((c) => c.id)).toEqual([
       "beta-live",
     ]);
+  });
+
+  it("matches search against punch-card task labels", () => {
+    const withTasks = [
+      ...fixtures,
+      coupon({
+        id: "task-live",
+        expiresAt: "2026-09-10",
+        publishedAt: "2026-08-02",
+        actions: [{ id: "aisle", label: "Walk the spice circuit", hint: "Bulk bins" }],
+      }),
+    ];
+    expect(
+      filterCoupons(withTasks, { ...baseQuery, search: "spice circuit" }, NOW).map((c) => c.id),
+    ).toEqual(["task-live"]);
+  });
+
+  it("keeps only punch-card deals when tasksOnly is set", () => {
+    const withTasks = [
+      fixtures[0],
+      coupon({
+        id: "task-live",
+        expiresAt: "2026-09-10",
+        publishedAt: "2026-08-02",
+        actions: [
+          { id: "a", label: "One" },
+          { id: "b", label: "Two" },
+        ],
+      }),
+    ];
+    expect(
+      filterCoupons(withTasks, { ...baseQuery, tasksOnly: true }, NOW).map((c) => c.id),
+    ).toEqual(["task-live"]);
   });
 
   it("filters by exact category and treats all as unfiltered", () => {
@@ -186,6 +249,34 @@ describe("walletSavings", () => {
     expect(walletSavings(fixtures, entries, NOW)).toBe(
       estimatedSave(alpha.discount, alpha.minSpend),
     );
+  });
+
+  it("ignores punch-card deals until every task is confirmed", () => {
+    const punch = coupon({
+      id: "punch-live",
+      expiresAt: "2026-09-01",
+      publishedAt: "2026-08-01",
+      discount: { kind: "amount", value: 12 },
+      actions: [
+        { id: "a", label: "One" },
+        { id: "b", label: "Two" },
+      ],
+    });
+    const entries = [
+      {
+        couponId: "punch-live",
+        clippedAt: "2026-08-20T00:00:00.000Z",
+        completedActionIds: ["a"],
+      },
+    ];
+    expect(walletSavings([punch], entries, NOW)).toBe(0);
+    expect(
+      walletSavings(
+        [punch],
+        [{ ...entries[0], completedActionIds: ["a", "b"] }],
+        NOW,
+      ),
+    ).toBe(12);
   });
 
   it("returns zero when nothing is still available", () => {

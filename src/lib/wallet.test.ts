@@ -180,6 +180,27 @@ describe("useWallet", () => {
     expect(again.result.current.entries).toHaveLength(1);
   });
 
+  it("stamps punch-card tasks, auto-clips, and lets you undo", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-08-25T17:00:00.000Z"));
+    const { result } = renderHook(() => useWallet());
+
+    act(() => {
+      result.current.toggleAction("harbor-pantry-circuit", "produce");
+    });
+
+    expect(result.current.isClipped("harbor-pantry-circuit")).toBe(true);
+    expect(result.current.completedActions("harbor-pantry-circuit")).toEqual(["produce"]);
+
+    act(() => {
+      result.current.toggleAction("harbor-pantry-circuit", "bakery");
+      result.current.toggleAction("harbor-pantry-circuit", "produce");
+    });
+
+    expect(result.current.completedActions("harbor-pantry-circuit")).toEqual(["bakery"]);
+    expect(loadWallet()[0].completedActionIds).toEqual(["bakery"]);
+  });
+
   it("keeps clip and used state in memory when localStorage is missing", () => {
     vi.stubGlobal("localStorage", throwingStorage());
     saveWallet([]);

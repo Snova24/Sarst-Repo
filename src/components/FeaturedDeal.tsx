@@ -1,15 +1,18 @@
 import type { CSSProperties } from "react";
 import type { Coupon } from "../types";
+import { actionProgress, isActionDeal } from "../lib/coupons";
 import {
   CATEGORY_LABEL,
   formatDiscount,
   formatExpiry,
 } from "../lib/format";
+import { PunchBar } from "./PunchBar";
 
 type FeaturedDealProps = {
   coupon: Coupon;
   now: Date;
   clipped: boolean;
+  completedActionIds: string[];
   onOpen: () => void;
   onClip: () => void;
   onCopy: () => void;
@@ -19,10 +22,14 @@ export function FeaturedDeal({
   coupon,
   now,
   clipped,
+  completedActionIds,
   onOpen,
   onClip,
   onCopy,
 }: FeaturedDealProps) {
+  const punch = actionProgress(coupon, completedActionIds);
+  const taskDeal = isActionDeal(coupon);
+
   return (
     <section
       className="featured"
@@ -62,14 +69,23 @@ export function FeaturedDeal({
           <span className="featured-expiry">
             {formatExpiry(coupon.expiresAt, now)}
           </span>
+          {taskDeal ? (
+            <PunchBar done={punch.done} total={punch.total} compact />
+          ) : null}
         </button>
         <div className="ticket-actions featured-actions">
           <button type="button" className="btn btn-clip" onClick={onClip}>
             {clipped ? "Unclip" : "Clip"}
           </button>
-          <button type="button" className="btn btn-copy" onClick={onCopy}>
-            Copy code
-          </button>
+          {taskDeal && !punch.unlocked ? (
+            <button type="button" className="btn btn-copy" onClick={onOpen}>
+              Earn code
+            </button>
+          ) : (
+            <button type="button" className="btn btn-copy" onClick={onCopy}>
+              Copy code
+            </button>
+          )}
         </div>
       </div>
     </section>

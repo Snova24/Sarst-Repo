@@ -1,6 +1,6 @@
 # Clipbook
 
-A Sunday circular you actually keep. Browse deals, copy codes, clip them into a wallet, and see what you still stand to save.
+A Sunday circular you actually keep. Browse deals, copy codes, clip them into a wallet, stamp punch-card tasks to unlock locked codes, and see what you still stand to save.
 
 ## Run
 

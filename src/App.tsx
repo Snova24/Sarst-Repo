@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { COUPONS } from "./data/catalog";
-import { filterCoupons, getCoupon, walletSavings } from "./lib/coupons";
+import { filterCoupons, getCoupon, isUnlocked, walletSavings } from "./lib/coupons";
 import { useWallet } from "./lib/wallet";
 import { formatMoney, isExpired } from "./lib/format";
 import type { Category, Coupon, SortKey } from "./types";
@@ -47,6 +47,7 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<Category | "all">("all");
   const [sort, setSort] = useState<SortKey>("ending");
+  const [tasksOnly, setTasksOnly] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number | null>(null);
@@ -80,10 +81,15 @@ export default function App() {
 
   const handleCopy = useCallback(
     async (coupon: Coupon) => {
+      if (!isUnlocked(coupon, wallet.completedActions(coupon.id))) {
+        setSelectedId(coupon.id);
+        showToast("Stamp each task to unlock the code");
+        return;
+      }
       await writeClipboard(coupon.code);
       showToast(`Copied ${coupon.merchant} code`);
     },
-    [showToast],
+    [showToast, wallet],
   );
 
   const closeDetail = useCallback(() => setSelectedId(null), []);
@@ -101,7 +107,7 @@ export default function App() {
       const clipped = COUPONS.filter((coupon) => wallet.isClipped(coupon.id));
       const filtered = filterCoupons(
         clipped,
-        { search, category, sort, walletOnly: true },
+        { search, category, sort, walletOnly: true, tasksOnly },
         now,
       );
       return [...filtered].sort(
@@ -110,11 +116,11 @@ export default function App() {
           walletRank(b, wallet.isUsed(b.id), now),
       );
     }
-    return filterCoupons(COUPONS, { search, category, sort }, now);
+    return filterCoupons(COUPONS, { search, category, sort, tasksOnly }, now);
   })();
 
   const gridCoupons =
-    view === "browse" && featured
+    view === "browse" && featured && visible.some((coupon) => coupon.id === featured.id)
       ? visible.filter((coupon) => coupon.id !== featured.id)
       : visible;
 
@@ -131,11 +137,14 @@ export default function App() {
       <ViewToggle view={view} onChange={setView} />
 
       <main id="panel-deals" role="tabpanel" aria-labelledby={`tab-${view}`}>
-        {view === "browse" && featured ? (
+        {view === "browse" &&
+        featured &&
+        visible.some((coupon) => coupon.id === featured.id) ? (
           <FeaturedDeal
             coupon={featured}
             now={now}
             clipped={wallet.isClipped(featured.id)}
+            completedActionIds={wallet.completedActions(featured.id)}
             onOpen={() => setSelectedId(featured.id)}
             onClip={() => handleClip(featured.id)}
             onCopy={() => void handleCopy(featured)}
@@ -147,9 +156,11 @@ export default function App() {
             search={search}
             category={category}
             sort={sort}
+            tasksOnly={tasksOnly}
             onSearch={setSearch}
             onCategory={setCategory}
             onSort={setSort}
+            onTasksOnly={setTasksOnly}
           />
         ) : null}
 
@@ -174,6 +185,7 @@ export default function App() {
                 now={now}
                 clipped={wallet.isClipped(coupon.id)}
                 used={wallet.isUsed(coupon.id)}
+                completedActionIds={wallet.completedActions(coupon.id)}
                 onOpen={() => setSelectedId(coupon.id)}
                 onClip={() => handleClip(coupon.id)}
                 onCopy={() => void handleCopy(coupon)}
@@ -189,6 +201,7 @@ export default function App() {
           now={now}
           clipped={wallet.isClipped(selected.id)}
           used={wallet.isUsed(selected.id)}
+          completedActionIds={wallet.completedActions(selected.id)}
           onClose={closeDetail}
           onClip={() => handleClip(selected.id)}
           onCopy={() => void handleCopy(selected)}
@@ -196,6 +209,7 @@ export default function App() {
             if (wallet.isUsed(selected.id)) wallet.markUnused(selected.id);
             else wallet.markUsed(selected.id);
           }}
+          onToggleAction={(actionId) => wallet.toggleAction(selected.id, actionId)}
         />
       ) : null}
 

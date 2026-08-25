@@ -17,6 +17,12 @@ export type Discount =
   | { kind: "bogo" }
   | { kind: "freeShipping" };
 
+export interface CouponAction {
+  id: string;
+  label: string;
+  hint?: string;
+}
+
 export interface Coupon {
   id: string;
   merchant: string;
@@ -35,12 +41,15 @@ export interface Coupon {
   featured?: boolean;
   /** Ticket accent, hex */
   color: string;
+  /** If set, the code stays locked until every action is confirmed. */
+  actions?: CouponAction[];
 }
 
 export interface WalletEntry {
   couponId: string;
   clippedAt: string;
   usedAt?: string;
+  completedActionIds?: string[];
 }
 
 export type SortKey = "ending" | "save" | "newest";
@@ -50,4 +59,6 @@ export interface CouponQuery {
   category: Category | "all";
   sort: SortKey;
   walletOnly?: boolean;
+  /** Punch-card deals that require confirmed tasks. */
+  tasksOnly?: boolean;
 }

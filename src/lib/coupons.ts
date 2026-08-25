@@ -6,10 +6,37 @@ export function getCoupon(id: string): Coupon | undefined {
   return COUPONS.find((coupon) => coupon.id === id);
 }
 
+export function isActionDeal(coupon: Coupon): boolean {
+  return (coupon.actions?.length ?? 0) > 0;
+}
+
+export function actionProgress(coupon: Coupon, completedIds: string[] = []) {
+  const actions = coupon.actions ?? [];
+  const total = actions.length;
+  if (total === 0) {
+    return { done: 0, total: 0, ratio: 1, unlocked: true };
+  }
+  const done = actions.filter((action) => completedIds.includes(action.id)).length;
+  return { done, total, ratio: done / total, unlocked: done === total };
+}
+
+export function isUnlocked(coupon: Coupon, completedIds: string[] = []): boolean {
+  return actionProgress(coupon, completedIds).unlocked;
+}
+
 function matchesSearch(coupon: Coupon, search: string): boolean {
   const q = search.trim().toLowerCase();
   if (!q) return true;
-  const haystack = [coupon.merchant, coupon.title, coupon.description, coupon.code]
+  const actionText = (coupon.actions ?? [])
+    .flatMap((action) => [action.label, action.hint ?? ""])
+    .join(" ");
+  const haystack = [
+    coupon.merchant,
+    coupon.title,
+    coupon.description,
+    coupon.code,
+    actionText,
+  ]
     .join(" ")
     .toLowerCase();
   return haystack.includes(q);
@@ -34,6 +61,7 @@ export function filterCoupons(
   const filtered = coupons.filter((coupon) => {
     if (!matchesSearch(coupon, query.search)) return false;
     if (query.category !== "all" && coupon.category !== query.category) return false;
+    if (query.tasksOnly && !isActionDeal(coupon)) return false;
     if (!query.walletOnly && isExpired(coupon.expiresAt, now)) return false;
     return true;
   });
@@ -60,6 +88,7 @@ export function walletSavings(
     const coupon = byId.get(entry.couponId);
     if (!coupon) continue;
     if (isExpired(coupon.expiresAt, now)) continue;
+    if (!isUnlocked(coupon, entry.completedActionIds)) continue;
     total += estimatedSave(coupon.discount, coupon.minSpend);
   }
   return total;

@@ -12,8 +12,9 @@ Someone who collects grocery, dining, and retail codes and loses them in screens
 - **Filter** — category chips + search (merchant, title, code).
 - **Sort** — ending soon, biggest save, newest.
 - **Detail** — merchant, terms, expiry, min spend, copy code, clip / unclip.
+- **Punch cards** — some deals lock the code until you confirm each listed task. Stamping a task clips the ticket and fills a progress bar. Undo is allowed. Savings only count after the card is full.
 - **Wallet** — clipped coupons, ending-soon first, mark used, remove.
-- **Savings** — rough dollars still available from unclipped-unused wallet items.
+- **Savings** — rough dollars still available from unused, unlocked wallet items.
 
 No accounts. Wallet lives in `localStorage` key `clipbook.wallet.v1`.
 

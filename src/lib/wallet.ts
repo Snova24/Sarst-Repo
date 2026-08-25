@@ -64,12 +64,44 @@ export function useWallet() {
     setEntries((prev) => {
       const next = prev.map((entry) => {
         if (entry.couponId !== id) return entry;
-        return { couponId: entry.couponId, clippedAt: entry.clippedAt };
+        const nextEntry: WalletEntry = {
+          couponId: entry.couponId,
+          clippedAt: entry.clippedAt,
+        };
+        if (entry.completedActionIds?.length) {
+          nextEntry.completedActionIds = entry.completedActionIds;
+        }
+        return nextEntry;
       });
       saveWallet(next);
       return next;
     });
   }, []);
+
+  const toggleAction = useCallback((couponId: string, actionId: string) => {
+    setEntries((prev) => {
+      const existing = prev.find((entry) => entry.couponId === couponId);
+      const clippedAt = existing?.clippedAt ?? new Date().toISOString();
+      const current = new Set(existing?.completedActionIds ?? []);
+      if (current.has(actionId)) current.delete(actionId);
+      else current.add(actionId);
+      const completedActionIds = [...current];
+      const nextEntry: WalletEntry = { couponId, clippedAt };
+      if (existing?.usedAt) nextEntry.usedAt = existing.usedAt;
+      if (completedActionIds.length) nextEntry.completedActionIds = completedActionIds;
+      const next = existing
+        ? prev.map((entry) => (entry.couponId === couponId ? nextEntry : entry))
+        : [...prev, nextEntry];
+      saveWallet(next);
+      return next;
+    });
+  }, []);
+
+  const completedActions = useCallback(
+    (id: string) =>
+      entries.find((entry) => entry.couponId === id)?.completedActionIds ?? [],
+    [entries],
+  );
 
   const isClipped = useCallback(
     (id: string) => entries.some((entry) => entry.couponId === id),
@@ -81,5 +113,15 @@ export function useWallet() {
     [entries],
   );
 
-  return { entries, clip, unclip, markUsed, markUnused, isClipped, isUsed };
+  return {
+    entries,
+    clip,
+    unclip,
+    markUsed,
+    markUnused,
+    toggleAction,
+    completedActions,
+    isClipped,
+    isUsed,
+  };
 }

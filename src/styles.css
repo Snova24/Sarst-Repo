@@ -315,7 +315,8 @@ h3 {
 .stat-wallet:focus-visible,
 .ticket-copy:focus-visible,
 .featured-copy:focus-visible,
-.sheet-close:focus-visible {
+.sheet-close:focus-visible,
+.action-row:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 2px;
 }
@@ -341,10 +342,195 @@ h3 {
   font-weight: 600;
 }
 
-.chip.is-active {
-  background: var(--sage);
-  color: #f4ede3;
+.chip-tasks {
   border-style: solid;
+}
+
+.chip-tasks.is-active {
+  background: var(--clip);
+  border-color: var(--clip-deep);
+  color: #fbf6ee;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* —— Punch cards —— */
+.punch-bar {
+  width: 100%;
+  margin-top: 0.55rem;
+}
+
+.punch-bar.is-compact {
+  margin-top: 0.4rem;
+}
+
+.punch-bar-track {
+  height: 8px;
+  border: 1px solid var(--ink);
+  background: color-mix(in srgb, var(--paper-deep) 70%, var(--ticket));
+  overflow: hidden;
+}
+
+.punch-bar-fill {
+  height: 100%;
+  background: var(--sage);
+  transition: width 0.22s ease;
+}
+
+.punch-stamps {
+  display: flex;
+  gap: 0.28rem;
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+}
+
+.punch-stamps li {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--ink-soft);
+  background: transparent;
+}
+
+.punch-stamps li.is-stamped {
+  border-style: solid;
+  border-color: var(--clip);
+  background: var(--clip);
+  box-shadow: inset 0 0 0 2px var(--ticket);
+}
+
+.punch-bar-label {
+  margin: 0.3rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.punch-bar.is-compact .punch-stamps li {
+  width: 11px;
+  height: 11px;
+}
+
+.stamp-punch {
+  margin-left: 0.35rem;
+  border-color: var(--clip);
+  color: var(--clip);
+}
+
+.sheet-tasks {
+  margin: 1rem 0 0.85rem;
+  padding: 0.85rem 0.8rem 0.7rem;
+  border: 1px dashed var(--ink);
+  background: color-mix(in srgb, var(--sage) 8%, var(--ticket));
+}
+
+.sheet-tasks h3 {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 0.25rem;
+}
+
+.sheet-tasks > p {
+  margin: 0 0 0.65rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.action-list {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.action-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.45rem 0.5rem;
+  text-align: left;
+  border: 1px solid var(--ink);
+  background: var(--ticket);
+}
+
+.action-row.is-done {
+  background: color-mix(in srgb, var(--sage) 16%, var(--ticket));
+}
+
+.action-box {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--paper);
+}
+
+.action-row.is-done .action-box {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: #f4ede3;
+}
+
+.action-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.action-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.action-hint {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
+.action-cta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clip-deep);
+  white-space: nowrap;
+}
+
+.action-row.is-done .action-cta {
+  color: var(--sage);
+}
+
+.code-strip.is-locked {
+  background: var(--paper-deep);
+  border-style: solid;
+}
+
+.code-strip.is-locked .code-value {
+  letter-spacing: 0.28em;
+  color: var(--ink-soft);
+}
+
+.sheet-flag-ok {
+  color: var(--sage);
+}
+
+.ticket-copy .punch-bar {
+  pointer-events: none;
 }
 
 .sort-field {

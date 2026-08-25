@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { Coupon } from "../types";
+import { actionProgress, isActionDeal } from "../lib/coupons";
 import {
   CATEGORY_LABEL,
   formatDiscount,
@@ -7,16 +8,20 @@ import {
   formatMoney,
   isExpired,
 } from "../lib/format";
+import { ActionList } from "./ActionList";
+import { PunchBar } from "./PunchBar";
 
 type CouponDetailProps = {
   coupon: Coupon;
   now: Date;
   clipped: boolean;
   used: boolean;
+  completedActionIds: string[];
   onClose: () => void;
   onClip: () => void;
   onCopy: () => void;
   onToggleUsed: () => void;
+  onToggleAction: (actionId: string) => void;
 };
 
 export function CouponDetail({
@@ -24,14 +29,18 @@ export function CouponDetail({
   now,
   clipped,
   used,
+  completedActionIds,
   onClose,
   onClip,
   onCopy,
   onToggleUsed,
+  onToggleAction,
 }: CouponDetailProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const expired = isExpired(coupon.expiresAt, now);
   const titleId = "coupon-detail-title";
+  const taskDeal = isActionDeal(coupon);
+  const punch = actionProgress(coupon, completedActionIds);
 
   useEffect(() => {
     closeRef.current?.focus();
@@ -88,9 +97,28 @@ export function CouponDetail({
           </div>
         </dl>
 
-        <div className="code-strip">
-          <span className="code-label">Code</span>
-          <code className="code-value">{coupon.code}</code>
+        {taskDeal && coupon.actions ? (
+          <section className="sheet-tasks">
+            <h3>Stamp the card</h3>
+            <p>
+              Confirm each task yourself. The code stays locked until the bar is
+              full.
+            </p>
+            <PunchBar done={punch.done} total={punch.total} />
+            <ActionList
+              actions={coupon.actions}
+              completedIds={completedActionIds}
+              disabled={expired || used}
+              onToggle={onToggleAction}
+            />
+          </section>
+        ) : null}
+
+        <div className={`code-strip${taskDeal && !punch.unlocked ? " is-locked" : ""}`}>
+          <span className="code-label">{punch.unlocked ? "Code" : "Locked"}</span>
+          <code className="code-value">
+            {punch.unlocked ? coupon.code : "••••••••"}
+          </code>
         </div>
 
         <section className="sheet-terms">
@@ -100,10 +128,18 @@ export function CouponDetail({
 
         {expired ? <p className="sheet-flag">This ticket has expired.</p> : null}
         {used ? <p className="sheet-flag">Marked used in your wallet.</p> : null}
+        {taskDeal && punch.unlocked ? (
+          <p className="sheet-flag sheet-flag-ok">Punch card full. Code unlocked.</p>
+        ) : null}
 
         <div className="sheet-actions">
-          <button type="button" className="btn btn-copy" onClick={onCopy}>
-            Copy code
+          <button
+            type="button"
+            className="btn btn-copy"
+            onClick={onCopy}
+            disabled={taskDeal && !punch.unlocked}
+          >
+            {taskDeal && !punch.unlocked ? "Code locked" : "Copy code"}
           </button>
           <button type="button" className="btn btn-clip" onClick={onClip}>
             {clipped ? "Unclip" : "Clip"}

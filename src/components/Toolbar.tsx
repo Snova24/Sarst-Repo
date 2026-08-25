@@ -6,9 +6,11 @@ type ToolbarProps = {
   search: string;
   category: Category | "all";
   sort: SortKey;
+  tasksOnly: boolean;
   onSearch: (value: string) => void;
   onCategory: (value: Category | "all") => void;
   onSort: (value: SortKey) => void;
+  onTasksOnly: (value: boolean) => void;
 };
 
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
@@ -21,9 +23,11 @@ export function Toolbar({
   search,
   category,
   sort,
+  tasksOnly,
   onSearch,
   onCategory,
   onSort,
+  onTasksOnly,
 }: ToolbarProps) {
   return (
     <div className="toolbar">
@@ -50,6 +54,14 @@ export function Toolbar({
           onClick={() => onCategory("all")}
         >
           All
+        </button>
+        <button
+          type="button"
+          className={`chip chip-tasks ${tasksOnly ? "is-active" : ""}`}
+          aria-pressed={tasksOnly}
+          onClick={() => onTasksOnly(!tasksOnly)}
+        >
+          Tasks
         </button>
         {CATEGORIES.map((item) => (
           <button
