@@ -31,6 +31,7 @@ let last = performance.now();
 let iFrames = 0;
 let aggroIn = 0;
 let bumpSafe = 0;
+let bumpArmed = false;
 let canvasArmed = false;
 
 function loadSprite(file) {
@@ -117,8 +118,11 @@ function spawnWave() {
     }
     drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 40 + waveIndex * 18 });
   }
-  aggroIn = waveIndex === 0 ? 1.8 : 0.45;
-  bumpSafe = waveIndex === 0 ? 5.5 : 0;
+  // Core PR #8 lock + Playtest 60149a0: freeze long enough to shoot NODE;
+  // bump-safe starts when chase starts so reading the HUD does not burn it.
+  aggroIn = waveIndex === 0 ? 3.5 : 0.45;
+  bumpSafe = 0;
+  bumpArmed = waveIndex === 0;
   const spots = [
     [180, 140],
     [760, 140],
@@ -131,7 +135,10 @@ function spawnWave() {
     nodes.push({ x: nx, y: ny, w: 40, h: 40, on: false });
   }
   mode = "play";
-  statusEl.textContent = `WAVE ${waveIndex + 1} — kill RED drones AND shoot BLUE NODE ON`;
+  statusEl.textContent =
+    waveIndex === 0
+      ? "WAVE 1 — drones frozen. SHOOT THE BLUE NODE ON first"
+      : `WAVE ${waveIndex + 1} — kill RED drones AND shoot BLUE NODE ON`;
 }
 
 function resetRun() {
@@ -271,7 +278,15 @@ function tick(now) {
       clampPlayer();
     }
 
+    const wasAggro = aggroIn;
     aggroIn = Math.max(0, aggroIn - dt);
+    if (bumpArmed && wasAggro > 0 && aggroIn <= 0) {
+      bumpSafe = 5.5;
+      bumpArmed = false;
+      if (mode === "play") {
+        statusEl.textContent = "WAVE 1 — kill RED drones AND shoot BLUE NODE ON";
+      }
+    }
     bumpSafe = Math.max(0, bumpSafe - dt);
     for (const d of drones) {
       if (aggroIn > 0) continue;

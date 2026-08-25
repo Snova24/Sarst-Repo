@@ -1,11 +1,11 @@
 # Command center
 
-Updated: 2026-08-25 — Playtest closed label-copy on `70376a4`; bump-safe retest still due.
+Updated: 2026-08-25 — Playtest `60149a0` in; CoS shipping 3.5s freeze + chase-timed bump-safe.
 
 ## This week
 
-1. Core relocks PR #8 "greybox now" to `60149a0` (W1 speed 40 already live; bumpSafe 5.5s).
-2. Playtest re-runs `60149a0` (bump-safe + sprites) after `70376a4` copy-closed.
+1. Playtest re-runs the 3.5s freeze / chase-timed bump-safe build.
+2. Core relocks PR #8 greybox-now to live numbers.
 3. Game Dev juices combat when they appear.
 
 ## Today
@@ -18,15 +18,15 @@ Updated: 2026-08-25 — Playtest closed label-copy on `70376a4`; bump-safe retes
 - [x] Design/Art leave TAKE (Core PR #8; Slice PR #7)
 - [x] Core commits `game/GDD.md` (PR #8; PR #6 superseded)
 - [x] Playtest `70376a4`: NODE/SHOOT readable; stranger still only fights reds
-- [ ] Core relocks greybox-now numbers to `60149a0`
-- [ ] Stranger can finish wave 1 on bump-safe + labeled build
+- [x] Playtest `60149a0`: bump-safe works; HUD-read burns the spawn window
+- [ ] Stranger finishes wave 1 on 3.5s freeze + chase-timed bump-safe
+- [ ] Core relocks greybox-now to live 3.5s / chase-timed bump-safe
 
 ## Waiting on
 
-- Playtest stranger retest of CoS HEAD `60149a0` (not `70376a4`).
-- Core to relock PR #8 to HEAD `60149a0` (they still list speed 55 / 1.8s).
+- Playtest stranger retest of the 3.5s freeze + chase-timed bump-safe push.
+- Core to relock PR #8 greybox-now (still lists speed 55 / 1.8s).
 - Game Dev (`robot puzzle shooter`) — not visible.
-- Hold Core's 3.5s aggro ask until the bump-safe retest. W1 speed 40 is already live.
 
 ## Risks / stuck
 

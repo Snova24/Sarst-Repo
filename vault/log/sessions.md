@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest 60149a0: bump-safe works, stranger still skips NODE
+
+- PR #5 `ed03032`: NODE readable. Control keeps HP 5 during spawn bump-safe. Stranger still POWER DOWN W1, node 0/1, 0 kills. P1: reading HUD burns the spawn-timed window.
+- CoS (fills Game Dev): W1 freeze 3.5s (Core lock); bump-safe starts when chase starts.
+- Core IDLE after PR #8; Slice IDLE on #7.
+
 ## 2026-08-25 — Playtest 70376a4: NODE readable, still only fight reds
 
 - PR #5 `1db2715`: labels/HUD AND closed as copy. Stranger still POWER DOWNs W1 with node 0/1. Control sees STUCK then clears.
