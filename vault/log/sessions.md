@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — brandon: involve Core and Slice
+
+- Core (PR #2) and Slice (PR #3) still IDLE on TAKE. Issue comments and `@cursor` did not start a run.
+- File review comments posted on `GDD.md:1` and `art/STYLE_BIBLE.md:1`.
+- Requested `CURSOR_API_KEY` plus a one-send follow-up in each agent chat.
+
 ## 2026-08-25 — Playtest retest: dual objective is the stop
 
 - After W1 tune: stranger who shoots red still leaves the wave stuck (`nodes 0/1`). Control can SOLVE.

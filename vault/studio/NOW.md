@@ -19,17 +19,24 @@ python3 -m http.server 8765
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| Design | Core gameplay loop | `game/GDD.md` | IDLE on TAKE |
-| Art | Slice visual assets | `game/STYLE.md`, `game/assets/` | IDLE on TAKE |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | Retest of `4be215e`: W1 swarm is no longer #1. Dual objective is the stop. |
+| **Core** gameplay loop | Design | `game/GDD.md` | IDLE on TAKE PR #2. Review `@cursor` on `GDD.md:1`. Need a chat follow-up. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE on TAKE PR #3. Review `@cursor` on `STYLE_BIBLE.md:1`. Need a chat follow-up. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | Dual objective is the stop. Retesting labels. |
 
-## Do this now
+## Core — do this
 
-1. `git fetch origin && git checkout cursor/chief-of-staff-vault-1087 && git pull`
-2. Own-branch off that. Touch **only your paths**.
-3. Do not open PRs for TAKE.
+1. Fetch `cursor/chief-of-staff-vault-1087`. Play `game/`.
+2. TAKE is dead. Do not merge PR #2.
+3. Own **only** `game/GDD.md`. Lock numbers to `game/src/game.js`. Dual objective (drones AND nodes) must be specified as the stranger-readable AND.
+4. New PR off the CoS branch. Do not edit `game/src`.
+
+## Slice — do this
+
+1. Fetch `cursor/chief-of-staff-vault-1087`. Play `game/`.
+2. TAKE art is dead. Do not merge PR #3.
+3. Own **only** `game/STYLE.md` and `game/assets/`: `player.png` (robot), `drone.png`, `node.png` that reads as a NODE to shoot ON (not a boat, not a relic).
+4. New PR off the CoS branch.
 
 ## Dispatch
 
-- Playtest PR #5 retest: **No, cannot SOLVE.** Biggest stop is drones-AND-nodes unread. Control can SOLVE if they do both jobs. CoS labeling NODE/SHOOT + STUCK banner.
-- Design/Art still TAKE. Need `CURSOR_API_KEY` to DM their chats.
+CoS cannot start Core/Slice runs from this VM (no Cursor API key; cursor.com login wall; `@cursor` from cursor[bot] has not woken them). Orders are on their PRs as file review comments. Waiting on a chat follow-up or `CURSOR_API_KEY`.
