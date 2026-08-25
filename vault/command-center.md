@@ -4,7 +4,7 @@ Updated: 2026-08-25 — W1 node gate shipped; waiting on Playtest.
 
 ## This week
 
-1. Playtest retests W1 node gate (no drones until NODE ON).
+1. Playtest retests W1 node gate on `4eaa11c` (no drones until NODE ON).
 2. Core relocks Greybox now to that gate (not another freeze).
 3. Game Dev juices combat when they appear.
 
@@ -28,7 +28,7 @@ Updated: 2026-08-25 — W1 node gate shipped; waiting on Playtest.
 
 ## Waiting on
 
-- Playtest retest of W1 node gate (drones spawn after NODE ON).
+- Playtest retest of W1 node gate on `4eaa11c` (drones spawn after NODE ON).
 - Core relock of Greybox now to that gate.
 - Game Dev (`robot puzzle shooter`) — not visible.
 

@@ -13,7 +13,7 @@ python3 -m http.server 8765
 # http://localhost:8765/game/
 ```
 
-CoS HEAD `342c2da`: W1 **node gate** — no drones until NODE ON, then 3-drone horde. Bump-safe on first contact. Do not restack freeze.
+CoS HEAD `4eaa11c`: W1 **node gate** — no drones until NODE ON, then 3-drone horde. 20s bump-safe after horde spawn. Do not restack freeze.
 
 ## Team (this repo)
 
@@ -23,7 +23,7 @@ CoS HEAD `342c2da`: W1 **node gate** — no drones until NODE ON, then 3-drone h
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
 | **Core** gameplay loop | Design | `game/GDD.md` | IDLE. Relock Greybox now to W1 node gate. Do not merge #2. |
 | **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | Hold on louder node PR #7. Do not merge #3. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | `79ff71e` in: HUD closed, still skip NODE. Retest node gate. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | `79ff71e` in: HUD closed, still skip NODE. Retest `4eaa11c` node gate. |
 
 ## Core — do this
 
@@ -35,4 +35,4 @@ Hold. Loud OFF node is already on CoS. Do not merge PR #3. No second sprite PR.
 
 ## Playtest — do this
 
-`79ff71e` P0 received (HUD closed, still skip NODE). Retest CoS `342c2da` (node gate + first-contact bump-safe). `game/PLAYTEST.md` only. Verdict: with no reds on screen, do they shoot the NODE ON?
+`79ff71e` P0 received (HUD closed, still skip NODE). Retest CoS `4eaa11c` (node gate + 20s bump-safe). `game/PLAYTEST.md` only. Verdict: with no reds on screen, do they shoot the NODE ON?
