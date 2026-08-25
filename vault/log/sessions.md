@@ -2,6 +2,13 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Staff loop: Core/Slice on RPS; Playtest still on 4be215e write-up
+
+- Core: RUNNING, left TAKE, playing greybox on `cursor/rps-gdd-80bc`. No GDD commit yet. Steered to own/replace PR #6 vs `60149a0` numbers. Do not merge #2.
+- Slice: RUNNING. PR #7 shipped. `node.png` reads as hex NODE (not a boat). Do not merge #3. No new TAKE art.
+- Playtest: RUNNING. Written report still `4be215e`. Mid-retest of `70376a4` labels; told them live HEAD is `60149a0` (labels + bump-safe + sprites).
+- Game Dev still missing. No Task clones. API key still unset.
+
 ## 2026-08-25 — Playtest: 1s death closed; stranger still dies in W1
 
 - PR #5: alive through grace, then walk into red, 0 kills, never leave W1. Control W1–W2, not W3.

@@ -13,24 +13,26 @@ python3 -m http.server 8765
 # http://localhost:8765/game/
 ```
 
+CoS HEAD: `60149a0` (labels + W1 bump-safe + Slice sprites hooked).
+
 ## Team (this repo)
 
 | Role | Agent | Owns | Status |
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Left TAKE. Researching RPS / PR #6. No new commit yet. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Shipped PR #7: robot / drone / NODE pylon. CoS hooking drawImage. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | 1s death closed. New P0: stranger walks into drones after grace (0 kills). CoS adding W1 bump-safe. |
+| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING on RPS (`cursor/rps-gdd-80bc`). Playing greybox. No GDD commit yet. Own/replace PR #6. Do not merge #2. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Shipped PR #7. Node reads as hex NODE (not a boat). Do not merge #3. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING. Written report is still `4be215e`. Retest of labeled/bump-safe/sprites (`60149a0`) in flight. |
 
 ## Core — do this
 
-Own PR #6 (`game/GDD.md` only) or open a new PR off CoS. Do not merge PR #2. Do not edit `game/src`. Dual objective is AND.
+Own PR #6 (`game/GDD.md` only) or open a new PR off CoS. Lock numbers to `60149a0` (speed `40 + waveIndex * 18`, W1 bumpSafe 5.5s). Dual objective is AND. Do not merge PR #2. Do not edit `game/src`.
 
 ## Slice — do this
 
-New PR off CoS. `player.png` robot, `drone.png`, `node.png` that reads as a NODE (not a boat). Do not merge PR #3.
+PR #7 is the art drop-in. Hold. Do not merge PR #3. Do not pile TAKE art.
 
 ## Playtest — do this
 
-Retest after the next CoS `game/src` push (`c8c82e1`): W1 bump-safe (contact knocks you, no HP for ~5.5s). 1s death is closed.
+Do not file `4be215e` unlabeled squares as current. Retest CoS HEAD `60149a0` (NODE/SHOOT labels + bump-safe + sprites). `game/PLAYTEST.md` only.
