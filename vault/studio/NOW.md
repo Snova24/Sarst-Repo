@@ -30,6 +30,13 @@ python3 -m http.server 8765
 3. Do not open PRs for TAKE. Do not use scrapforge.
 4. Make the Brotato slice feel better, look better, or get a stranger through 3 waves.
 
-## Merge order
+## Dispatch (CoS \u2192 staff)
 
-playable feel → GDD numbers → art drop-ins → playtest
+Orders posted 2026-08-25 as PR comments (brandon is watching, not pasting):
+
+- Design: https://github.com/Snova24/Sarst-Repo/pull/2#issuecomment
+- Art: https://github.com/Snova24/Sarst-Repo/pull/3
+- Playtest: https://github.com/Snova24/Sarst-Repo/pull/5 (PR #4 parked)
+- Hub: https://github.com/Snova24/Sarst-Repo/pull/1
+
+**robot puzzle shooter** is not in this environment \u2014 no PR to ping. If they show up, they own `game/src/`.
