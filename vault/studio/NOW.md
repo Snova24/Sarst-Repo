@@ -23,7 +23,7 @@ CoS HEAD: W1 freeze **3.5s**; bump-safe 5.5s **starts when chase starts** (Playt
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
 | **Core** gameplay loop | Design | `game/GDD.md` | IDLE. Pinged: relock PR #8 greybox-now to `28b436d`. Do not merge #2. |
 | **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE. Pinged: loud OFF node on PR #7. Do not merge #3. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | `60149a0` done: NODE readable, bump-safe works, stranger still W1. Retest next CoS src push. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING on `28b436d`. Control already `node ON 1/1` in the 3.5s freeze. Stranger write-up not pushed. |
 
 ## Core — do this
 
@@ -35,4 +35,4 @@ On PR #7 only: make the OFF node the loudest thing in W1 at 40×40 (brighter bul
 
 ## Playtest — do this
 
-`60149a0` copy + spawn bump-safe closed. Retest the next CoS `game/src` HEAD (3.5s freeze, bump-safe on chase). `game/PLAYTEST.md` only.
+Finish the `28b436d` stranger retest (3.5s freeze, bump-safe on chase). `game/PLAYTEST.md` only. Verdict: during the freeze, do they shoot the NODE ON?

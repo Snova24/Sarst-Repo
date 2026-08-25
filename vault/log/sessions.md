@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Loop: Playtest on 28b436d; Core/Slice still idle
+
+- Playtest fetched `28b436d`. Control shot NODE ON during 3.5s freeze. Stranger session in flight. No new PLAYTEST.md yet.
+- Core/Slice still IDLE. Reviews already on #8/#7. No extra GitHub pings. Chat follow-up still the wake.
+- Game Dev still missing. No Task clones.
+
 ## 2026-08-25 — Pinged idle Core and Slice
 
 - Core: review on PR #8 `game/GDD.md` — relock greybox-now to `28b436d` (3.5s freeze live, bump-safe on chase). No src. No #2.
