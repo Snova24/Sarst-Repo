@@ -303,14 +303,10 @@ function tick(now) {
 
     const wasAggro = aggroIn;
     aggroIn = Math.max(0, aggroIn - dt);
-    if (bumpArmed && wasAggro > 0 && aggroIn <= 0) {
-      bumpSafe = 5.5;
-      bumpArmed = false;
-      if (mode === "play") {
-        statusEl.textContent = nodes.every((n) => n.on)
-          ? "WAVE 1 — kill RED drones"
-          : "WAVE 1 — kill RED drones AND shoot BLUE NODE ON";
-      }
+    if (wasAggro > 0 && aggroIn <= 0 && mode === "play" && waveIndex === 0) {
+      statusEl.textContent = nodes.every((n) => n.on)
+        ? "WAVE 1 — kill RED drones"
+        : "WAVE 1 — kill RED drones AND shoot BLUE NODE ON";
     }
     bumpSafe = Math.max(0, bumpSafe - dt);
     for (const d of drones) {
@@ -321,6 +317,12 @@ function tick(now) {
       d.x += (cx / len) * d.speed * dt;
       d.y += (cy / len) * d.speed * dt;
       if (iFrames <= 0 && overlaps(player, d)) {
+        // Node-gate W1: drones walk in from the edges. Start bump-safe on first
+        // contact, not when chase starts (that window expires before they arrive).
+        if (bumpArmed) {
+          bumpSafe = 5.5;
+          bumpArmed = false;
+        }
         player.x += (cx / len) * 28;
         player.y += (cy / len) * 28;
         clampPlayer();
