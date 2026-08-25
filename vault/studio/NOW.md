@@ -21,9 +21,9 @@ CoS HEAD: `60149a0` (labels + W1 bump-safe + Slice sprites hooked).
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Shipped PR #8 (AND + fairer W1). Greybox-now table is stale vs `60149a0`. Do not merge #2. |
+| **Core** gameplay loop | Design | `game/GDD.md` | PR #8 ready. Greybox-now still lists speed 55. Relock to `60149a0`. Hold 3.5s. Do not merge #2. |
 | **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | IDLE. PR #7 shipped. Hex NODE. Hold. Do not merge #3. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING. Written report still `4be215e`. Mid-`70376a4` retest; must pull `60149a0`. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | Pushed `70376a4`: NODE readable on screen, stranger still only fights reds. Must retest `60149a0` bump-safe. |
 
 ## Core — do this
 
@@ -35,4 +35,4 @@ PR #7 is the art drop-in. Hold. Do not merge PR #3. Do not pile TAKE art.
 
 ## Playtest — do this
 
-Do not file `4be215e` unlabeled squares as current. Retest CoS HEAD `60149a0` (NODE/SHOOT + bump-safe + sprites). `game/PLAYTEST.md` only.
+`70376a4` copy is closed. Next is CoS HEAD `60149a0` (bump-safe + sprites). `game/PLAYTEST.md` only.

@@ -1,11 +1,11 @@
 # Command center
 
-Updated: 2026-08-25 — Core shipped PR #8; Playtest still has not retested `60149a0`.
+Updated: 2026-08-25 — Playtest closed label-copy on `70376a4`; bump-safe retest still due.
 
 ## This week
 
 1. Core relocks PR #8 "greybox now" to `60149a0` (W1 speed 40 already live; bumpSafe 5.5s).
-2. Playtest re-runs `60149a0` (labels + bump-safe + sprites).
+2. Playtest re-runs `60149a0` (bump-safe + sprites) after `70376a4` copy-closed.
 3. Game Dev juices combat when they appear.
 
 ## Today
@@ -17,15 +17,16 @@ Updated: 2026-08-25 — Core shipped PR #8; Playtest still has not retested `601
 - [x] CoS wave-1 fairness (3 drones, grace, first click focuses)
 - [x] Design/Art leave TAKE (Core PR #8; Slice PR #7)
 - [x] Core commits `game/GDD.md` (PR #8; PR #6 superseded)
+- [x] Playtest `70376a4`: NODE/SHOOT readable; stranger still only fights reds
 - [ ] Core relocks greybox-now numbers to `60149a0`
 - [ ] Stranger can finish wave 1 on bump-safe + labeled build
 
 ## Waiting on
 
-- Core to relock PR #8 to HEAD `60149a0` (they played speed 55 / 1.8s).
-- Playtest stranger retest of CoS HEAD `60149a0` (not `4be215e`).
+- Playtest stranger retest of CoS HEAD `60149a0` (not `70376a4`).
+- Core to relock PR #8 to HEAD `60149a0` (they still list speed 55 / 1.8s).
 - Game Dev (`robot puzzle shooter`) — not visible.
-- Hold Core's 3.5s aggro ask until that retest. W1 speed 40 is already live.
+- Hold Core's 3.5s aggro ask until the bump-safe retest. W1 speed 40 is already live.
 
 ## Risks / stuck
 

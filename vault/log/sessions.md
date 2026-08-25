@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest 70376a4: NODE readable, still only fight reds
+
+- PR #5 `1db2715`: labels/HUD AND closed as copy. Stranger still POWER DOWNs W1 with node 0/1. Control sees STUCK then clears.
+- Next: `60149a0` bump-safe + sprites. P1 contact is why bump-safe shipped. Do not stack Core's 3.5s yet.
+- Core PR #8 still lists greybox speed 55. Slice idle on #7.
+
 ## 2026-08-25 — Core shipped PR #8; Playtest still not on HEAD
 
 - Core: PR #8 `game/GDD.md` only, off CoS. AND locked. PR #2 retitled abandoned. Greybox-now table still lists speed 55; they did not play `60149a0` bump-safe. Asked Game Dev for 3.5s aggro + speed 40 — speed 40 is already live on W1. Hold 3.5s.
