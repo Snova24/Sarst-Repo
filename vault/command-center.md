@@ -20,14 +20,15 @@ Updated: 2026-08-25 — Core and Slice are RUNNING on RPS lanes.
 - [x] Core commits `game/GDD.md` (PR #8; PR #6 superseded)
 - [x] Playtest `70376a4`: NODE/SHOOT readable; stranger still only fights reds
 - [x] Playtest `60149a0`: bump-safe works; HUD-read burns the spawn window
-- [ ] Stranger finishes wave 1 on 3.5s freeze + chase-timed bump-safe
+- [x] Playtest `28b436d`: freeze unused; first click wipes NODE order
+- [ ] Stranger shoots NODE during freeze after HUD fix
 - [ ] Core pushes PR #8 greybox-now relock (`28b436d` numbers)
 - [x] Slice pushes louder OFF node on PR #7
 
 ## Waiting on
 
-- Core to **push** the PR #8 GDD relock (local, not pushed).
-- Playtest stranger write-up for `28b436d`.
+- Playtest retest of first-click HUD fix (freeze order must stay).
+- Core to **push** the PR #8 GDD relock.
 - Game Dev (`robot puzzle shooter`) — not visible.
 
 ## Risks / stuck

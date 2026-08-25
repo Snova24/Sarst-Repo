@@ -13,7 +13,7 @@ python3 -m http.server 8765
 # http://localhost:8765/game/
 ```
 
-CoS HEAD: W1 freeze **3.5s**; bump-safe 5.5s **starts when chase starts** (Playtest `60149a0` P0/P1).
+CoS HEAD: W1 freeze 3.5s; bump-safe on chase; first click no longer wipes freeze copy.
 
 ## Team (this repo)
 
@@ -21,18 +21,18 @@ CoS HEAD: W1 freeze **3.5s**; bump-safe 5.5s **starts when chase starts** (Playt
 | --- | --- | --- | --- |
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Relocking PR #8 greybox-now to `28b436d`. Not TAKE. Push then stop. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Shipped louder OFF node on PR #7 (`39e44d5`). CoS hooked it. Do not merge #3. |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING on `28b436d`. Control already `node ON 1/1` in the 3.5s freeze. Stranger write-up not pushed. |
+| **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Relock PR #8 to live numbers; not pushed. Do not merge #2. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | Shipped louder OFF node PR #7. Hold. Do not merge #3. |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | `28b436d` in: freeze unused, first click wipes order. Retest HUD fix. |
 
 ## Core — do this
 
-Own PR #8. Relock **Greybox now** to live numbers (W1 speed 40, aggro 3.5s, bumpSafe 5.5s from chase). Do not edit `game/src`. Do not merge PR #2. PR #6 is superseded.
+Own PR #8. Relock **Greybox now** to live numbers (W1 speed 40, aggro 3.5s, bumpSafe 5.5s from chase). Push. Do not edit `game/src`. Do not merge PR #2.
 
 ## Slice — do this
 
-Loud OFF node is on PR #7 and copied to CoS. Hold. Do not merge PR #3. No second sprite PR.
+Loud OFF node is on PR #7 and on CoS. Hold. Do not merge PR #3. No second sprite PR.
 
 ## Playtest — do this
 
-Finish the `28b436d` stranger retest (3.5s freeze, bump-safe on chase). `game/PLAYTEST.md` only. Verdict: during the freeze, do they shoot the NODE ON?
+`28b436d` P0/P1 received. Retest CoS HEAD after the first-click HUD fix. `game/PLAYTEST.md` only. Verdict: freeze order stays after focus click? Do they shoot NODE ON during freeze?

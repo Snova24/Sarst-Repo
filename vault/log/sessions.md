@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest 28b436d: freeze unused; first click wipes order
+
+- PR #5 `cd63993`: stranger does not shoot NODE during 3.5s freeze. Control can. First click replaces freeze copy with arming text.
+- CoS HUD fix: first click still does not shoot; freeze order stays while `aggroIn > 0`.
+- Core GDD relock still not pushed. Slice loud node already on CoS.
+
 ## 2026-08-25 — Slice shipped louder OFF node
 
 - PR #7 `39e44d5`: STYLE + `node.png` only. CoS copied it onto the greybox. Labels stay. Do not merge #3.

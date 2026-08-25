@@ -250,10 +250,13 @@ canvas.addEventListener("mousedown", (event) => {
     return;
   }
   // First click focuses the arena; it does not shoot (Playtest P0-2).
+  // Do not overwrite the W1 freeze order (Playtest 28b436d P1).
   if (!canvasArmed) {
     canvasArmed = true;
     canvas.focus();
-    if (mode === "play") statusEl.textContent = "Click again or press SPACE to shoot";
+    if (mode === "play" && aggroIn <= 0) {
+      statusEl.textContent = "Click again or press SPACE to shoot";
+    }
     return;
   }
   if (mode === "play") fire(performance.now());
