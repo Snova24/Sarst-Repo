@@ -13,7 +13,7 @@ python3 -m http.server 8765
 # http://localhost:8765/game/
 ```
 
-CoS HEAD: W1 **node gate** — no drones until NODE ON, then 3-drone horde. Do not restack freeze.
+CoS HEAD `342c2da`: W1 **node gate** — no drones until NODE ON, then 3-drone horde. Bump-safe on first contact. Do not restack freeze.
 
 ## Team (this repo)
 
@@ -35,4 +35,4 @@ Hold. Loud OFF node is already on CoS. Do not merge PR #3. No second sprite PR.
 
 ## Playtest — do this
 
-`79ff71e` P0 received (HUD closed, still skip NODE). Retest CoS HEAD after the W1 node gate. `game/PLAYTEST.md` only. Verdict: with no reds on screen, do they shoot the NODE ON?
+`79ff71e` P0 received (HUD closed, still skip NODE). Retest CoS `342c2da` (node gate + first-contact bump-safe). `game/PLAYTEST.md` only. Verdict: with no reds on screen, do they shoot the NODE ON?
