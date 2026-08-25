@@ -33,11 +33,13 @@ You are a scrap robot in an arena sim. Horde comes in waves. You shoot **nodes**
 
 ## Wave budget (slice)
 
-| Wave | Drones | Nodes |
-| --- | --- | --- |
-| 1 | 6 | 1 |
-| 2 | 10 | 1 |
-| 3 | 14 | 2 |
+| Wave | Drones | Nodes | Notes |
+| --- | --- | --- | --- |
+| 1 | 3 | 1 | ~1.8s before drones chase (stranger learn window) |
+| 2 | 8 | 1 | |
+| 3 | 12 | 2 | |
+
+Playtest 2026-08-25: 6 drones from all edges + click-to-focus-shoots = POWER DOWN in ~1s. Wave 1 must be survivable standing still for a beat.
 
 ## Upgrade pool (Brotato-style)
 

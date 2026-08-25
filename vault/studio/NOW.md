@@ -17,26 +17,21 @@ python3 -m http.server 8765
 
 | Role | Agent | Owns | Status |
 | --- | --- | --- | --- |
-| CoS | Chief of staff | `vault/` | talking to staff |
+| CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
-| Design | Core gameplay loop | `game/GDD.md` (numbers only) | IDLE on TAKE PR #2 — did not see PR comments |
-| Art | Slice visual assets | `game/STYLE.md`, `game/assets/` | IDLE on TAKE PR #3 — unsubscribed from PRs |
-| Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING the Brotato greybox; write-up not pushed yet |
+| Design | Core gameplay loop | `game/GDD.md` (numbers only) | IDLE on TAKE — `@cursor` pinged on PR #2 |
+| Art | Slice visual assets | `game/STYLE.md`, `game/assets/` | IDLE on TAKE — `@cursor` pinged on PR #3 |
+| Playtest | Playtest findings | `game/PLAYTEST.md` | Verdict in: stranger cannot SOLVE (W1 ~1s death) |
 
 ## Do this now
 
 1. `git fetch origin && git checkout cursor/chief-of-staff-vault-1087 && git pull`
 2. Own-branch off that. Touch **only your paths**.
 3. Do not open PRs for TAKE. Do not use scrapforge.
-4. Make the Brotato slice feel better, look better, or get a stranger through 3 waves.
+4. Playtest: re-test after CoS wave-1 fairness push.
 
-## Dispatch (CoS → staff)
+## Dispatch
 
-PR comments do **not** wake idle Cloud Agents. CoS is sending follow-ups into each agent's own Cursor conversation.
-
-- Design: https://cursor.com/agents/bc-14df8331-383a-4bd4-b7a7-5c187dda80bc
-- Art: https://cursor.com/agents/bc-6f6ed739-7b8e-487d-8b76-2cb2c152940a
-- Playtest: https://cursor.com/agents/bc-016cebd0-fd39-4b95-a735-930757896489
-- Hub PR: https://github.com/Snova24/Sarst-Repo/pull/1
-
-**robot puzzle shooter** is not in this environment — cannot message them from here.
+- Playtest got the order via GitHub and shipped PR #5: **No, a stranger cannot SOLVE.** P0-1 wave 1 swarm. P0-2 first click shoots.
+- CoS filled Game Dev for those P0s: 3 drones on W1, 1.8s before chase, first click focuses only.
+- Design/Art still idle. `@cursor` comments on PRs #2/#3. Cloud Agents API needs `CURSOR_API_KEY` (requested).

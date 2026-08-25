@@ -9,10 +9,10 @@ Status: `open` · `waiting` · `blocked` · `done`
 | ID | Commitment | Owner | Due | Status | Notes |
 | --- | --- | --- | --- | --- | --- |
 | C-001 | Finish Chief of Staff onboard | brandon | 2026-08-31 | open | Timezone still open |
-| C-012 | Juice RPS Brotato greybox (`game/src`) | robot puzzle shooter | 2026-08-26 | blocked | Agent not in this environment |
-| C-013 | Art for robot, drone, node | Slice visual assets | 2026-08-26 | waiting | Still on TAKE; CoS sending chat follow-up |
-| C-014 | Playtest 3-wave stranger run | Playtest findings | 2026-08-26 | waiting | Retesting Brotato; write-up not pushed |
-| C-015 | Design GDD matches RPS greybox | Core gameplay loop | 2026-08-26 | waiting | Still on TAKE PR #2; CoS sending chat follow-up |
+| C-012 | Juice RPS Brotato greybox (`game/src`) | CoS (acting Game Dev) | 2026-08-26 | open | W1 fairness shipped; Playtest retest next |
+| C-014 | Playtest 3-wave stranger run | Playtest findings | 2026-08-26 | waiting | Verdict: cannot SOLVE. Retest after W1 fix |
+| C-013 | Art for robot, drone, node | Slice visual assets | 2026-08-26 | waiting | Still on TAKE; `@cursor` on PR #3 |
+| C-015 | Design GDD matches RPS greybox | Core gameplay loop | 2026-08-26 | waiting | Still on TAKE; `@cursor` on PR #2 |
 
 ## Waiting on others
 

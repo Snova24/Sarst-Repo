@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Playtest verdict in; CoS fills Game Dev P0
+
+- Playtest: stranger cannot SOLVE. Wave 1 ~1s death. Click-to-focus shoots. PR #5 updated.
+- Design/Art still IDLE on TAKE. Browser follow-up blocked by cursor.com login. Task resume spawned clones, not DMs. `@cursor` pinged on PRs #2/#3. Requested CURSOR_API_KEY for API follow-ups.
+- CoS tuned wave 1 (3 drones, grace, first click focuses) so Playtest can re-run.
+
 ## 2026-08-25 — CoS talking to each staff agent
 
 - brandon: do not ask him to paste; communicate with each agent; he watches and steers.

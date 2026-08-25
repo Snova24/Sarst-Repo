@@ -10,9 +10,9 @@ const W = 960;
 const H = 540;
 const FIRE_BASE = 280;
 const WAVES = [
-  { drones: 6, nodes: 1 },
-  { drones: 10, nodes: 1 },
-  { drones: 14, nodes: 2 },
+  { drones: 3, nodes: 1 },
+  { drones: 8, nodes: 1 },
+  { drones: 12, nodes: 2 },
 ];
 
 const POOL = [
@@ -29,6 +29,8 @@ const mouse = { x: W / 2, y: H / 2 };
 let lastShot = 0;
 let last = performance.now();
 let iFrames = 0;
+let aggroIn = 0;
+let canvasArmed = false;
 
 const player = {
   x: W / 2 - 14,
@@ -88,8 +90,9 @@ function spawnWave() {
       x = W - 36;
       y = 40 + Math.random() * (H - 80);
     }
-    drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 70 + waveIndex * 18 });
+    drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 55 + waveIndex * 16 });
   }
+  aggroIn = waveIndex === 0 ? 1.8 : 0.45;
   const spots = [
     [180, 140],
     [760, 140],
@@ -102,7 +105,10 @@ function spawnWave() {
     nodes.push({ x: nx, y: ny, w: 26, h: 26, on: false });
   }
   mode = "play";
-  statusEl.textContent = `WAVE ${waveIndex + 1} — kill drones, shoot nodes ON`;
+  statusEl.textContent =
+    waveIndex === 0
+      ? "WAVE 1 — WASD first. Red = drones. Blue = shoot ON."
+      : `WAVE ${waveIndex + 1} — kill drones, shoot nodes ON`;
 }
 
 function resetRun() {
@@ -213,6 +219,12 @@ canvas.addEventListener("mousedown", (event) => {
     if (hit) applyCard(hit.id);
     return;
   }
+  // First click focuses the arena; it does not shoot (Playtest P0-2).
+  if (!canvasArmed) {
+    canvasArmed = true;
+    canvas.focus();
+    return;
+  }
   if (mode === "play") fire(performance.now());
 });
 
@@ -235,7 +247,9 @@ function tick(now) {
       clampPlayer();
     }
 
+    aggroIn = Math.max(0, aggroIn - dt);
     for (const d of drones) {
+      if (aggroIn > 0) continue;
       const cx = player.x + player.w / 2 - (d.x + d.w / 2);
       const cy = player.y + player.h / 2 - (d.y + d.h / 2);
       const len = Math.hypot(cx, cy) || 1;
