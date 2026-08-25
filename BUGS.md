@@ -12,7 +12,7 @@ Ranked by **stops the slice**. Playtest 2026-08-25. Stranger tester. No feature 
 | P1-4 | P1 | Maybe | **Guard start facing / first waypoint omitted.** Paper play #2 (“rush relic on spawn → caught at mid-line”) assumes a spawn-time cone the map does not state. First death can feel random, so the player cannot say *why* they lost in one sentence. |
 | P2-1 | P2 | Confusion | **ASCII `G-----G` reads as a wall or corridor**, not a patrol polyline. `s` vs `.` is easy to miss. First-time room reading fails the “0:00–0:20 readable” beat before code exists. |
 | P2-2 | P2 | Confusion | **Three names, one repo.** “The Vault” (CoS), leftover Copilot skill, working title TAKE. Stranger cannot tell which thing they are supposed to finish in 5 minutes. |
-| P2-3 | P2 | Confusion | **Art board looks like a game page.** PR #3 `art/preview.html` titles itself “TAKE — slice 0” and describes the loop, but nothing moves. A stranger can sit on that page thinking they failed to start. |
+| P2-3 | P2 | **Closed** | Art board no longer pretends to be the game. PR #3 `art/preview.html` now banners “Not the game. Nothing here moves.” Greybox P0s in [PR #5](https://github.com/Snova24/Sarst-Repo/pull/5) are unchanged. |
 
 ## Not logged
 
