@@ -60,6 +60,8 @@ Baseline: HP 5, move 230, dmg 1, fire 280 ms, pierce 0, extra 0, shot 560, conta
 
 **Playtest `60149a0`:** NODE/SHOOT is readable; spawn-timed bump-safe worked; stranger still skipped the node (HUD-read burned the old 1.8s window). **`28b436d` is the retest:** 3.5s freeze + bump-safe on chase. Control already `node ON 1/1` in the freeze. Do not stack another freeze until that retest lands.
 
+Copy bug (Design, not a new freeze): first click replaces the freeze line with `Click again or press SPACE to shoot`. That can read as “chase started.” Game Dev should keep `drones frozen. SHOOT THE BLUE NODE ON first` until `aggroIn` hits 0. Design does not edit `src`.
+
 ### Design lock — live. Do not restack freeze.
 
 The W1 lock from PR #8 (3.5s, speed 40) is **in the greybox**. Next stop is not numbers:
