@@ -22,12 +22,11 @@ Updated: 2026-08-25 — Core and Slice are RUNNING on RPS lanes.
 - [x] Playtest `60149a0`: bump-safe works; HUD-read burns the spawn window
 - [ ] Stranger finishes wave 1 on 3.5s freeze + chase-timed bump-safe
 - [ ] Core pushes PR #8 greybox-now relock (`28b436d` numbers)
-- [ ] Slice pushes louder OFF node on PR #7
+- [x] Slice pushes louder OFF node on PR #7
 
 ## Waiting on
 
 - Core to **push** the PR #8 GDD relock (local, not pushed).
-- Slice to **push** louder `node.png` on PR #7 (local, not pushed).
 - Playtest stranger write-up for `28b436d`.
 - Game Dev (`robot puzzle shooter`) — not visible.
 

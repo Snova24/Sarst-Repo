@@ -22,7 +22,7 @@ CoS HEAD: W1 freeze **3.5s**; bump-safe 5.5s **starts when chase starts** (Playt
 | CoS | Chief of staff | `vault/` + filling `game/src` until Game Dev appears | talking to staff |
 | Game Dev | **robot puzzle shooter** | `game/src/`, `game/index.html` | not in this environment |
 | **Core** gameplay loop | Design | `game/GDD.md` | RUNNING. Relocking PR #8 greybox-now to `28b436d`. Not TAKE. Push then stop. |
-| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Louder OFF node on PR #7. Not TAKE. No second PR. |
+| **Slice** visual assets | Art | `game/STYLE.md`, `game/assets/` | RUNNING. Shipped louder OFF node on PR #7 (`39e44d5`). CoS hooked it. Do not merge #3. |
 | Playtest | Playtest findings | `game/PLAYTEST.md` | RUNNING on `28b436d`. Control already `node ON 1/1` in the 3.5s freeze. Stranger write-up not pushed. |
 
 ## Core — do this
@@ -31,7 +31,7 @@ Own PR #8. Relock **Greybox now** to live numbers (W1 speed 40, aggro 3.5s, bump
 
 ## Slice — do this
 
-On PR #7 only: make the OFF node the loudest thing in W1 at 40×40 (brighter bullseye, stronger SHOOT). Keep labels. Do not merge PR #3. No second sprite PR.
+Loud OFF node is on PR #7 and copied to CoS. Hold. Do not merge PR #3. No second sprite PR.
 
 ## Playtest — do this
 

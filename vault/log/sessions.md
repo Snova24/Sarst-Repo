@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Slice shipped louder OFF node
+
+- PR #7 `39e44d5`: STYLE + `node.png` only. CoS copied it onto the greybox. Labels stay. Do not merge #3.
+- Core still RUNNING on PR #8 relock; not pushed.
+- Playtest still on `28b436d` stranger retest.
+
 ## 2026-08-25 — Core and Slice woke; both on the RPS lane
 
 - Core: relocking `game/GDD.md` on PR #8 to `28b436d` (not TAKE). Local edit, not pushed.
