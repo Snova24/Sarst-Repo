@@ -2,6 +2,12 @@
 
 Log choices that should still make sense in six months. Newest first.
 
+## 2026-08-25 — Reset: RPS + Brotato, in Sarst-Repo only
+
+- **Decision:** Scrap scrapforge, TAKE, Alpha Budget-as-game, and prior greyboxes as product. The game is a Robot Puzzle Shooter **simulator** with **Brotato-style wave upgrades**, built in `Snova24/Sarst-Repo` `game/`.
+- **Why:** brandon: forget prior production paths; start new with the team here; still RPS; upgrade like Brotato.
+- **Revisit if:** he names a different engine.
+
 ## 2026-08-25 — Product repo is Snova24/Snova24-scrapforge
 
 - **Decision:** The game lives at https://github.com/Snova24/Snova24-scrapforge (brandon: `Snova24/scrapforge`). The Vault is memory. scrapforge is empty; **robot puzzle shooter** makes the first playable commit. This CoS environment cannot push there.

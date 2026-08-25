@@ -1,75 +1,75 @@
-# The Vault slice — Robot Puzzle Shooter
+# Robot Puzzle Shooter — slice spec
 
-Locked 2026-08-25 by Chief of Staff after brandon named the original Game Dev **robot puzzle shooter**.
-
-This replaces the heist/extract greybox and parks Design’s **TAKE** stealth spec (PR #2). Shooting is a **puzzle tool**, not a DPS check.
+**Reset 2026-08-25.** Scrapforge, TAKE stealth, and the loot/extract greybox are dead. The game lives in **this repo** (`game/`). Reference: *Brotato* (wave survival + pick 1 of 3 upgrades) plus a robot that **shoots puzzles**, not only health bars.
 
 ## Fantasy
 
-You are a robot. Read the room. Shoot the right things. Walk out.
+You are a scrap robot in an arena sim. Horde comes in waves. You shoot **nodes** to close each wave and shoot **drones** so they do not unmake you. Between waves you kit out like Brotato.
 
 ## Platform
 
-- **Title:** Robot Puzzle Shooter (working title)
-- **Product repo:** https://github.com/Snova24/Snova24-scrapforge (empty until Game Dev’s first commit)
-- **Scratch:** HTML5 greybox in *this* repo (`game/`) — not the product
-- **Session:** ~5 minutes
+- **Title:** Robot Puzzle Shooter
+- **Repo:** `Snova24/Sarst-Repo` — `game/`
+- **Engine:** HTML5 canvas + vanilla JS
+- **Session:** ~5 minutes (3 waves + 2 upgrade picks)
 
-## Verbs (only these)
+## Verbs
 
 | Input | Action |
 | --- | --- |
-| WASD or arrows | Move |
+| WASD / arrows | Move |
 | Mouse | Aim |
-| Click or Space | Shoot (puzzle tool) |
-| R | Retry |
-
-No stealth, no grab-loot, no melee.
+| Click / Space | Shoot |
+| Click a card | Take the upgrade (between waves) |
+| R | Retry run |
 
 ## 5-minute loop
 
-1. Spawn as a robot on the left.
-2. Three **nodes** in the room must be shot to ON.
-3. One node is blocked by a **crate** — shoot the crate first.
-4. When 3/3 nodes are ON, the **exit** unlocks (right side).
-5. Walk into the exit.
-6. **Win:** exit with 3/3. **Lose:** 90s lock-down after the first shot expires while you are not in the exit.
-7. R retries.
+1. Wave N: drones chase. One or more **nodes** sit in the arena.
+2. **Clear the wave:** all drones dead **and** all nodes ON (shot).
+3. **Upgrade:** pause. Pick 1 of 3 cards (Brotato). Stats stack.
+4. Waves 1 → 2 → 3. Survive wave 3 = **SOLVED**.
+5. HP hits 0 = **POWER DOWN**. R retries. Upgrades reset.
 
-## Win / lose copy
+## Wave budget (slice)
 
-- Win: `SOLVED`
+| Wave | Drones | Nodes |
+| --- | --- | --- |
+| 1 | 6 | 1 |
+| 2 | 10 | 1 |
+| 3 | 14 | 2 |
+
+## Upgrade pool (Brotato-style)
+
+Each pick: 3 random unique cards.
+
+| Card | Effect |
+| --- | --- |
+| HOT BARREL | +1 damage |
+| COOLANT | Faster fire |
+| SERVOS | +move speed |
+| PLATING | +2 max HP and heal 2 |
+| AP ROUNDS | Shots pierce +1 enemy |
+| DUAL LINK | +1 projectile (spread) |
+
+## Win / lose
+
+- Win: `SOLVED` after wave 3
 - Lose: `POWER DOWN`
-- Idle: `WASD move · mouse aim · click shoot`
+- HUD: wave, HP, nodes, kills
 
-## Content budget
+## Non-goals (this slice)
 
-- 1 robot
-- 1 projectile type
-- 3 nodes
-- 1 destructible crate
-- 1 locked exit
-- Walls
-
-## Explicit non-goals
-
-- Stealth TAKE (PR #2) — do not merge as the game
-- Vault heist / relic extract
-- Enemy health bars, gun-game arenas, story, upgrades, audio requirement
-
-## Cuts if we slip
-
-1. No extra enemy types.
-2. No second room.
-3. No ammo economy.
-
-## Art contract
-
-Placeholders are shapes. Drop-ins in `game/assets/` per `game/assets/README.md`.
+- Scrapforge repo
+- TAKE stealth (Sarst-Repo PR #2 / #3)
+- Alpha Budget
+- Meta progression across runs, characters, 50 weapons, online
 
 ## Owners
 
-- **Game Dev (implementer):** agent **robot puzzle shooter** — `game/src/`, `game/index.html`
-- **Design:** Core gameplay loop — tighten this GDD only, do not own src
-- **Art:** Slice visual assets
-- **Playtest:** Playtest findings
+| Path | Owner |
+| --- | --- |
+| `game/src/`, `game/index.html` | Game Dev (**robot puzzle shooter** + anyone implementing) |
+| `game/GDD.md` | Design (Core gameplay loop) — numbers only after this lock |
+| `game/STYLE.md`, `game/assets/` | Art |
+| `game/PLAYTEST.md` | Playtest |

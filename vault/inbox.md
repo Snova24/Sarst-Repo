@@ -9,7 +9,7 @@ Filed items: `- [x] YYYY-MM-DD — note — Filed → path`
 
 ## Filed
 
-- [x] 2026-08-25 — Product repo Snova24/scrapforge → Snova24/Snova24-scrapforge (empty) — Filed → studio/NOW.md, projects/the-game.md
+- [x] 2026-08-25 — Reset: scrap prior product; RPS + Brotato in Sarst-Repo — Filed → game/GDD.md, studio/NOW.md
 - [x] 2026-08-25 — Loop in original Game Dev **robot puzzle shooter** — Filed → studio/NOW.md, game/GDD.md
 - [x] 2026-08-25 — Spawned staff all at once; manage the project immediately — Filed → studio/NOW.md, game/GDD.md
 - [x] 2026-08-24 — First run: replace the Copilot course template with a working Chief of Staff vault — Filed → README.md, AGENTS.md

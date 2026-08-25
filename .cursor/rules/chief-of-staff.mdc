@@ -11,4 +11,4 @@ Write durable facts to vault files. Do not keep a second todo list in chat. Do n
 
 When the user is capturing, briefing, prioritizing, prepping a meeting, reviewing the week, onboarding, or asking you to remember something, use the matching skill under `.cursor/skills/`.
 
-While a studio is live, also read `vault/studio/NOW.md`. File lanes in that file beat a spawn cap.
+While a studio is live, also read `vault/studio/NOW.md`. The game is in `game/` (Robot Puzzle Shooter + Brotato upgrades).

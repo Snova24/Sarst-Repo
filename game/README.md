@@ -1,8 +1,6 @@
-# The Vault — playable slice
+# Robot Puzzle Shooter
 
-**Robot Puzzle Shooter** greybox. Spec: [GDD.md](GDD.md).
-
-## Run
+Brotato-style wave sim + puzzle nodes. Spec: [GDD.md](GDD.md).
 
 ```bash
 python3 -m http.server 8765
@@ -10,13 +8,4 @@ python3 -m http.server 8765
 
 Open http://localhost:8765/game/
 
-WASD move, mouse aim, click/space shoot, R retry.
-
-## Lanes
-
-| Path | Owner |
-| --- | --- |
-| `game/src/`, `game/index.html` | **robot puzzle shooter** (original Game Dev) |
-| `game/GDD.md` | Design (Core gameplay loop) may tighten; fantasy is locked |
-| `game/STYLE.md`, `game/assets/` | Art |
-| `game/PLAYTEST.md` | Playtest |
+WASD move, mouse aim, click shoot. Clear drones + nodes, pick an upgrade, survive 3 waves.

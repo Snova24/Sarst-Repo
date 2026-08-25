@@ -81,4 +81,4 @@ This vault is a git repo. Persist changes so the next Cloud Agent session has th
 - Do not create parallel todo lists in chat. The lists live in the vault.
 - Do not start a new project file for a one-off task. Use commitments.
 - Do not store secrets, passwords, or tokens in this repo.
-- Follow `vault/studio/NOW.md` while staff are live. File lanes beat a spawn cap. Original Game Dev is **robot puzzle shooter** (implementer). Core gameplay loop is Design only. CoS may scaffold a greybox to unblock.
+- Follow `vault/studio/NOW.md`. The game is Robot Puzzle Shooter + Brotato upgrades in `game/`. scrapforge and TAKE are scrapped.

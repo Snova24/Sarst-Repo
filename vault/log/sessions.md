@@ -2,6 +2,12 @@
 
 One short entry per session that changed the vault. Newest first. This is a trail, not a journal.
 
+## 2026-08-25 — Reset to RPS + Brotato in this repo
+
+- brandon: scrap production so far; team stays on Sarst-Repo; still Robot Puzzle Shooter; upgrades like Brotato.
+- New greybox: 3 waves, drones + nodes, 1-of-3 upgrade cards.
+- Dead: scrapforge, TAKE, Alpha Budget move.
+
 ## 2026-08-25 — Alpha Budget has no game file to move
 
 - Looked at `Snova24/alpha-budget-docs` (only public Alpha Budget repo): README, index.html, privacy.html, terms.html. GitHub Pages same. One commit. No game.

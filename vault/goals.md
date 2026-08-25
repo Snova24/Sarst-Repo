@@ -6,14 +6,14 @@ A goal is an outcome with a reason, not a task. Tasks live in [commitments.md](c
 
 ## North star
 
-A stranger can play Robot Puzzle Shooter from **https://github.com/Snova24/Snova24-scrapforge**.
+A stranger can finish a 3-wave Robot Puzzle Shooter run with Brotato-style upgrades, in this repo.
 
 ## Now (max 3)
 
 | Goal | Why it matters | How we'll know | Status |
 | --- | --- | --- | --- |
-| Init scrapforge with a 5-minute RPS slice | Product repo is empty; Vault greybox is not the game | First playable commit on Snova24-scrapforge | Waiting on robot puzzle shooter |
-| Move Design/Art/Playtest onto scrapforge | They are still shipping into The Vault | Their next PRs are on scrapforge, not Sarst-Repo | Waiting |
+| Ship RPS + Brotato slice in Sarst-Repo | brandon reset; scrapforge/TAKE are dead | 3 waves, upgrade picks, stranger can win or die fairly | In progress — greybox up |
+| Keep the team on `game/` only | Parallel staff were splitting across repos | New PRs only touch assigned `game/` paths | Waiting |
 
 ## Next
 

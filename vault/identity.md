@@ -21,7 +21,7 @@ Last updated: 2026-08-25
 
 ## Current context
 
-Producing **Robot Puzzle Shooter** in https://github.com/Snova24/Snova24-scrapforge (alias `Snova24/scrapforge`). Repo is empty as of 2026-08-25. Original Game Dev: **robot puzzle shooter**. This vault is CoS memory only.
+Producing **Robot Puzzle Shooter** in this repo (`game/`): wave sim + puzzle nodes + Brotato-style upgrades. scrapforge and TAKE are scrapped.
 
 ## Constraints
 

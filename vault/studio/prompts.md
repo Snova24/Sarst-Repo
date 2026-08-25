@@ -1,37 +1,39 @@
-# Paste these into the staff agents
+# Paste into staff agents
 
-CoS cannot DM other Cloud Agents. **First paste: robot puzzle shooter.** Product repo is **Snova24/Snova24-scrapforge** (empty as of 2026-08-25).
+Product is **Snova24/Sarst-Repo** `game/` on branch `cursor/chief-of-staff-vault-1087`. Scrapforge and TAKE are dead.
 
-## robot puzzle shooter (Game Dev) — first
+## robot puzzle shooter (Game Dev)
 
 ```
-You are the original Game Dev: Robot Puzzle Shooter.
+Reset. Work in Snova24/Sarst-Repo, branch cursor/chief-of-staff-vault-1087, folder game/.
 
-Product repo is https://github.com/Snova24/Snova24-scrapforge (brandon called it Snova24/scrapforge). It is empty. Initialize it with the 5-minute playable: robot, WASD, mouse aim, shoot as a puzzle tool, nodes, crate, exit. Spec draft: Snova24/Sarst-Repo game/GDD.md on branch cursor/chief-of-staff-vault-1087.
+Game is Robot Puzzle Shooter simulator, Brotato-like: 3 waves, shoot drones AND turn nodes ON, pick 1 of 3 upgrades between waves, survive. Greybox already runs: python3 -m http.server 8765 → http://localhost:8765/game/
 
-Do not implement in Snova24/Sarst-Repo. That repo is Chief of Staff memory only. Do not build TAKE stealth (Sarst-Repo PR #2). First commit on scrapforge should be something a stranger can run. Then Art and Playtest will follow you there.
+You own game/src/ and game/index.html. Juice combat, wave pacing, upgrade feel. Do not rebuild TAKE or scrapforge. Open a PR against this CoS branch.
 ```
 
 ## Core gameplay loop (Design)
 
 ```
-Product repo is https://github.com/Snova24/Snova24-scrapforge. The Vault is memory only.
+Reset. Sarst-Repo only. Fetch cursor/chief-of-staff-vault-1087.
 
-You are Design, not Game Dev. Original implementer is robot puzzle shooter. Do not merge TAKE (Sarst-Repo PR #2) as the game. After Game Dev’s first scrapforge commit, put/tighten GDD.md there for Robot Puzzle Shooter only.
+You are Design. Spec is game/GDD.md — Robot Puzzle Shooter + Brotato upgrades. Tighten numbers, wave counts, upgrade pool. Do not edit game/src. Do not revive TAKE (PR #2). PR with GDD only.
 ```
 
 ## Slice visual assets (Art)
 
 ```
-Stop putting the game in Snova24/Sarst-Repo. Product repo: https://github.com/Snova24/Snova24-scrapforge
+Reset. Sarst-Repo game/ on cursor/chief-of-staff-vault-1087.
 
-Game is Robot Puzzle Shooter (robot, shoot nodes, exit), not TAKE. Wait for Game Dev’s first scrapforge commit, then own assets/style there. Until then, do not invent a second look on The Vault.
+Not TAKE. Robot + drones + nodes, Brotato-readable arena. Own game/STYLE.md and game/assets/ (player.png, drone.png, node.png). No new mechanics. PR art only.
 ```
 
 ## Playtest findings (Playtest)
 
 ```
-Stop playtesting Sarst-Repo as the game. Product repo: https://github.com/Snova24/Snova24-scrapforge (empty until Game Dev lands a build).
+Reset. Play the Brotato slice, not TAKE.
 
-When a playable exists there, stranger-run it. Crashes and confusion only. Do not playtest TAKE.
+git fetch && checkout cursor/chief-of-staff-vault-1087. python3 -m http.server 8765 → http://localhost:8765/game/
+
+Script in game/PLAYTEST.md. Stranger run, 3 waves + upgrades. Crashes and confusion only. Fill Findings. PR PLAYTEST.md only.
 ```

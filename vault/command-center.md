@@ -1,41 +1,26 @@
 # Command center
 
-Updated: 2026-08-25 — product repo is scrapforge (empty).
+Updated: 2026-08-25 — reset. Game is RPS + Brotato, in this repo.
 
 ## This week
 
-1. Paste Game Dev prompt into **robot puzzle shooter** so it initializes `Snova24/Snova24-scrapforge`.
-2. Design / Art / Playtest **leave The Vault** as a game repo after that first commit.
-3. CoS tracks from here; does not push to scrapforge (no write access from this env).
+1. Paste reset prompts (`vault/studio/prompts.md`) into Game Dev, Design, Art, Playtest.
+2. Play `game/` — 3 waves, nodes + drones, upgrade cards.
+3. Ignore scrapforge and TAKE PRs.
 
 ## Today
 
-- [x] Repo named: https://github.com/Snova24/Snova24-scrapforge (alias `Snova24/scrapforge`)
-- [x] Confirmed empty — Game Dev must make the first commit
-- [x] Looked for Game Dev file in Alpha Budget — **not there** (policy pages only)
-- [ ] brandon pastes prompts **or** points at the real game filename/private repo
+- [x] Scrap prior product direction
+- [x] Ship new greybox (Brotato waves + puzzle nodes)
+- [ ] Team works `game/` only
 
 ## Waiting on
 
-- **robot puzzle shooter** — init scrapforge
-- brandon — paste (that agent is not in this environment) **or** grant access to a private Alpha Budget *app* repo if the game lives there
-- Design/Art/Playtest — hold game work until scrapforge has a playable
+Staff on the new slice. brandon to paste prompts.
 
 ## Risks / stuck
 
-`Snova24/alpha-budget-docs` is Play Store privacy/terms, not a game. Public GitHub for Snova24 has only 3 repos. This CoS token cannot push to scrapforge (`permissions.push: false`).
-
-**2026-08-25:** First commit for scrapforge was created locally (`README.md`, message `first commit`). `git push -u origin main` failed: `Permission to Snova24/Snova24-scrapforge.git denied to cursor[bot]`. Need GitHub App write access on that repo.
-
-## Waiting on
-
-- **robot puzzle shooter** — init scrapforge
-- brandon — paste (that agent is not in this environment)
-- Design/Art/Playtest — hold game work until scrapforge has a playable
-
-## Risks / stuck
-
-Empty product repo + staff already branching on Sarst-Repo. They will keep inventing TAKE/Vault games unless redirected.
+Old PRs (#2 TAKE, #3 TAKE art, #4/#5 playtest of dead greyboxes) will confuse the team if merged.
 
 ## Inbox
 

@@ -1,29 +1,57 @@
 const canvas = document.getElementById("view");
 const ctx = canvas.getContext("2d");
 const statusEl = document.getElementById("status");
+const waveEl = document.getElementById("wave");
+const hpEl = document.getElementById("hp");
 const lootEl = document.getElementById("loot");
-const timerEl = document.getElementById("timer");
+const killsEl = document.getElementById("kills");
 
-const SPEED = 240;
-const SHOT_SPEED = 520;
-const FIRE_MS = 220;
-const LOCK_SECONDS = 90;
+const W = 960;
+const H = 540;
+const FIRE_BASE = 280;
+const WAVES = [
+  { drones: 6, nodes: 1 },
+  { drones: 10, nodes: 1 },
+  { drones: 14, nodes: 2 },
+];
 
-const ASSETS = {
-  player: loadImage("../assets/player.png"),
-  loot: loadImage("../assets/node.png"),
-  extract: loadImage("../assets/exit.png"),
+const POOL = [
+  { id: "dmg", name: "HOT BARREL", desc: "+1 damage" },
+  { id: "rof", name: "COOLANT", desc: "faster fire" },
+  { id: "spd", name: "SERVOS", desc: "+move speed" },
+  { id: "hp", name: "PLATING", desc: "+2 HP" },
+  { id: "pierce", name: "AP ROUNDS", desc: "shots pierce +1" },
+  { id: "multi", name: "DUAL LINK", desc: "+1 projectile" },
+];
+
+const keys = new Set();
+const mouse = { x: W / 2, y: H / 2 };
+let lastShot = 0;
+let last = performance.now();
+let iFrames = 0;
+
+const player = {
+  x: W / 2 - 14,
+  y: H / 2 - 14,
+  w: 28,
+  h: 28,
+  hp: 5,
+  maxHp: 5,
+  speed: 230,
+  dmg: 1,
+  fireMs: FIRE_BASE,
+  pierce: 0,
+  extra: 0,
 };
 
-function loadImage(src) {
-  const img = new Image();
-  const state = { img, ok: false };
-  img.onload = () => {
-    state.ok = true;
-  };
-  img.src = src;
-  return state;
-}
+let waveIndex = 0;
+let drones = [];
+let nodes = [];
+let shots = [];
+let kills = 0;
+let mode = "play"; // play | pick | win | lose
+let cards = [];
+let cardBoxes = [];
 
 function box(x, y, w, h) {
   return { x, y, w, h };
@@ -33,41 +61,127 @@ function overlaps(a, b) {
   return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 }
 
-const walls = [
-  box(0, 0, 960, 24),
-  box(0, 516, 960, 24),
-  box(0, 0, 24, 540),
-  box(936, 0, 24, 540),
-  box(300, 120, 24, 300),
-  box(300, 120, 220, 24),
-  box(620, 280, 24, 236),
-];
+function clampPlayer() {
+  player.x = Math.max(8, Math.min(W - player.w - 8, player.x));
+  player.y = Math.max(8, Math.min(H - player.h - 8, player.y));
+}
 
-const keys = new Set();
-const spawn = { x: 56, y: 250 };
-const mouse = { x: 480, y: 270 };
-let lastShot = 0;
-
-const player = { x: spawn.x, y: spawn.y, w: 28, h: 28 };
-let shots = [];
-let crate = null;
-let nodes = [];
-let exitZone = box(860, 220, 60, 100);
-let solved = 0;
-let lockStarted = false;
-let lockEndsAt = 0;
-let outcome = null;
-let last = performance.now();
-
-function resetNodes() {
-  nodes = [
-    { ...box(160, 80, 28, 28), on: false },
-    { ...box(430, 360, 28, 28), on: false },
-    { ...box(760, 80, 28, 28), on: false },
-  ];
-  crate = box(730, 70, 90, 50);
+function spawnWave() {
+  const spec = WAVES[waveIndex];
+  drones = [];
+  nodes = [];
   shots = [];
-  solved = 0;
+  for (let i = 0; i < spec.drones; i += 1) {
+    const edge = i % 4;
+    let x = 40;
+    let y = 40;
+    if (edge === 0) {
+      x = 40 + Math.random() * (W - 80);
+      y = 20;
+    } else if (edge === 1) {
+      x = 40 + Math.random() * (W - 80);
+      y = H - 36;
+    } else if (edge === 2) {
+      x = 20;
+      y = 40 + Math.random() * (H - 80);
+    } else {
+      x = W - 36;
+      y = 40 + Math.random() * (H - 80);
+    }
+    drones.push({ x, y, w: 22, h: 22, hp: 1 + Math.floor(waveIndex / 2), speed: 70 + waveIndex * 18 });
+  }
+  const spots = [
+    [180, 140],
+    [760, 140],
+    [180, 380],
+    [760, 380],
+    [480, 80],
+  ];
+  for (let n = 0; n < spec.nodes; n += 1) {
+    const [nx, ny] = spots[n];
+    nodes.push({ x: nx, y: ny, w: 26, h: 26, on: false });
+  }
+  mode = "play";
+  statusEl.textContent = `WAVE ${waveIndex + 1} — kill drones, shoot nodes ON`;
+}
+
+function resetRun() {
+  player.x = W / 2 - 14;
+  player.y = H / 2 - 14;
+  player.hp = 5;
+  player.maxHp = 5;
+  player.speed = 230;
+  player.dmg = 1;
+  player.fireMs = FIRE_BASE;
+  player.pierce = 0;
+  player.extra = 0;
+  waveIndex = 0;
+  kills = 0;
+  cards = [];
+  spawnWave();
+}
+
+function waveClear() {
+  return drones.length === 0 && nodes.length > 0 && nodes.every((n) => n.on);
+}
+
+function offerUpgrades() {
+  const pool = [...POOL];
+  cards = [];
+  for (let i = 0; i < 3; i += 1) {
+    const idx = Math.floor(Math.random() * pool.length);
+    cards.push(pool.splice(idx, 1)[0]);
+  }
+  const bw = 220;
+  const bh = 120;
+  const gap = 24;
+  const total = 3 * bw + 2 * gap;
+  const x0 = (W - total) / 2;
+  cardBoxes = cards.map((c, i) => ({
+    ...c,
+    x: x0 + i * (bw + gap),
+    y: 200,
+    w: bw,
+    h: bh,
+  }));
+  mode = "pick";
+  statusEl.textContent = "PICK AN UPGRADE";
+}
+
+function applyCard(id) {
+  if (id === "dmg") player.dmg += 1;
+  if (id === "rof") player.fireMs = Math.max(90, player.fireMs - 50);
+  if (id === "spd") player.speed += 40;
+  if (id === "hp") {
+    player.maxHp += 2;
+    player.hp = Math.min(player.maxHp, player.hp + 2);
+  }
+  if (id === "pierce") player.pierce += 1;
+  if (id === "multi") player.extra += 1;
+  waveIndex += 1;
+  spawnWave();
+}
+
+function fire(now) {
+  if (now - lastShot < player.fireMs) return;
+  lastShot = now;
+  const cx = player.x + player.w / 2;
+  const cy = player.y + player.h / 2;
+  const ang = Math.atan2(mouse.y - cy, mouse.x - cx);
+  const count = 1 + player.extra;
+  const spread = count === 1 ? 0 : 0.18;
+  for (let i = 0; i < count; i += 1) {
+    const a = ang + (i - (count - 1) / 2) * spread;
+    shots.push({
+      x: cx - 4,
+      y: cy - 4,
+      w: 8,
+      h: 8,
+      vx: Math.cos(a) * 560,
+      vy: Math.sin(a) * 560,
+      pierce: player.pierce,
+    });
+  }
 }
 
 window.addEventListener("keydown", (event) => {
@@ -75,8 +189,8 @@ window.addEventListener("keydown", (event) => {
   if (["arrowup", "arrowdown", "arrowleft", "arrowright", " "].includes(event.key.toLowerCase())) {
     event.preventDefault();
   }
-  if (event.key.toLowerCase() === "r") reset();
-  if (event.key === " " && !outcome) fire(performance.now());
+  if (event.key.toLowerCase() === "r") resetRun();
+  if (event.key === " " && mode === "play") fire(performance.now());
 });
 
 window.addEventListener("keyup", (event) => {
@@ -85,83 +199,29 @@ window.addEventListener("keyup", (event) => {
 
 canvas.addEventListener("mousemove", (event) => {
   const r = canvas.getBoundingClientRect();
-  const sx = canvas.width / r.width;
-  const sy = canvas.height / r.height;
-  mouse.x = (event.clientX - r.left) * sx;
-  mouse.y = (event.clientY - r.top) * sy;
+  mouse.x = ((event.clientX - r.left) * W) / r.width;
+  mouse.y = ((event.clientY - r.top) * H) / r.height;
 });
 
 canvas.addEventListener("mousedown", (event) => {
   event.preventDefault();
-  if (!outcome) fire(performance.now());
+  const r = canvas.getBoundingClientRect();
+  const mx = ((event.clientX - r.left) * W) / r.width;
+  const my = ((event.clientY - r.top) * H) / r.height;
+  if (mode === "pick") {
+    const hit = cardBoxes.find((c) => mx >= c.x && mx <= c.x + c.w && my >= c.y && my <= c.y + c.h);
+    if (hit) applyCard(hit.id);
+    return;
+  }
+  if (mode === "play") fire(performance.now());
 });
-
-function reset() {
-  player.x = spawn.x;
-  player.y = spawn.y;
-  resetNodes();
-  lockStarted = false;
-  lockEndsAt = 0;
-  outcome = null;
-  statusEl.textContent = "WASD move · mouse aim · click shoot";
-}
-
-function moveAxis(dx, dy) {
-  player.x += dx;
-  player.y += dy;
-  const blockers = crate ? walls.concat(crate) : walls;
-  for (const wall of blockers) {
-    if (overlaps(player, wall)) {
-      if (dx > 0) player.x = wall.x - player.w;
-      if (dx < 0) player.x = wall.x + wall.w;
-      if (dy > 0) player.y = wall.y - player.h;
-      if (dy < 0) player.y = wall.y + wall.h;
-    }
-  }
-}
-
-function fire(now) {
-  if (now - lastShot < FIRE_MS) return;
-  lastShot = now;
-  const cx = player.x + player.w / 2;
-  const cy = player.y + player.h / 2;
-  const ang = Math.atan2(mouse.y - cy, mouse.x - cx);
-  shots.push({
-    x: cx - 4,
-    y: cy - 4,
-    w: 8,
-    h: 8,
-    vx: Math.cos(ang) * SHOT_SPEED,
-    vy: Math.sin(ang) * SHOT_SPEED,
-  });
-  if (!lockStarted) {
-    lockStarted = true;
-    lockEndsAt = now + LOCK_SECONDS * 1000;
-    statusEl.textContent = "CLOCK — solve and exit";
-  }
-}
-
-function hitWorld(shot) {
-  if (crate && overlaps(shot, crate)) {
-    crate = null;
-    return true;
-  }
-  for (const node of nodes) {
-    if (!node.on && overlaps(shot, node)) {
-      node.on = true;
-      solved = nodes.filter((n) => n.on).length;
-      if (solved === 3) statusEl.textContent = "EXIT OPEN — get out";
-      return true;
-    }
-  }
-  return walls.some((wall) => overlaps(shot, wall));
-}
 
 function tick(now) {
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
+  iFrames = Math.max(0, iFrames - dt);
 
-  if (!outcome) {
+  if (mode === "play") {
     let dx = 0;
     let dy = 0;
     if (keys.has("a") || keys.has("arrowleft")) dx -= 1;
@@ -170,80 +230,132 @@ function tick(now) {
     if (keys.has("s") || keys.has("arrowdown")) dy += 1;
     if (dx || dy) {
       const len = Math.hypot(dx, dy) || 1;
-      moveAxis((dx / len) * SPEED * dt, 0);
-      moveAxis(0, (dy / len) * SPEED * dt);
+      player.x += (dx / len) * player.speed * dt;
+      player.y += (dy / len) * player.speed * dt;
+      clampPlayer();
+    }
+
+    for (const d of drones) {
+      const cx = player.x + player.w / 2 - (d.x + d.w / 2);
+      const cy = player.y + player.h / 2 - (d.y + d.h / 2);
+      const len = Math.hypot(cx, cy) || 1;
+      d.x += (cx / len) * d.speed * dt;
+      d.y += (cy / len) * d.speed * dt;
+      if (iFrames <= 0 && overlaps(player, d)) {
+        player.hp -= 1;
+        iFrames = 0.7;
+        if (player.hp <= 0) {
+          mode = "lose";
+          statusEl.textContent = "POWER DOWN";
+        }
+      }
     }
 
     shots = shots.filter((shot) => {
       shot.x += shot.vx * dt;
       shot.y += shot.vy * dt;
-      if (shot.x < -20 || shot.y < -20 || shot.x > 980 || shot.y > 560) return false;
-      return !hitWorld(shot);
+      if (shot.x < -20 || shot.y < -20 || shot.x > W + 20 || shot.y > H + 20) return false;
+      for (const node of nodes) {
+        if (!node.on && overlaps(shot, node)) {
+          node.on = true;
+          return shot.pierce-- > 0;
+        }
+      }
+      for (let i = drones.length - 1; i >= 0; i -= 1) {
+        if (overlaps(shot, drones[i])) {
+          drones[i].hp -= player.dmg;
+          if (drones[i].hp <= 0) {
+            drones.splice(i, 1);
+            kills += 1;
+          }
+          return shot.pierce-- > 0;
+        }
+      }
+      return true;
     });
 
-    if (solved === 3 && overlaps(player, exitZone)) {
-      outcome = "win";
-      statusEl.textContent = "SOLVED";
-    } else if (lockStarted && now >= lockEndsAt) {
-      outcome = "lose";
-      statusEl.textContent = "POWER DOWN";
+    if (waveClear()) {
+      if (waveIndex >= WAVES.length - 1) {
+        mode = "win";
+        statusEl.textContent = "SOLVED";
+      } else {
+        offerUpgrades();
+      }
     }
   }
 
   draw();
-  lootEl.textContent = `${solved}/3`;
-  if (!lockStarted) timerEl.textContent = "—";
-  else if (outcome) timerEl.textContent = outcome === "win" ? "CLEAR" : "0.0";
-  else timerEl.textContent = `${Math.max(0, (lockEndsAt - now) / 1000).toFixed(1)}s`;
-
+  waveEl.textContent = mode === "win" ? "CLEAR" : `W${waveIndex + 1}`;
+  hpEl.textContent = String(Math.max(0, player.hp));
+  lootEl.textContent = `${nodes.filter((n) => n.on).length}/${Math.max(1, nodes.length)}`;
+  killsEl.textContent = String(kills);
   requestAnimationFrame(tick);
 }
 
-function fillRect(r, color) {
+function fill(r, color) {
   ctx.fillStyle = color;
   ctx.fillRect(r.x, r.y, r.w, r.h);
 }
 
-function drawSprite(asset, r, fallback) {
-  if (asset.ok) ctx.drawImage(asset.img, r.x, r.y, r.w, r.h);
-  else fillRect(r, fallback);
-}
-
 function draw() {
-  ctx.fillStyle = "#1b212c";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  for (const wall of walls) fillRect(wall, "#2c3444");
-  fillRect(exitZone, solved === 3 ? "#1f6f4a" : "#5a2430");
-  drawSprite(ASSETS.extract, exitZone, solved === 3 ? "#1f6f4a" : "#5a2430");
-  if (crate) fillRect(crate, "#8a6a3b");
-  for (const node of nodes) {
-    drawSprite(ASSETS.loot, node, node.on ? "#7dffb3" : "#5aa0ff");
-  }
-  for (const shot of shots) fillRect(shot, "#ffe08a");
+  ctx.fillStyle = "#141820";
+  ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = "#2a3140";
+  ctx.strokeRect(6, 6, W - 12, H - 12);
+
+  for (const node of nodes) fill(node, node.on ? "#7dffb3" : "#4d8dff");
+  for (const d of drones) fill(d, "#d45b5b");
+  for (const shot of shots) fill(shot, "#ffe08a");
 
   const cx = player.x + player.w / 2;
   const cy = player.y + player.h / 2;
-  ctx.strokeStyle = "rgba(255,255,255,0.25)";
+  ctx.strokeStyle = "rgba(255,255,255,0.2)";
   ctx.beginPath();
   ctx.moveTo(cx, cy);
   ctx.lineTo(mouse.x, mouse.y);
   ctx.stroke();
-  drawSprite(ASSETS.player, player, "#d7e2f0");
-  ctx.fillStyle = "#1b212c";
+  fill(player, iFrames > 0 ? "#9aa4b8" : "#e8edf4");
+  ctx.fillStyle = "#141820";
   ctx.fillRect(cx - 3, cy - 3, 6, 6);
 
-  if (outcome) {
-    ctx.fillStyle = "rgba(8, 10, 14, 0.55)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#2a3140";
+  ctx.fillRect(16, H - 22, 120, 8);
+  ctx.fillStyle = "#7dffb3";
+  ctx.fillRect(16, H - 22, 120 * (player.hp / player.maxHp), 8);
+
+  if (mode === "pick") {
+    ctx.fillStyle = "rgba(8,10,14,0.62)";
+    ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = "#e8edf4";
-    ctx.font = "28px ui-sans-serif, system-ui, sans-serif";
+    ctx.font = "22px ui-sans-serif, system-ui, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(outcome === "win" ? "SOLVED" : "POWER DOWN", canvas.width / 2, canvas.height / 2);
+    ctx.fillText("WAVE CLEAR — pick one", W / 2, 160);
+    for (const c of cardBoxes) {
+      ctx.fillStyle = "#1c2430";
+      ctx.fillRect(c.x, c.y, c.w, c.h);
+      ctx.strokeStyle = "#7dffb3";
+      ctx.strokeRect(c.x, c.y, c.w, c.h);
+      ctx.fillStyle = "#7dffb3";
+      ctx.font = "16px ui-sans-serif, system-ui, sans-serif";
+      ctx.fillText(c.name, c.x + c.w / 2, c.y + 48);
+      ctx.fillStyle = "#8b95a8";
+      ctx.font = "13px ui-sans-serif, system-ui, sans-serif";
+      ctx.fillText(c.desc, c.x + c.w / 2, c.y + 78);
+    }
+  }
+
+  if (mode === "win" || mode === "lose") {
+    ctx.fillStyle = "rgba(8,10,14,0.55)";
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "#e8edf4";
+    ctx.font = "32px ui-sans-serif, system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(mode === "win" ? "SOLVED" : "POWER DOWN", W / 2, H / 2);
     ctx.font = "16px ui-sans-serif, system-ui, sans-serif";
     ctx.fillStyle = "#8b95a8";
-    ctx.fillText("Press R to retry", canvas.width / 2, canvas.height / 2 + 32);
+    ctx.fillText("Press R to retry", W / 2, H / 2 + 36);
   }
 }
 
-reset();
+resetRun();
 requestAnimationFrame(tick);

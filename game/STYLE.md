@@ -1,29 +1,21 @@
 # Style bible — Robot Puzzle Shooter
 
-Art owns this file. Greybox is colored shapes until drop-ins load.
+Art owns this file. Greybox is shapes until drop-ins load.
 
-## Look (fill in)
+## Look
 
-- Mood: compact robot, readable puzzle toys, dark room
-- Palette (3–5 hex):
-- Robot silhouette:
+Brotato-adjacent: readable top-down arena, one robot, cheap drones, glowing nodes. Dark floor, one accent (mint).
 
-## Must-have (this slice)
+## Must-have
 
-| File | Stands in for | Size hint |
-| --- | --- | --- |
-| `player.png` | Robot | 64×64 |
-| `node.png` | Puzzle node (off/on can be one art; code tints) | 48×48 |
-| `exit.png` | Exit bay | 64×64 |
+| File | Stands in for |
+| --- | --- |
+| `player.png` | Robot |
+| `drone.png` | Chaser |
+| `node.png` | Puzzle node |
 
-Optional later: `crate.png`, projectile. Walls stay rects.
-
-## Later
-
-Guards, extra props, muzzle flash, logo, audio.
+Optional: projectile, upgrade-card chrome. HUD is HTML.
 
 ## Rules
 
-- Do not change verbs or the puzzle in `game/src/game.js`.
-- Transparent PNG, dark-friendly.
-- Missing files must not crash the game.
+Do not change verbs or the 3-wave / Brotato pick loop in `game/src/game.js`. Missing files must not crash.

@@ -1,44 +1,35 @@
-# Standing order — 2026-08-25 (rev 3)
+# Standing order — 2026-08-25 (reset)
 
-**Game repo:** https://github.com/Snova24/Snova24-scrapforge  
-(brandon said `Snova24/scrapforge`; the live GitHub name is `Snova24/Snova24-scrapforge`.)
+brandon: scrap work so far. **Start new in Sarst-Repo.** Game is a **Robot Puzzle Shooter simulator** with **Brotato-style upgrades**.
 
-That repo exists and is **empty** (created 2026-08-25, no commits). It is the product. The Vault (`Snova24/Sarst-Repo`) is CoS memory only.
-
-**Game Dev:** agent **robot puzzle shooter** — initialize scrapforge with the Robot Puzzle Shooter playable. Do not leave the studio on The Vault greybox.
+Ignore: scrapforge, Alpha Budget, TAKE (PRs #2/#3), loot-extract greybox.
 
 ## Mission
 
-A stranger can play Robot Puzzle Shooter from **scrapforge** for five minutes.
+Playable in `game/`: 3 waves, shoot drones + nodes, pick 1 of 3 upgrades between waves, survive.
 
-Parked:
+```bash
+python3 -m http.server 8765
+# http://localhost:8765/game/
+```
 
-- Design PR #2 TAKE — https://github.com/Snova24/Sarst-Repo/pull/2
-- Sarst-Repo `game/` greybox — scratch only until scrapforge has a build
+## Team (this repo)
 
-## Team
-
-| Role | Agent | Product work happens in |
+| Role | Agent | Owns |
 | --- | --- | --- |
-| CoS | Chief of staff | `Snova24/Sarst-Repo` `vault/` |
-| **Game Dev** | **robot puzzle shooter** | **`Snova24/Snova24-scrapforge`** (owns the repo) |
-| Design | Core gameplay loop | scrapforge GDD (not TAKE) |
-| Art | Slice visual assets | scrapforge assets |
-| Playtest | Playtest findings | scrapforge playable |
+| CoS | Chief of staff | `vault/` |
+| Game Dev | **robot puzzle shooter** (and implementers on this repo) | `game/src/`, `game/index.html` |
+| Design | Core gameplay loop | `game/GDD.md` (numbers only) |
+| Art | Slice visual assets | `game/STYLE.md`, `game/assets/` |
+| Playtest | Playtest findings | `game/PLAYTEST.md` |
 
 ## Do this now
 
-1. **robot puzzle shooter:** first commit on `Snova24/Snova24-scrapforge` — playable 5-minute slice (move, aim, shoot nodes, exit). Copy the Vault greybox if useful; replace it if you already have a better build.
-2. Design / Art / Playtest: **stop shipping the game into Sarst-Repo.** After Game Dev’s first scrapforge commit, branch there. Until then, wait or prep from `game/GDD.md` in The Vault without treating it as source of truth.
-3. CoS stays on The Vault and tracks status.
+1. `git fetch origin && git checkout cursor/chief-of-staff-vault-1087 && git pull`
+2. Own-branch off that. Touch **only your paths**.
+3. Do not open PRs for TAKE. Do not use scrapforge.
+4. Make the Brotato slice feel better, look better, or get a stranger through 3 waves.
 
-## Merge order (scrapforge)
+## Merge order
 
-1. Playable from robot puzzle shooter
-2. Design tighten
-3. Art
-4. Playtest
-
-## Paste-prompts
-
-[prompts.md](prompts.md)
+playable feel → GDD numbers → art drop-ins → playtest
