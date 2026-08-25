@@ -39,7 +39,7 @@ export function Toolbar({
           id="coupon-search"
           type="search"
           className="search-input"
-          placeholder="Merchant, title, or code"
+          placeholder="Merchant, code, bonus, or 0% APR"
           value={search}
           onChange={(event) => onSearch(event.target.value)}
           autoComplete="off"

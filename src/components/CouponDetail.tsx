@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { Coupon } from "../types";
-import { actionProgress, isActionDeal } from "../lib/coupons";
+import { actionProgress, isActionDeal, isMoneyDeal, locksCode } from "../lib/coupons";
 import {
   CATEGORY_LABEL,
   formatDiscount,
@@ -9,6 +9,7 @@ import {
   isExpired,
 } from "../lib/format";
 import { ActionList } from "./ActionList";
+import { MoneyPanel } from "./MoneyPanel";
 import { PunchBar } from "./PunchBar";
 
 type CouponDetailProps = {
@@ -40,7 +41,9 @@ export function CouponDetail({
   const expired = isExpired(coupon.expiresAt, now);
   const titleId = "coupon-detail-title";
   const taskDeal = isActionDeal(coupon);
+  const money = coupon.money;
   const punch = actionProgress(coupon, completedActionIds);
+  const codeLocked = locksCode(coupon) && !punch.unlocked;
 
   useEffect(() => {
     closeRef.current?.focus();
@@ -84,25 +87,30 @@ export function CouponDetail({
 
         <dl className="sheet-meta">
           <div>
-            <dt>Expires</dt>
+            <dt>{money ? "Offer ends" : "Expires"}</dt>
             <dd>{formatExpiry(coupon.expiresAt, now)}</dd>
           </div>
           <div>
-            <dt>Min spend</dt>
+            <dt>{money ? "Clean exit" : "Min spend"}</dt>
             <dd>
-              {coupon.minSpend != null
-                ? formatMoney(coupon.minSpend)
-                : "No minimum"}
+              {money
+                ? `${money.holdMonths} months`
+                : coupon.minSpend != null
+                  ? formatMoney(coupon.minSpend)
+                  : "No minimum"}
             </dd>
           </div>
         </dl>
 
+        {money ? <MoneyPanel money={money} /> : null}
+
         {taskDeal && coupon.actions ? (
           <section className="sheet-tasks">
-            <h3>Stamp the card</h3>
+            <h3>{isMoneyDeal(coupon) ? "Path to a clean exit" : "Stamp the card"}</h3>
             <p>
-              Confirm each task yourself. The code stays locked until the bar is
-              full.
+              {isMoneyDeal(coupon)
+                ? "Confirm each step yourself. The promo code is available now. The bar is the hold — do not close until it is full."
+                : "Confirm each task yourself. The code stays locked until the bar is full."}
             </p>
             <PunchBar done={punch.done} total={punch.total} />
             <ActionList
@@ -114,10 +122,10 @@ export function CouponDetail({
           </section>
         ) : null}
 
-        <div className={`code-strip${taskDeal && !punch.unlocked ? " is-locked" : ""}`}>
-          <span className="code-label">{punch.unlocked ? "Code" : "Locked"}</span>
+        <div className={`code-strip${codeLocked ? " is-locked" : ""}`}>
+          <span className="code-label">{codeLocked ? "Locked" : "Code"}</span>
           <code className="code-value">
-            {punch.unlocked ? coupon.code : "••••••••"}
+            {codeLocked ? "••••••••" : coupon.code}
           </code>
         </div>
 
@@ -128,8 +136,11 @@ export function CouponDetail({
 
         {expired ? <p className="sheet-flag">This ticket has expired.</p> : null}
         {used ? <p className="sheet-flag">Marked used in your wallet.</p> : null}
-        {taskDeal && punch.unlocked ? (
+        {taskDeal && punch.unlocked && !money ? (
           <p className="sheet-flag sheet-flag-ok">Punch card full. Code unlocked.</p>
+        ) : null}
+        {money && punch.unlocked && taskDeal ? (
+          <p className="sheet-flag sheet-flag-ok">Exit path complete. You can wipe your hands.</p>
         ) : null}
 
         <div className="sheet-actions">
@@ -137,9 +148,9 @@ export function CouponDetail({
             type="button"
             className="btn btn-copy"
             onClick={onCopy}
-            disabled={taskDeal && !punch.unlocked}
+            disabled={codeLocked}
           >
-            {taskDeal && !punch.unlocked ? "Code locked" : "Copy code"}
+            {codeLocked ? "Code locked" : "Copy code"}
           </button>
           <button type="button" className="btn btn-clip" onClick={onClip}>
             {clipped ? "Unclip" : "Clip"}

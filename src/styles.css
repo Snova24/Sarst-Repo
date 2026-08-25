@@ -529,6 +529,190 @@ h3 {
   color: var(--sage);
 }
 
+/* —— Money / fine print —— */
+.deal-section {
+  margin-top: 1.75rem;
+  padding-top: 1.1rem;
+  border-top: 3px double var(--ink);
+}
+
+.deal-section:first-of-type {
+  margin-top: 0.35rem;
+}
+
+.deal-section-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clip-deep);
+  font-weight: 700;
+}
+
+.deal-section-title {
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  margin: 0.2rem 0 0.35rem;
+}
+
+.deal-section-lede {
+  margin: 0 0 1rem;
+  max-width: 42rem;
+  color: var(--ink-soft);
+}
+
+.deal-subsection {
+  margin-top: 1.1rem;
+}
+
+.deal-subsection h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.2rem;
+}
+
+.deal-subsection > p {
+  margin: 0 0 0.75rem;
+  color: var(--ink-soft);
+  max-width: 40rem;
+}
+
+.money-panel {
+  margin: 0.9rem 0 0.4rem;
+  padding: 0.9rem 0.85rem 0.8rem;
+  border: 1px solid var(--ink);
+  background: color-mix(in srgb, var(--gold) 10%, var(--ticket));
+}
+
+.money-panel h3,
+.money-panel h4 {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 0.35rem;
+}
+
+.money-kind {
+  margin: 0 0 0.7rem;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.safe-exit {
+  padding: 0.7rem 0.75rem;
+  border: 2px solid var(--sage);
+  background: color-mix(in srgb, var(--sage) 10%, var(--ticket));
+  margin-bottom: 0.85rem;
+}
+
+.safe-exit-kicker {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--sage);
+}
+
+.safe-exit-hold {
+  margin: 0.15rem 0 0.35rem;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.25rem;
+}
+
+.safe-exit-copy {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.safe-exit-ok,
+.safe-exit-warn {
+  margin: 0.45rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.safe-exit-ok {
+  color: var(--sage);
+}
+
+.safe-exit-warn {
+  color: var(--clip-deep);
+}
+
+.money-timeline {
+  list-style: none;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.money-timeline li {
+  display: grid;
+  grid-template-columns: 7.2rem 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed var(--rule);
+}
+
+@media (max-width: 420px) {
+  .money-timeline li {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
+  .money-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.money-timeline-at {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clip-deep);
+}
+
+.money-timeline-label {
+  font-size: 0.9rem;
+}
+
+.money-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 0.75rem;
+  margin: 0 0 0.85rem;
+}
+
+.money-facts dt {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.money-facts dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.88rem;
+}
+
+.money-lists {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.money-lists ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.money-lists li + li {
+  margin-top: 0.3rem;
+}
+
 .ticket-copy .punch-bar {
   pointer-events: none;
 }
@@ -654,6 +838,19 @@ h3 {
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--clip-deep);
+}
+
+.ticket-exit {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sage);
+}
+
+.stamp-money {
+  margin-left: 0.35rem;
+  border-color: var(--gold);
+  color: #7a5a12;
 }
 
 .stamp {

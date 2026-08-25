@@ -15,6 +15,6 @@
 
 ## Slice for v1
 
-A stranger can: browse deals, filter by category or Tasks, search, open a coupon, copy a code, clip it to their wallet, stamp punch-card tasks to unlock a code, mark it used, and see estimated savings. Wallet survives refresh.
+A stranger can: browse deals, filter by category or Tasks, search, open a coupon, copy a code, clip it to their wallet, stamp punch-card tasks, read bank-bonus clawbacks and a safe-exit month, compare 0% balance transfers and 0% personal loans, mark used, and see estimated savings. Wallet survives refresh.
 
 Do not add auth, payments, merchant dashboards, or scraping.

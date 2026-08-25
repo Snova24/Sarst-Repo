@@ -114,6 +114,19 @@ describe("catalog", () => {
     expect(punches.length).toBeGreaterThanOrEqual(4);
     expect(punches.every((c) => (c.actions?.length ?? 0) >= 3)).toBe(true);
   });
+
+  it("includes bank bonuses with a safe-exit horizon and 0% credit offers", () => {
+    const banks = COUPONS.filter((c) => c.money?.kind === "bankBonus");
+    const bts = COUPONS.filter((c) => c.money?.kind === "balanceTransfer");
+    const loans = COUPONS.filter((c) => c.money?.kind === "personalLoan");
+    expect(banks.length).toBeGreaterThanOrEqual(3);
+    expect(bts.length).toBeGreaterThanOrEqual(2);
+    expect(loans.length).toBeGreaterThanOrEqual(2);
+    expect(banks.every((c) => (c.money?.holdMonths ?? 0) >= 5)).toBe(true);
+    expect(banks.every((c) => (c.money?.safeExit.length ?? 0) > 20)).toBe(true);
+    expect(bts.every((c) => c.discount.kind === "zeroApr" && c.discount.flavor === "bt")).toBe(true);
+    expect(loans.every((c) => c.discount.kind === "zeroApr" && c.discount.flavor === "loan")).toBe(true);
+  });
 });
 
 describe("actionProgress", () => {
@@ -200,6 +213,18 @@ describe("filterCoupons", () => {
     expect(
       filterCoupons(withTasks, { ...baseQuery, tasksOnly: true }, NOW).map((c) => c.id),
     ).toEqual(["task-live"]);
+  });
+
+  it("filters bank bonuses and matches clawback / 0% search terms", () => {
+    const harbor = COUPONS.find((c) => c.id === "harbor-mutual-300");
+    expect(harbor).toBeDefined();
+    const banks = filterCoupons(COUPONS, { ...baseQuery, category: "bank" }, NOW);
+    expect(banks.every((c) => c.category === "bank")).toBe(true);
+    expect(banks.some((c) => c.id === "harbor-mutual-300")).toBe(true);
+    const claw = filterCoupons(COUPONS, { ...baseQuery, search: "clawback" }, NOW);
+    expect(claw.some((c) => c.id === "harbor-mutual-300")).toBe(true);
+    const transfers = filterCoupons(COUPONS, { ...baseQuery, search: "balance transfer" }, NOW);
+    expect(transfers.some((c) => c.money?.kind === "balanceTransfer")).toBe(true);
   });
 
   it("filters by exact category and treats all as unfiltered", () => {

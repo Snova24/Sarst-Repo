@@ -10,6 +10,27 @@ export function isActionDeal(coupon: Coupon): boolean {
   return (coupon.actions?.length ?? 0) > 0;
 }
 
+export function isMoneyDeal(coupon: Coupon): boolean {
+  return coupon.money != null;
+}
+
+export function isBankBonus(coupon: Coupon): boolean {
+  return coupon.money?.kind === "bankBonus";
+}
+
+export function isBalanceTransfer(coupon: Coupon): boolean {
+  return coupon.money?.kind === "balanceTransfer";
+}
+
+export function isPersonalLoan(coupon: Coupon): boolean {
+  return coupon.money?.kind === "personalLoan";
+}
+
+/** Grocery punch cards lock the code. Money deals keep the promo code available from day one. */
+export function locksCode(coupon: Coupon): boolean {
+  return isActionDeal(coupon) && !isMoneyDeal(coupon);
+}
+
 export function actionProgress(coupon: Coupon, completedIds: string[] = []) {
   const actions = coupon.actions ?? [];
   const total = actions.length;
@@ -21,6 +42,7 @@ export function actionProgress(coupon: Coupon, completedIds: string[] = []) {
 }
 
 export function isUnlocked(coupon: Coupon, completedIds: string[] = []): boolean {
+  if (!locksCode(coupon)) return true;
   return actionProgress(coupon, completedIds).unlocked;
 }
 
@@ -30,12 +52,35 @@ function matchesSearch(coupon: Coupon, search: string): boolean {
   const actionText = (coupon.actions ?? [])
     .flatMap((action) => [action.label, action.hint ?? ""])
     .join(" ");
+  const money = coupon.money;
+  const kindWords = !money
+    ? ""
+    : money.kind === "bankBonus"
+      ? "bank bonus checking signup"
+      : money.kind === "balanceTransfer"
+        ? "balance transfer 0% apr card"
+        : "personal loan 0% interest";
+  const moneyText = money
+    ? [
+        kindWords,
+        money.kind,
+        money.safeExit,
+        money.introApr ?? "",
+        money.thenApr ?? "",
+        money.transferFee ?? "",
+        money.originationFee ?? "",
+        ...money.requirements,
+        ...money.gotchas,
+        ...money.timeline.map((step) => `${step.at} ${step.label}`),
+      ].join(" ")
+    : "";
   const haystack = [
     coupon.merchant,
     coupon.title,
     coupon.description,
     coupon.code,
     actionText,
+    moneyText,
   ]
     .join(" ")
     .toLowerCase();
@@ -89,7 +134,7 @@ export function walletSavings(
     if (!coupon) continue;
     if (isExpired(coupon.expiresAt, now)) continue;
     if (!isUnlocked(coupon, entry.completedActionIds)) continue;
-    total += estimatedSave(coupon.discount, coupon.minSpend);
+    total += estimatedSave(coupon.discount, coupon.minSpend, coupon.money);
   }
   return total;
 }

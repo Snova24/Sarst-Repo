@@ -1,8 +1,9 @@
 import type { CSSProperties } from "react";
 import type { Coupon } from "../types";
-import { actionProgress, isActionDeal } from "../lib/coupons";
+import { actionProgress, isActionDeal, locksCode } from "../lib/coupons";
 import {
   CATEGORY_LABEL,
+  MONEY_KIND_LABEL,
   formatDiscount,
   formatExpiry,
   isExpired,
@@ -33,6 +34,8 @@ export function Ticket({
   const expired = isExpired(coupon.expiresAt, now);
   const punch = actionProgress(coupon, completedActionIds);
   const taskDeal = isActionDeal(coupon);
+  const money = coupon.money;
+  const codeLocked = locksCode(coupon) && !punch.unlocked;
   const classes = [
     "ticket",
     expired ? "is-expired" : "",
@@ -69,7 +72,10 @@ export function Ticket({
         aria-label={`${coupon.merchant}, ${coupon.title}. View details`}
       >
         <span className="stamp">{CATEGORY_LABEL[coupon.category]}</span>
-        {taskDeal ? <span className="stamp stamp-punch">Punch</span> : null}
+        {money ? (
+          <span className="stamp stamp-money">{MONEY_KIND_LABEL[money.kind]}</span>
+        ) : null}
+        {taskDeal && !money ? <span className="stamp stamp-punch">Punch</span> : null}
         {used ? (
           <span className="rubber-mark rubber-used">Used</span>
         ) : expired ? (
@@ -78,6 +84,9 @@ export function Ticket({
         <span className="ticket-merchant">{coupon.merchant}</span>
         <span className="ticket-title">{coupon.title}</span>
         <span className="ticket-expiry">{formatExpiry(coupon.expiresAt, now)}</span>
+        {money ? (
+          <span className="ticket-exit">Clean exit · {money.holdMonths} months</span>
+        ) : null}
         {taskDeal ? (
           <PunchBar done={punch.done} total={punch.total} compact />
         ) : null}
@@ -86,7 +95,7 @@ export function Ticket({
         <button type="button" className="btn btn-clip" onClick={onClip}>
           {clipped ? "Unclip" : "Clip"}
         </button>
-        {taskDeal && !punch.unlocked ? (
+        {codeLocked ? (
           <button type="button" className="btn btn-copy" onClick={onOpen}>
             Earn code
           </button>

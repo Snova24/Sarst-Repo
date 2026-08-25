@@ -1,4 +1,4 @@
-import type { Discount } from "../types";
+import type { Discount, MoneyOffer } from "../types";
 
 export function formatDiscount(discount: Discount): string {
   switch (discount.kind) {
@@ -10,6 +10,10 @@ export function formatDiscount(discount: Discount): string {
       return "BOGO";
     case "freeShipping":
       return "Free ship";
+    case "bonus":
+      return `$${discount.value} bonus`;
+    case "zeroApr":
+      return discount.flavor === "bt" ? `0% BT ${discount.months} mo` : `0% loan ${discount.months} mo`;
   }
 }
 
@@ -23,10 +27,18 @@ export function discountScore(discount: Discount): number {
       return 50;
     case "freeShipping":
       return 15;
+    case "bonus":
+      return Math.min(100, Math.round(discount.value / 4));
+    case "zeroApr":
+      return discount.months * 3;
   }
 }
 
-export function estimatedSave(discount: Discount, minSpend = 0): number {
+export function estimatedSave(
+  discount: Discount,
+  minSpend = 0,
+  money?: MoneyOffer,
+): number {
   switch (discount.kind) {
     case "amount":
       return discount.value;
@@ -36,6 +48,10 @@ export function estimatedSave(discount: Discount, minSpend = 0): number {
       return Math.round((minSpend || 24) / 2);
     case "freeShipping":
       return 8;
+    case "bonus":
+      return discount.value;
+    case "zeroApr":
+      return money?.interestAvoided ?? Math.round((money?.typicalBalance ?? 4000) * 0.18 * (discount.months / 12));
   }
 }
 
@@ -75,4 +91,12 @@ export const CATEGORY_LABEL: Record<string, string> = {
   home: "Home",
   entertainment: "Out",
   tech: "Tech",
+  bank: "Bank",
+  credit: "Credit",
+};
+
+export const MONEY_KIND_LABEL: Record<string, string> = {
+  bankBonus: "Bonus",
+  balanceTransfer: "0% BT",
+  personalLoan: "0% loan",
 };

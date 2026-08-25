@@ -13,6 +13,8 @@ Someone who collects grocery, dining, and retail codes and loses them in screens
 - **Sort** — ending soon, biggest save, newest.
 - **Detail** — merchant, terms, expiry, min spend, copy code, clip / unclip.
 - **Punch cards** — some deals lock the code until you confirm each listed task. Stamping a task clips the ticket and fills a progress bar. Undo is allowed. Savings only count after the card is full.
+- **Bank bonuses** — ads that claim hundreds to open a checking account, with requirements, clawbacks, fees, and a dated **safe exit** so you can close and leave.
+- **0% credit** — a section for balance-transfer cards and 0% personal loans: intro APR, then-APR, fees, payoff clock, clean exit.
 - **Wallet** — clipped coupons, ending-soon first, mark used, remove.
 - **Savings** — rough dollars still available from unused, unlocked wallet items.
 
